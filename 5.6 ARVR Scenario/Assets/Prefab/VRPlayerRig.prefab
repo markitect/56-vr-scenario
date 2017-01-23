@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 114523285417755586}
   - component: {fileID: 114123233344156658}
   - component: {fileID: 114854165720474538}
-  - component: {fileID: 114305541250337782}
+  - component: {fileID: 114450044262464324}
   m_Layer: 0
   m_Name: VRPlayerRig
   m_TagString: Untagged
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &114305541250337782
+--- !u!114 &114450044262464324
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -363,6 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7192f70c4e7255d448e2556471f34b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  childCamera: {fileID: 20282625848835418}
 --- !u!124 &124359453427101990
 Behaviour:
   m_ObjectHideFlags: 1

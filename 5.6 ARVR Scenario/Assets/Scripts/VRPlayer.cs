@@ -4,14 +4,22 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.VR;
 
-public class VRPlayer : NetworkBehaviour {
+public class VRPlayer : NetworkBehaviour
+{
+
+	public Camera childCamera;
 	void OnStartLocalPlayer()
 	{
 		GetComponent<Material>().color = Color.blue;
-
 		//test code
-		transform.position = new Vector3(Random.Range(-2,2), 1, Random.Range(-2, 2));
-		VRSettings.LoadDeviceByName("OpenVR");
+	}
+
+	void Start()
+	{
+		if (!isLocalPlayer)
+		{
+			Destroy(childCamera);
+		}
 	}
 
 
