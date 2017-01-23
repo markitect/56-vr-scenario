@@ -29,4 +29,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+#OSX
 .DS_Store
