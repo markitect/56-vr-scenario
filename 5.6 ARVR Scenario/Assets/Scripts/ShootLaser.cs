@@ -12,16 +12,22 @@ public class ShootLaser : MonoBehaviour
 
 	public bool isFiring = false;
 
+	public LayerMask collisionLayers;
+
 	private LineRenderer lineRenderer;
 
 	private List<Vector3> linePoints = new List<Vector3>();
-	
+	private List<Vector3> newPoints = new List<Vector3>();
+
 	private float segmentLength;
 
 	private Vector3 start;
 	private Vector3 end;
 	private Vector3 direction;
 	private bool ended = false;
+
+	private List<GameObject> newPointSpheres = new List<GameObject>();
+	private List<GameObject> linePointSpheres = new List<GameObject>();
 
 	// Use this for initialization
 	void Start()
@@ -39,20 +45,28 @@ public class ShootLaser : MonoBehaviour
 	{
 		if (this.isFiring)
 		{
-			end += this.direction * Time.deltaTime * speed;
-			this.linePoints[this.linePoints.Count-1] = end;
+			if (!this.ended)
+			{
+				end += this.direction * Time.deltaTime * speed;
+				this.linePoints[this.linePoints.Count - 1] = end;
+			}
 
-			//if (this.linePoints.Count > 2)
-			//{
-			//	RecalcuateReflections();
-			//}
+			if (this.linePoints.Count > 2 || this.ended)
+			{
+				RecalcuateReflections();
+			}
 
-			RaycastForReflection();
+			if (!ended)
+			{
+				RaycastForMovement();
+			}
 
 			if (Input.GetMouseButtonDown(1))
 			{
+				this.newPoints.Clear();
 				this.linePoints.Clear();
 				this.isFiring = false;
+				this.ended = false;
 			}
 
 			this.lineRenderer.startWidth = .05f;
@@ -84,61 +98,94 @@ public class ShootLaser : MonoBehaviour
 
 	private void RecalcuateReflections()
 	{
-		var newPoints = new List<Vector3> {this.linePoints.FirstOrDefault()};
-		var startPoint = this.linePoints[0];
-		var endPoint = this.linePoints[1];
+		var currentEnd = this.end;
+		this.start = this.linePoints[0];
+		this.newPoints = new List<Vector3> { start };
+		this.direction = this.transform.forward;
 
-		newPoints.Add(endPoint);
-
-		while (RaycastReflection(startPoint, endPoint, ref newPoints) && newPoints.Count < this.linePoints.Count - 1)
+		if (!this.ended)
 		{
-			startPoint = newPoints[newPoints.Count - 2];
-			endPoint = newPoints[newPoints.Count - 1];
+			while (this.RaycastReflections() && this.newPoints.Count < this.linePoints.Count - 1)
+			{
+				start = newPoints[newPoints.Count - 1];
+			}
+			
+			this.newPoints.Add(currentEnd);
+		}
+		else
+		{
+			while (this.RaycastReflections())
+			{
+				start = newPoints[newPoints.Count - 1];
+			}
 		}
 
-		for (var i = 0; i < this.linePoints.Count - 1; ++i)
-		{
-			this.linePoints[i] = newPoints[i];
-		}
+		this.linePoints = this.newPoints;
 
+		// reset start and end tot he last two points in the list
 		this.start = this.linePoints[this.linePoints.Count - 2];
 		this.end = this.linePoints[this.linePoints.Count - 1];
 	}
 
-	private bool RaycastReflection(Vector3 startPoint, Vector3 endPoint, ref List<Vector3> newPoints)
+	private bool RaycastReflections()
 	{
-		var hits = Physics.RaycastAll(new Ray(startPoint, (endPoint - startPoint).normalized));
+		var hits = Physics.RaycastAll(new Ray(start, this.direction), this.collisionLayers);
 
 		if (hits.Length > 0)
 		{
-			newPoints[newPoints.Count - 1] = hits[0].point;
-			if (hits[0].collider.gameObject.name != "Wall")
+			var closestHit = FindClosestHit(hits);
+
+			this.newPoints.Add(closestHit.point);
+			this.end = closestHit.point;
+			if (closestHit.collider.gameObject.layer != LayerMask.NameToLayer("Wall"))
 			{
-				var reflection = Vector3.Reflect(endPoint - startPoint, hits[0].normal);
+				var reflection = Vector3.Reflect(this.end - this.start, closestHit.normal);
 				this.direction = reflection.normalized;
 				return true;
+			}
+			else
+			{
+				return false;
 			}
 		}
 		return false;
 	}
 
-	private void RaycastForReflection()
+	private void RaycastForMovement()
 	{
-		var hits = Physics.RaycastAll(new Ray(this.start, (this.end - this.start).normalized), Vector3.Distance(start, end));
+		var hits = Physics.RaycastAll(new Ray(this.start, (this.end - this.start).normalized), Vector3.Distance(start, end), this.collisionLayers);
 
 		if (hits.Length > 0)
 		{
-			if (hits[0].collider.gameObject.name != "Wall")
+			var closestHit = FindClosestHit(hits);
+
+			if (closestHit.collider.gameObject.layer != LayerMask.NameToLayer("Wall"))
 			{
-				var reflection = Vector3.Reflect(end - start, hits[0].normal);
+				var reflection = Vector3.Reflect(this.end - this.start, closestHit.normal);
 				this.direction = reflection.normalized;
 				this.start = this.end;
 				this.linePoints.Add(this.end);
 			}
 			else
 			{
-				ended = true;
+				this.ended = true;
 			}
 		}
+	}
+
+	private RaycastHit FindClosestHit(RaycastHit[] hits)
+	{
+		var closestDistance = Vector3.Distance(start, hits[0].point);
+		var closestHit = hits[0];
+
+		for (var i = 1; i < hits.Length; ++i)
+		{
+			if (closestDistance > Vector3.Distance(start, hits[i].point))
+			{
+				closestHit = hits[i];
+			}
+		}
+
+		return closestHit;
 	}
 }
