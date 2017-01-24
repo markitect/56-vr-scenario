@@ -314,6 +314,7 @@ MonoBehaviour:
   m_BarrelTipPosition: {fileID: 4289033154568676}
   m_MaxBeamLength: 10
   m_MaxChargeTime: 10
+  m_ChargingEffect: {fileID: 198000013551237616}
 --- !u!137 &137000014254242414
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
