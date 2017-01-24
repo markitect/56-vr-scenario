@@ -10,13 +10,17 @@ public class ARPlayer : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		if (!isLocalPlayer)
+		{
+			return;
+		}
+		transform.localPosition = testLocation;
 	}
 
 	void OnStartLocalPlayer()
 	{
 		//test code
-		transform.localPosition = testLocation;
+		
 	}
 
 	// Update is called once per frame
