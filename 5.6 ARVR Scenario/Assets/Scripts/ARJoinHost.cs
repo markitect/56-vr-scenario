@@ -6,7 +6,6 @@ using UnityEngine.VR;
 
 public class ARJoinHost : MonoBehaviour
 {
-
 	//TempScript for 
 	public string hostIP;
 	public NetworkManager netManager;
@@ -15,8 +14,14 @@ public class ARJoinHost : MonoBehaviour
 	{
 		if (VRSettings.loadedDeviceName == "HoloLens")
 		{
-			netManager.StartClient();
 			netManager.networkAddress = hostIP;
+			netManager.StartClient();
+		}
+
+		if (VRSettings.loadedDeviceName == "GearVR")
+		{
+			netManager.networkAddress = hostIP;
+			netManager.StartClient();
 		}
 	}
 }
