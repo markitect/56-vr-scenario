@@ -893,7 +893,8 @@ MonoBehaviour:
   ARPlayerInstance: {fileID: 1766184295273366}
   VRPlayerInstance: {fileID: 1118874535832482}
   childCamera: {fileID: 20282625848835418}
-  netWorkTransfromChild: {fileID: 0}
+  arChildCamera: {fileID: 20197698019297238}
+  netWorkTransfromChild: {fileID: 114450044262464324}
 --- !u!114 &114901230430859908
 MonoBehaviour:
   m_ObjectHideFlags: 1
