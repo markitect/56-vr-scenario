@@ -41,9 +41,9 @@ public class VRPlayer : NetworkBehaviour
             child.localPosition = new Vector3(0f, 0f, 0f);
             NetworkServer.Spawn(ARInstance);
 
-            LaserBlock1.SetActive(true);
-            LaserBlock2.SetActive(true);
-            RedMirror.SetActive(true);
+            //LaserBlock1.SetActive(true);
+            //LaserBlock2.SetActive(true);
+            //RedMirror.SetActive(true);
 		}
 	}
 

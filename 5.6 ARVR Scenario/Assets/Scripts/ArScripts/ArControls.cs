@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.VR.WSA.Input;
 using UnityEngine.Windows.Speech;
 using UnityEngine.Networking;
@@ -9,10 +7,12 @@ public class ArControls : NetworkBehaviour
 {
     KeywordRecognizer m_KeywordRecognizer = null;
     GestureRecognizer m_GestureReconizer = null;
+    public GameObject LaserWall;
+    public GameObject RedMirror;
 
     GameObject Wall1;
     GameObject Wall2;
-    GameObject RedMirror;
+    //GameObject RedMirror;
 
     bool RedMirrorMoved = false;
     bool WallTracking = true;
@@ -56,15 +56,15 @@ public class ArControls : NetworkBehaviour
 
     void Update()
     {
-        //if (m_WallCoolDown < 0)
-        //{
+        if (m_WallCoolDown < 0)
+        {
             if (WallTracking)
             {
                 MoveWall();
             }
-        //}
-        
-        if(m_WallCoolDown > 0)
+        }
+
+        if (m_WallCoolDown > 0)
         {
             m_WallCoolDown -= Time.deltaTime;
         }
@@ -78,6 +78,7 @@ public class ArControls : NetworkBehaviour
     
     private void M_GestureReconizer_TappedEvent(InteractionSourceKind source, int tapCount, Ray headRay)
     {
+
         if (!WallTracking)
         {
             WallTracking = true;
@@ -96,15 +97,16 @@ public class ArControls : NetworkBehaviour
     {
         if(args.text == "Wall")
         {
-            if(m_WallCount > m_AllowedWalls)
-            {
-                WallTracking = false;
-            }
-            else if(m_WallCount < m_AllowedWalls)
+            if(m_WallCount < m_AllowedWalls)
             {
                 WallTracking = true;
                 m_WallCount += 1;
-            }         
+                Instantiate(LaserWall);
+            }
+            if (m_WallCount > m_AllowedWalls)
+            {
+                WallTracking = false;
+            }
         }
 
         if (args.text == "Red")
@@ -115,17 +117,17 @@ public class ArControls : NetworkBehaviour
 
     public void MoveWall()
     {
-        Wall1 = GameObject.Find("LaserBlock(1)");
-        Wall2 = GameObject.Find("LaserBlock(2)");
+        //Wall1 = GameObject.Find("LaserBlock(1)");
+        //Wall2 = GameObject.Find("LaserBlock(2)");
 
         if (m_WallCount.Equals(1))
         {
-            MoveObject(Wall1);
+            MoveObject(LaserWall);
         }
 
         if (m_WallCount.Equals(2))
         {
-            MoveObject(Wall2);
+            MoveObject(LaserWall);
         }
     }
 
