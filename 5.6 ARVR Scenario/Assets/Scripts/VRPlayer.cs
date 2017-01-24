@@ -10,7 +10,6 @@ public class VRPlayer : NetworkBehaviour
 	public Camera childCamera;
 	void OnStartLocalPlayer()
 	{
-		GetComponent<Material>().color = Color.blue;
 		//test code
 	}
 
@@ -19,6 +18,12 @@ public class VRPlayer : NetworkBehaviour
 		if (!isLocalPlayer)
 		{
 			Destroy(childCamera);
+			return;
+		}
+
+		if (VRSettings.loadedDeviceName == "HoloLens")
+		{
+			gameObject.AddComponent<ARPlayer>();
 		}
 	}
 
