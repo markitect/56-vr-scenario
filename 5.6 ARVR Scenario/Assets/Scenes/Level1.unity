@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3880796, g: 0.5405005, b: 0.7705377, a: 1}
+  m_IndirectSpecularColor: {r: 0.3923076, g: 0.54170626, b: 0.7716203, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -430,6 +430,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1574142035}
+  delatTimeBeforeTeleport: 1.5
+  deltaBlink: 20
 --- !u!1 &208833766
 GameObject:
   m_ObjectHideFlags: 0
