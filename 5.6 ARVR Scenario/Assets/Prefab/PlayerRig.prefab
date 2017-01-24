@@ -710,11 +710,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7192f70c4e7255d448e2556471f34b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ARPlayerInstance: {fileID: 0}
-  VRPlayerInstance: {fileID: 0}
-  childCamera: {fileID: 0}
-  arChildCamera: {fileID: 0}
-  netWorkTransfromChild: {fileID: 0}
+  ARPlayerInstance: {fileID: 1766184295273366}
+  VRPlayerInstance: {fileID: 1118874535832482}
+  childCamera: {fileID: 20282625848835418}
+  arChildCamera: {fileID: 20197698019297238}
+  netWorkTransfromChild: {fileID: 114450044262464324}
 --- !u!114 &114450044262464324
 MonoBehaviour:
   m_ObjectHideFlags: 1
