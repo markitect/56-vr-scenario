@@ -211,6 +211,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserColor: {r: 1, g: 1, b: 1, a: 1}
+  speed: 2
+  isFiring: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 768
 --- !u!23 &581399
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -472,7 +477,7 @@ GameObject:
   - component: {fileID: 891774657}
   - component: {fileID: 891774656}
   - component: {fileID: 891774655}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -869,7 +874,7 @@ GameObject:
   - component: {fileID: 2032742341}
   - component: {fileID: 2032742340}
   - component: {fileID: 2032742339}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
