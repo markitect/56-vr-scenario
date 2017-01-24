@@ -6,8 +6,11 @@ using UnityEngine.VR;
 
 public class VRPlayer : NetworkBehaviour
 {
-    public GameObject ArPlayer;
+    public GameObject ARPlayerInstance;
+	public GameObject VRPlayerInstance;
 	public Camera childCamera;
+	public NetworkTransformChild netWorkTransfromChild;
+
     GameObject LaserBlock1;
     GameObject LaserBlock2;
     GameObject RedMirror;
@@ -34,16 +37,13 @@ public class VRPlayer : NetworkBehaviour
             // We to destroy VR camera to create a AR camera
             Destroy(childCamera);
 
-            GameObject ARInstance = Instantiate(ArPlayer);       
-            ARInstance.transform.SetParent(transform);
-            var child = transform.FindChild("VRPlayer");
-            transform.FindChild("VRPlayer").SetParent(ARInstance.transform);
-            child.localPosition = new Vector3(0f, 0f, 0f);
-            NetworkServer.Spawn(ARInstance);
+			ARPlayerInstance.SetActive(true);
+			VRPlayerInstance.SetActive(false);
+			netWorkTransfromChild.target = ARPlayerInstance.transform;
 
-            //LaserBlock1.SetActive(true);
-            //LaserBlock2.SetActive(true);
-            //RedMirror.SetActive(true);
+			//LaserBlock1.SetActive(true);
+			//LaserBlock2.SetActive(true);
+			//RedMirror.SetActive(true);
 		}
 	}
 
