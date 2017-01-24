@@ -6,8 +6,12 @@ using UnityEngine.VR;
 
 public class VRPlayer : NetworkBehaviour
 {
-
+    public GameObject ArPlayer;
 	public Camera childCamera;
+    GameObject LaserBlock1;
+    GameObject LaserBlock2;
+    GameObject RedMirror;
+
 	void OnStartLocalPlayer()
 	{
 		//test code
@@ -15,7 +19,11 @@ public class VRPlayer : NetworkBehaviour
 
 	void Start()
 	{
-		if (!isLocalPlayer)
+        LaserBlock1 = GameObject.Find("LaserBlock1");
+        LaserBlock2 = GameObject.Find("LaserBlock2");
+        RedMirror = GameObject.Find("RedMirror");
+
+        if (!isLocalPlayer)
 		{
 			Destroy(childCamera);
 			return;
@@ -23,7 +31,19 @@ public class VRPlayer : NetworkBehaviour
 
 		if (VRSettings.loadedDeviceName == "HoloLens")
 		{
-			gameObject.AddComponent<ARPlayer>();
+            // We to destroy VR camera to create a AR camera
+            Destroy(childCamera);
+
+            GameObject ARInstance = Instantiate(ArPlayer);       
+            ARInstance.transform.SetParent(transform);
+            var child = transform.FindChild("VRPlayer");
+            transform.FindChild("VRPlayer").SetParent(ARInstance.transform);
+            child.localPosition = new Vector3(0f, 0f, 0f);
+            NetworkServer.Spawn(ARInstance);
+
+            LaserBlock1.SetActive(true);
+            LaserBlock2.SetActive(true);
+            RedMirror.SetActive(true);
 		}
 	}
 

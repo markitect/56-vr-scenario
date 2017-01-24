@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 136853923429669924}
   - component: {fileID: 23393732262444264}
   m_Layer: 0
-  m_Name: VRPlayer
+  m_Name: VRPlayerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,6 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7192f70c4e7255d448e2556471f34b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ArPlayer: {fileID: 1106348523968688, guid: 7276f38a5450e544a9f057d327d43e0e, type: 2}
   childCamera: {fileID: 20282625848835418}
 --- !u!136 &136853923429669924
 CapsuleCollider:

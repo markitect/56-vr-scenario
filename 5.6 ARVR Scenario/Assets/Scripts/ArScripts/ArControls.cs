@@ -15,7 +15,7 @@ public class ArControls : NetworkBehaviour
     GameObject RedMirror;
 
     bool RedMirrorMoved = false;
-    bool WallTracking = false;
+    bool WallTracking = true;
     bool WallLimit = false;
 
     public string[] controlWords;
@@ -39,10 +39,6 @@ public class ArControls : NetworkBehaviour
         m_GestureReconizer.TappedEvent += M_GestureReconizer_TappedEvent;
         m_GestureReconizer.NavigationUpdatedEvent += M_GestureReconizer_NavigationUpdatedEvent;
         m_GestureReconizer.StartCapturingGestures();
-
-        Wall1 = GameObject.Find("LaserBlock(1)");
-        Wall2 = GameObject.Find("LaserBlock(2)");
-        RedMirror = GameObject.Find("RedMirror");
     }
 
     private void M_GestureReconizer_NavigationUpdatedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headRay)
@@ -60,22 +56,22 @@ public class ArControls : NetworkBehaviour
 
     void Update()
     {
-        if (m_WallCoolDown < 0)
-        {
+        //if (m_WallCoolDown < 0)
+        //{
             if (WallTracking)
             {
                 MoveWall();
             }
-        }
+        //}
         
         if(m_WallCoolDown > 0)
         {
             m_WallCoolDown -= Time.deltaTime;
-            m_WallCount -= 1;
         }
 
         if (RedMirrorMoved)
         {
+            RedMirror = GameObject.Find("RedMirror");
             MoveObject(RedMirror);
         }
     }
@@ -92,6 +88,8 @@ public class ArControls : NetworkBehaviour
             WallTracking = false;
             m_WallCoolDown = 0;
         }
+
+        m_WallCount = tapCount;
     }
 
     private void M_KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
@@ -117,6 +115,9 @@ public class ArControls : NetworkBehaviour
 
     public void MoveWall()
     {
+        Wall1 = GameObject.Find("LaserBlock(1)");
+        Wall2 = GameObject.Find("LaserBlock(2)");
+
         if (m_WallCount.Equals(1))
         {
             MoveObject(Wall1);

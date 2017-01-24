@@ -56,6 +56,8 @@ GameObject:
   - component: {fileID: 92709259321712364}
   - component: {fileID: 124687575161143440}
   - component: {fileID: 81150206044533700}
+  - component: {fileID: 114914338960360814}
+  - component: {fileID: 114482465216982674}
   m_Layer: 0
   m_Name: ArPlayer
   m_TagString: MainCamera
@@ -286,6 +288,24 @@ MonoBehaviour:
   m_innerCircleDefault: {x: 0.5, y: 0.5, z: 0.5}
   m_innerCircleSelect: {x: 1, y: 1, z: 1}
   m_selectorTweenSpeed: 0.4
+--- !u!114 &114482465216982674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1106348523968688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fd7798569672a4da5d457876a951ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlWords:
+  - Wall
+  - Red
+  - Blue
+  - Yellow
+  m_CoolDown: 10
+  m_AllowedWalls: 2
 --- !u!114 &114527035701461142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -334,6 +354,38 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114914338960360814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1106348523968688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 114
+    i1: 118
+    i2: 243
+    i3: 138
+    i4: 84
+    i5: 80
+    i6: 229
+    i7: 68
+    i8: 169
+    i9: 240
+    i10: 87
+    i11: 211
+    i12: 39
+    i13: 212
+    i14: 62
+    i15: 14
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114988293716067918
 MonoBehaviour:
   m_ObjectHideFlags: 1
