@@ -34,21 +34,26 @@ public class VRPlayer : NetworkBehaviour
 
 		if (VRSettings.loadedDeviceName == "HoloLens")
 		{
-            // We to destroy VR camera to create a AR camera
-            Destroy(childCamera);
-
-			ARPlayerInstance.SetActive(true);
-			VRPlayerInstance.SetActive(false);
-			netWorkTransfromChild.target = ARPlayerInstance.transform;
-
-			//LaserBlock1.SetActive(true);
-			//LaserBlock2.SetActive(true);
-			//RedMirror.SetActive(true);
-		}
+            ActivateArRig();
+        }
 	}
 
+    [ClientRpc]
+    public void ActivateArRig()
+    {
+        // We to destroy VR camera to create a AR camera
+        Destroy(childCamera);
 
-	void Update()
+        ARPlayerInstance.SetActive(true);
+        VRPlayerInstance.SetActive(false);
+        netWorkTransfromChild.target = ARPlayerInstance.transform;
+
+        //LaserBlock1.SetActive(true);
+        //LaserBlock2.SetActive(true);
+        //RedMirror.SetActive(true);
+    }
+
+    void Update()
 	{
 		if (!isLocalPlayer)
 		{
