@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShootLaser : MonoBehaviour {
 
+	public Transform playerTransform; 
+
 	public Color laserColor;
 
 	private LineRenderer lineRenderer;
@@ -48,6 +50,12 @@ public class ShootLaser : MonoBehaviour {
 		if(hits.Length > 0)
 		{
 			this.linePoints[this.linePoints.Count-1] = hits[0].point;
+
+			if(hits[0].collider.gameObject.name == "TeleportPlatform")
+			{
+				Teleport(hits[0].collider.gameObject.transform);
+			}
+
 			if(hits[0].collider.gameObject.name != "Wall")
 			{
 			 	var colliderNormal = hits[0].normal;
@@ -63,5 +71,11 @@ public class ShootLaser : MonoBehaviour {
 		}
 		this.linePoints.Add(direction);
 		return false;
+	}
+
+	private void Teleport( Transform destination )
+	{
+		playerTransform.position = destination.position;
+		playerTransform.Translate(Vector3.up * 0.5f);
 	}
 }
