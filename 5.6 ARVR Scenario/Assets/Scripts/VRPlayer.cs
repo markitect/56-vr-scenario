@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.VR;
 
+
 public class VRPlayer : NetworkBehaviour
 {
     public GameObject ARPlayerInstance;
 	public GameObject VRPlayerInstance;
 	public Camera childCamera;
-	public Camera arChildCamera;
+    public Camera arChildCamera;
 	public NetworkTransformChild netWorkTransfromChild;
 
     GameObject LaserBlock1;
@@ -35,12 +36,12 @@ public class VRPlayer : NetworkBehaviour
 
 		if (VRSettings.loadedDeviceName == "HoloLens")
 		{
-            ActivateArRig();
+            RpcActivateArRig();
         }
 	}
 
     [ClientRpc]
-    public void ActivateArRig()
+    public void RpcActivateArRig()
     {
         // We to destroy VR camera to create a AR camera
         Destroy(childCamera);
