@@ -9,6 +9,7 @@ public class VRPlayer : NetworkBehaviour
     public GameObject ARPlayerInstance;
 	public GameObject VRPlayerInstance;
 	public Camera childCamera;
+	public Camera arChildCamera;
 	public NetworkTransformChild netWorkTransfromChild;
 
     GameObject LaserBlock1;
