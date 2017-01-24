@@ -6,7 +6,7 @@ public class ShootLaser : MonoBehaviour {
 
 	public Color laserColor;
 
-	private LineRenderer lineRenderer;
+	public LineRenderer lineRenderer;
 
 	private List<Vector3> linePoints = new List<Vector3>();
 
