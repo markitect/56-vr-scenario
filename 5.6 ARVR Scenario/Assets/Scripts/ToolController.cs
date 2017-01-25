@@ -82,8 +82,8 @@ public class ToolController : NetworkBehaviour {
 			return;
 
 
-		laserInstance.transform.position = InputTracking.GetLocalPosition(VRNode.RightHand);
-		laserInstance.transform.rotation = InputTracking.GetLocalRotation(VRNode.RightHand);
+		//laserInstance.transform.position = InputTracking.GetLocalPosition(VRNode.RightHand);
+		//laserInstance.transform.rotation = InputTracking.GetLocalRotation(VRNode.RightHand);
 
 
 
