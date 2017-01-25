@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.VR;
 
 public class ToolController : NetworkBehaviour {
 
@@ -67,6 +68,9 @@ public class ToolController : NetworkBehaviour {
 
 		if(!isLocalPlayer)
 			return;
+
+
+		transform.position = InputTracking.GetLocalPosition(VRNode.RightHand);
 
 
 		Debug.Log("Horizontal: " + Input.GetAxis("Horizontal"));
