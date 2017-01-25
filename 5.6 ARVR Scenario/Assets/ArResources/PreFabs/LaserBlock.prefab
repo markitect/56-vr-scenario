@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23919966533826388}
   - component: {fileID: 114063673026294052}
   - component: {fileID: 114795027646441296}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LaserBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1987227842866444}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.3, z: 4.93}
+  m_LocalRotation: {x: 0.12697849, y: 0.83063316, z: -0.21123984, w: 0.49930227}
+  m_LocalPosition: {x: 0.8153752, y: -0.23335841, z: 0.2706347}
   m_LocalScale: {x: 1, y: 2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}

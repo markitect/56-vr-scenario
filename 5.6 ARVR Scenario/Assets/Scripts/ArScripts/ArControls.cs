@@ -56,13 +56,13 @@ public class ArControls : NetworkBehaviour
 
     void Update()
     {
-        if (m_WallCoolDown < 0)
-        {
-            if (WallTracking)
-            {
+        //if (m_WallCoolDown < 0)
+        //{
+        //    if (WallTracking)
+        //    {
                 MoveWall();
-            }
-        }
+        //    }
+        //}
 
         if (m_WallCoolDown > 0)
         {
@@ -95,18 +95,20 @@ public class ArControls : NetworkBehaviour
 
     private void M_KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
-        if(args.text == "Wall")
+        if (args.text == "Wall")
         {
-            if(m_WallCount < m_AllowedWalls)
-            {
+            //if (m_WallCount < m_AllowedWalls)
+            //{
                 WallTracking = true;
                 m_WallCount += 1;
-                Instantiate(LaserWall);
-            }
-            if (m_WallCount > m_AllowedWalls)
-            {
-                WallTracking = false;
-            }
+                Wall1 = Instantiate(LaserWall);
+            SpawnObject(Wall1);
+
+            //}
+            //if (m_WallCount > m_AllowedWalls)
+            //{
+            //    WallTracking = false;
+            //}
         }
 
         if (args.text == "Red")
@@ -120,10 +122,10 @@ public class ArControls : NetworkBehaviour
         //Wall1 = GameObject.Find("LaserBlock(1)");
         //Wall2 = GameObject.Find("LaserBlock(2)");
 
-        if (m_WallCount.Equals(1))
-        {
-            MoveObject(LaserWall);
-        }
+        //if (m_WallCount.Equals(1))
+        //{
+            MoveObject(Wall1);
+        //}
 
         if (m_WallCount.Equals(2))
         {
@@ -133,9 +135,15 @@ public class ArControls : NetworkBehaviour
 
     public void MoveObject(GameObject obj)
     {
-        var cam = Camera.main.transform;
+        var cam = transform.GetComponentInParent<Camera>().transform;
         Vector3 move = cam.forward * 4f + cam.position;
         obj.transform.position = Vector3.Lerp(obj.transform.position, move, Time.deltaTime * m_currentTrackSpeed);
         obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, cam.rotation, Time.deltaTime * m_currentTrackSpeed);
+    }
+
+    [Command]
+    public void SpawnObject(GameObject obj)
+    {
+        NetworkServer.Spawn(obj);
     }
 }

@@ -49,10 +49,6 @@ public class VRPlayer : NetworkBehaviour
         ARPlayerInstance.SetActive(true);
         VRPlayerInstance.SetActive(false);
         netWorkTransfromChild.target = ARPlayerInstance.transform;
-
-        //LaserBlock1.SetActive(true);
-        //LaserBlock2.SetActive(true);
-        //RedMirror.SetActive(true);
     }
 
     void Update()
