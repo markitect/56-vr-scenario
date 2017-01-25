@@ -1,34 +1,37 @@
 fileFormatVersion: 2
-guid: b1b5e9deb31196f4b9a1166204816d20
-timeCreated: 1485301779
+guid: 918a4cd4bb4c38e4592f77750ff8672d
+timeCreated: 1485309290
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Camera
+    100000: Base
     100002: Face1
     100004: Face2
     100006: Face3
     100008: //RootNode
-    100010: PrismBase
-    400000: Camera
+    100010: Prism
+    400000: Base
     400002: Face1
     400004: Face2
     400006: Face3
     400008: //RootNode
-    400010: PrismBase
-    2300000: Face1
-    2300002: Face2
-    2300004: Face3
-    2300006: PrismBase
-    3300000: Face1
-    3300002: Face2
-    3300004: Face3
-    3300006: PrismBase
-    4300000: Face3
-    4300002: Face2
-    4300004: Face1
-    4300006: PrismBase
+    400010: Prism
+    2300000: Base
+    2300002: Face1
+    2300004: Face2
+    2300006: Face3
+    2300008: Prism
+    3300000: Base
+    3300002: Face1
+    3300004: Face2
+    3300006: Face3
+    3300008: Prism
+    4300000: Base
+    4300002: Face3
+    4300004: Face2
+    4300006: Face1
+    4300008: Prism
   materials:
     importMaterials: 1
     materialName: 0
