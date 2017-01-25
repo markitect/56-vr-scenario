@@ -103,7 +103,7 @@ public class ArControls : NetworkBehaviour
                 m_WallCount += 1;
 
             Wall1 = Instantiate(LaserWall);
-            RpcSpawnObject(Wall1);
+            CmdSpawnObject(Wall1);
 
             //}
             //if (m_WallCount > m_AllowedWalls)
@@ -147,8 +147,8 @@ public class ArControls : NetworkBehaviour
         obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, cam.rotation, Time.deltaTime * m_currentTrackSpeed);
     }
 
-    [ClientRpc]
-    public void RpcSpawnObject(GameObject obj)
+    [Command]
+    public void CmdSpawnObject(GameObject obj)
     {
         NetworkServer.Spawn(obj);
     }
