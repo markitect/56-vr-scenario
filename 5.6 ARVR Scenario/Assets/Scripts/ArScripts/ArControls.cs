@@ -60,7 +60,7 @@ public class ArControls : NetworkBehaviour
         //{
         //    if (WallTracking)
         //    {
-                CmdMoveWall();
+                MoveWall();
         //    }
         //}
 
@@ -72,7 +72,7 @@ public class ArControls : NetworkBehaviour
         if (RedMirrorMoved)
         {
             RedMirror = GameObject.Find("RedMirror");
-            CmdMoveObject(RedMirror);
+            MoveObject(RedMirror);
         }
     }
     
@@ -101,8 +101,9 @@ public class ArControls : NetworkBehaviour
             //{
                 WallTracking = true;
                 m_WallCount += 1;
-                Wall1 = Instantiate(LaserWall);
-            CmdSpawnObject(Wall1);
+
+            Wall1 = Instantiate(LaserWall);
+            RpcSpawnObject(Wall1);
 
             //}
             //if (m_WallCount > m_AllowedWalls)
@@ -117,25 +118,28 @@ public class ArControls : NetworkBehaviour
         }
     }
 
-    [Command]
-    public void CmdMoveWall()
+
+    public void MoveWall()
     {
         //Wall1 = GameObject.Find("LaserBlock(1)");
         //Wall2 = GameObject.Find("LaserBlock(2)");
 
         //if (m_WallCount.Equals(1))
         //{
-        CmdMoveObject(Wall1);
+        if (Wall1 == null)
+        {
+            return;
+        }
+        MoveObject(Wall1);
         //}
 
         if (m_WallCount.Equals(2))
         {
-            CmdMoveObject(LaserWall);
+            MoveObject(LaserWall);
         }
     }
 
-    [Command]
-    public void CmdMoveObject(GameObject obj)
+    public void MoveObject(GameObject obj)
     {
         var cam = transform.GetComponentInParent<Camera>().transform;
         Vector3 move = cam.forward * 4f + cam.position;
@@ -143,8 +147,8 @@ public class ArControls : NetworkBehaviour
         obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, cam.rotation, Time.deltaTime * m_currentTrackSpeed);
     }
 
-    [Command]
-    public void CmdSpawnObject(GameObject obj)
+    [ClientRpc]
+    public void RpcSpawnObject(GameObject obj)
     {
         NetworkServer.Spawn(obj);
     }

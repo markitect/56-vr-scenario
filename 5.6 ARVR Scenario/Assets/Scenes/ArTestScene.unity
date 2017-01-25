@@ -371,7 +371,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 4.931361e-31
+  field of view: 1
   orthographic: 0
   orthographic size: 5
   m_Depth: -10
@@ -756,7 +756,9 @@ MonoBehaviour:
   m_OfflineScene: 
   m_OnlineScene: 
   m_SpawnPrefabs:
+  - {fileID: 1106348523968688, guid: 7276f38a5450e544a9f057d327d43e0e, type: 2}
   - {fileID: 1987227842866444, guid: 744c20cbb5a7aaf41bee85e80acf2e10, type: 2}
+  - {fileID: 1619390745029496, guid: a0b7862524e9cf2468e1b8db1afeaaeb, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
