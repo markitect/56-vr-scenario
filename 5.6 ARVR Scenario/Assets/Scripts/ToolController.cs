@@ -31,7 +31,7 @@ public class ToolController : NetworkBehaviour {
 		b_CanChangeTool = true;
 
 		m_ActiveTools = new GameObject[m_AvailableTools.Length];
-        laserTest = Resources.Load("Prefabs/Prefabs/LaserGun") as GameObject;
+        laserTest = Resources.Load("Prefabs/ArResources/Prefabs/LaserGun") as GameObject;
 
         //for (int x = 0; x < m_AvailableTools.Length; x++)
         //{
