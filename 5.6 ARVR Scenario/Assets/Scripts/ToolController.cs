@@ -35,7 +35,7 @@ public class ToolController : NetworkBehaviour {
 			CmdSpawnObject(m_AvailableTools[x], x);
 		}
 
-		RpcEnableTool(0);
+		CmdEnableTool(0);
 	}
 
 	void Awake()
@@ -43,8 +43,8 @@ public class ToolController : NetworkBehaviour {
 
 	}
 
-	[ClientRpc]
-	public void RpcEnableTool(int i)
+	[Command]
+	public void CmdEnableTool(int i)
 	{
 		m_ActiveTools[i].SetActive(true);
 		for (int x = 0; x < m_ActiveTools.Length; x++)
@@ -80,7 +80,7 @@ public class ToolController : NetworkBehaviour {
 		if (Input.GetAxis("Horizontal") > .5f && b_CanChangeTool)
 		{
 			m_CurrentToolIndex = (m_CurrentToolIndex + 1) % m_ActiveTools.Length;
-			RpcEnableTool(m_CurrentToolIndex);
+			CmdEnableTool(m_CurrentToolIndex);
 
 			m_ToolChangeTimer = 0;
 			b_CanChangeTool = false;
@@ -89,7 +89,7 @@ public class ToolController : NetworkBehaviour {
 		if (Input.GetAxis("Horizontal") < -.5f && b_CanChangeTool)
 		{
 			m_CurrentToolIndex = (m_CurrentToolIndex - 1) % m_ActiveTools.Length;
-			RpcEnableTool(m_CurrentToolIndex);
+			CmdEnableTool(m_CurrentToolIndex);
 
 			m_ToolChangeTimer = 0;
 			b_CanChangeTool = false;
