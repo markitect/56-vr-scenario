@@ -57,7 +57,7 @@ MonoBehaviour:
   isFiring: 0
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 768
 --- !u!120 &120204160203755540
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -139,4 +139,4 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1

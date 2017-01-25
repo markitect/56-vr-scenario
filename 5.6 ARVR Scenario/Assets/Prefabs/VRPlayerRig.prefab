@@ -386,7 +386,7 @@ MonoBehaviour:
   m_ToolPosition: {fileID: 4090518259499662}
   m_AvailableTools:
   - {fileID: 1000011454856410, guid: 9d7dd9042967d4e90bbc1e277017bca5, type: 2}
-  - {fileID: 1943003942105832, guid: 6b2527e1356a03c41a62f35a767089fa, type: 2}
+  - {fileID: 1465782399083276, guid: 8e316f76228868e48bab92f011ccc1e4, type: 2}
   m_ChangeTimeLimit: 0.4
   childCamera: {fileID: 20282625848835418}
 --- !u!136 &136853923429669924
