@@ -102,7 +102,7 @@ public class ArControls : NetworkBehaviour
                 WallTracking = true;
                 m_WallCount += 1;
                 Wall1 = Instantiate(LaserWall);
-            SpawnObject(Wall1);
+            CmdSpawnObject(Wall1);
 
             //}
             //if (m_WallCount > m_AllowedWalls)
@@ -142,7 +142,7 @@ public class ArControls : NetworkBehaviour
     }
 
     [Command]
-    public void SpawnObject(GameObject obj)
+    public void CmdSpawnObject(GameObject obj)
     {
         NetworkServer.Spawn(obj);
     }
