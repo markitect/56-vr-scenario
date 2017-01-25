@@ -60,7 +60,7 @@ public class ArControls : NetworkBehaviour
         //{
         //    if (WallTracking)
         //    {
-                MoveWall();
+                CmdMoveWall();
         //    }
         //}
 
@@ -72,7 +72,7 @@ public class ArControls : NetworkBehaviour
         if (RedMirrorMoved)
         {
             RedMirror = GameObject.Find("RedMirror");
-            MoveObject(RedMirror);
+            CmdMoveObject(RedMirror);
         }
     }
     
@@ -117,23 +117,25 @@ public class ArControls : NetworkBehaviour
         }
     }
 
-    public void MoveWall()
+    [Command]
+    public void CmdMoveWall()
     {
         //Wall1 = GameObject.Find("LaserBlock(1)");
         //Wall2 = GameObject.Find("LaserBlock(2)");
 
         //if (m_WallCount.Equals(1))
         //{
-            MoveObject(Wall1);
+        CmdMoveObject(Wall1);
         //}
 
         if (m_WallCount.Equals(2))
         {
-            MoveObject(LaserWall);
+            CmdMoveObject(LaserWall);
         }
     }
 
-    public void MoveObject(GameObject obj)
+    [Command]
+    public void CmdMoveObject(GameObject obj)
     {
         var cam = transform.GetComponentInParent<Camera>().transform;
         Vector3 move = cam.forward * 4f + cam.position;
