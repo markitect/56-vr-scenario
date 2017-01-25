@@ -52,23 +52,32 @@ public class ArControls : NetworkBehaviour
 
     private void M_GestureReconizer_NavigationUpdatedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headRay)
     {
-        RaycastHit hit;      
-        if (Physics.Raycast(headRay, out hit, 10f))
+        RaycastHit hit;
+        if (Physics.Raycast(headRay, out hit, 50f))
         {
-            //if (m_LocalWall1)
-            //{
-            //    if (hit.collider.name == m_LocalWall1.GetComponent<Collider>().name)
-            //    {
-            //        m_LocalWall1.transform.Rotate(normalizedOffset);
-            //    }
-            //}
-            //else if (m_LocalWall2)
-            //{
-            //    if (hit.collider.name == m_LocalWall2.GetComponent<Collider>().name)
-            //    {
-            //        m_LocalWall2.transform.Rotate(normalizedOffset);
-            //    }
-            //}
+            if (hit.transform.gameObject.layer == 9)
+            {
+                var hitObject = hit.transform.gameObject;
+                hitObject.transform.Rotate(normalizedOffset);
+            }
+
+            if (hit.transform.gameObject.layer == 10)
+            {
+                var hitObject = hit.transform.gameObject;
+                hitObject.transform.Rotate(normalizedOffset);
+            }
+
+            if (hit.transform.gameObject.layer == 11)
+            {
+                var hitObject = hit.transform.gameObject;
+                hitObject.transform.Rotate(normalizedOffset);
+            }
+
+            if (hit.transform.gameObject.layer == 12)
+            {
+                var hitObject = hit.transform.gameObject;
+                hitObject.transform.Rotate(normalizedOffset);
+            }
         }
     }
 
