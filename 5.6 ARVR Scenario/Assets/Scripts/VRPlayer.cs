@@ -4,19 +4,28 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.VR;
 
+
 public class VRPlayer : NetworkBehaviour
 {
     [SerializeField] private Transform m_ToolPosition;
     [SerializeField] private GameObject[] m_AvailableTools;
+    public GameObject ARPlayerInstance;
+    public GameObject VRPlayerInstance;
     [SerializeField] private float m_ChangeTimeLimit;
 
     private GameObject[] m_ActiveTools;
     private int m_CurrentToolIndex;
     private float m_ToolChangeTimer;
     private bool b_CanChangeTool;
-
 	public Camera childCamera;
     public PlayerRoles role { get; private set; }
+
+    public Camera arChildCamera;
+    public NetworkTransformChild netWorkTransfromChild;
+
+    GameObject LaserBlock1;
+    GameObject LaserBlock2;
+    GameObject RedMirror;
 
 	void OnStartLocalPlayer()
 	{
@@ -24,7 +33,11 @@ public class VRPlayer : NetworkBehaviour
 
 	void Start()
 	{
-		if (!isLocalPlayer)
+        //LaserBlock1 = GameObject.Find("LaserBlock1");
+        //LaserBlock2 = GameObject.Find("LaserBlock2");
+        //RedMirror = GameObject.Find("RedMirror");
+
+        if (!isLocalPlayer)
 		{
 			Destroy(childCamera);
 			return;
@@ -34,8 +47,9 @@ public class VRPlayer : NetworkBehaviour
 
         if (VRSettings.loadedDeviceName == "HoloLens")
         {
-            gameObject.AddComponent<ARPlayer>();
+            RpcActivateArRig();
             role = PlayerRoles.Blocker;
+            gameObject.AddComponent<ArControls>();
         }
         else
         {
@@ -52,8 +66,18 @@ public class VRPlayer : NetworkBehaviour
         }
     }
 
+    [ClientRpc]
+    public void RpcActivateArRig()
+    {
+        // We to destroy VR camera to create a AR camera
+        Destroy(childCamera);
 
-	void Update()
+        ARPlayerInstance.SetActive(true);
+        VRPlayerInstance.SetActive(false);
+        netWorkTransfromChild.target = ARPlayerInstance.transform;
+    }
+
+    void Update()
 	{
 		if (!isLocalPlayer)
 		{
