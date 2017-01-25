@@ -6,14 +6,6 @@ using UnityEngine;
 
 public class LaserShooter : MonoBehaviour
 {
-    public Color LaserColor;
-
-    [SerializeField] private GameObject m_LaserBeamPrefab;
-    [SerializeField] private Transform m_BarrelTipPosition;
-    [SerializeField] private float m_MaxBeamLength;
-    [SerializeField] private float m_MaxChargeTime;
-    [SerializeField] private ParticleSystem m_ChargingEffect;
-
     private enum FireState
     {
         None,
@@ -23,12 +15,37 @@ public class LaserShooter : MonoBehaviour
     
     private FireState m_FireState;
     private GameObject m_Laserbeam;
-    private float m_BeamLength;
     private LineRenderer m_Beam;
+    private ShootLaser m_BeamScript;
+    private float m_BeamLength;
     private float m_BeamSpeed;
+    
+    private bool b_CanChangeColor;
+    private int m_CurrentColorIndex;
+    private float m_ColorChangeTimer;
+
+
+    [SerializeField] private GameObject m_LaserBeamPrefab;
+    [SerializeField] private Transform m_BarrelTipPosition;
+
+    [SerializeField] private float m_MaxBeamLength;
+    [SerializeField] private float m_MaxChargeTime;
+    [SerializeField] private float m_MaxBeamSpeed;
+    [SerializeField] private float m_MinBeamSpeed;
+
+    [SerializeField] private ParticleSystem m_ChargingEffect;
+    [SerializeField] private Color[] m_AvailableColors;
+    [SerializeField] private float m_ColorChangeTimeLimit;
+
+    void Start()
+    {
+        b_CanChangeColor = true;
+    }
 
     void Update()
     {
+        m_ColorChangeTimer += Time.deltaTime;
+
         switch (m_FireState)
         {
             case FireState.None:
@@ -36,11 +53,9 @@ public class LaserShooter : MonoBehaviour
                 {
                     m_Laserbeam = Instantiate(m_LaserBeamPrefab);
                     m_Beam = m_Laserbeam.GetComponent<LineRenderer>();
-                    m_Beam.numPositions = 2;
-                    m_Beam.GetComponent<Transform>().position = m_BarrelTipPosition.position;
-                    m_Beam.SetPosition(0, Vector3.zero);
-                    m_Beam.startColor = Color.blue;
-                    m_Beam.endColor = m_Beam.startColor;
+                    m_BeamScript = m_Laserbeam.GetComponent<ShootLaser>();
+                    m_BeamScript.laserColor = m_AvailableColors[m_CurrentColorIndex];
+                    m_BeamSpeed = m_MaxBeamSpeed;
 
                     if (m_ChargingEffect != null)
                         m_ChargingEffect.gameObject.SetActive(true);
@@ -52,7 +67,7 @@ public class LaserShooter : MonoBehaviour
             case FireState.Charging:
                 if (Input.GetButtonDown("Fire1") || m_BeamLength >= m_MaxBeamLength)
                 {
-                    m_Beam.SetPosition(1, new Vector3(0, 0, m_BeamLength));
+                    // m_BeamScript.Length = m_BeamLength
                     m_FireState = FireState.Firing;
 
                     // set beam length back to zero for next beam creation.
@@ -60,27 +75,45 @@ public class LaserShooter : MonoBehaviour
                     break;
                 }
 
-                // this may have to change to better conform to the beam control system.
-                // but basically the beam should get longer the longer a player holds the button here.
                 m_BeamLength += m_MaxBeamLength * Time.deltaTime / m_MaxChargeTime;
                 break;
 
             case FireState.Firing:
-                if (Input.GetButtonDown("Fire1"))
+                if (Input.GetButtonDown("Fire1") || m_BeamSpeed <= m_MinBeamSpeed)
                 {
                     if (m_ChargingEffect != null)
                         m_ChargingEffect.gameObject.SetActive(false);
 
-                    // TODO: fire event Mark is working which should be attached to the beam prefab.
-                    // should set the speed of the beam here too.
-                    Debug.Log("Fired laser!");
+                    m_BeamScript.speed = m_BeamSpeed;
+                    m_Laserbeam.transform.position = m_BarrelTipPosition.position;
+                    m_Laserbeam.transform.rotation = m_BarrelTipPosition.rotation;
+
+                    m_BeamScript.FireLaser();
+
                     m_FireState = FireState.None;
                     break;
                 }
 
                 // increase or decrease beam speed?
-                m_BeamSpeed -= 5;
+                m_BeamSpeed -= .1f;
                 break;
         }
+
+        if (Input.GetAxis("Vertical") > .5 && b_CanChangeColor)
+        {
+            m_CurrentColorIndex = (m_CurrentColorIndex + 1)%m_AvailableColors.Length;
+            b_CanChangeColor = false;
+            m_ColorChangeTimer = 0;
+        }
+
+        if (Input.GetAxis("Vertical") < -.5 && b_CanChangeColor)
+        {
+            m_CurrentColorIndex = (m_CurrentColorIndex - 1) % m_AvailableColors.Length;
+            b_CanChangeColor = false;
+            m_ColorChangeTimer = 0;
+        }
+
+        if (m_ColorChangeTimer > m_ColorChangeTimeLimit)
+            b_CanChangeColor = true;
     }
 }
