@@ -150,6 +150,7 @@ public class ShootLaser : MonoBehaviour
                 {
                     return false;
                 }
+                closestGameObject.GetComponent<BoxCollider>().enabled = false;
             }
             else
 			{
@@ -181,6 +182,7 @@ public class ShootLaser : MonoBehaviour
                 {
                     this.ended = true;
                 }
+                closestGameObject.GetComponent<BoxCollider>().enabled = false;
             }
 			else
 			{
