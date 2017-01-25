@@ -672,6 +672,7 @@ MonoBehaviour:
   m_AvailableTools:
   - {fileID: 1000011454856410, guid: 9d7dd9042967d4e90bbc1e277017bca5, type: 2}
   m_ChangeTimeLimit: 0
+  laserTest: {fileID: 1000011454856410, guid: 9d7dd9042967d4e90bbc1e277017bca5, type: 2}
 --- !u!114 &114123233344156658
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -318,7 +318,8 @@ MonoBehaviour:
   m_MaxBeamSpeed: 20
   m_MinBeamSpeed: 5
   m_ChargingEffect: {fileID: 198000013551237616}
-  m_AvailableColors: []
+  m_AvailableColors:
+  - {r: 1, g: 0, b: 0, a: 0}
   m_ColorChangeTimeLimit: 0
   isScoring: 0
 --- !u!114 &114511835200152676

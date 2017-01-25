@@ -19,10 +19,18 @@ public class ToolController : NetworkBehaviour {
 	private float m_ToolChangeTimer;
 	private bool b_CanChangeTool;
 
+	public GameObject laserTest;
+
 
 
 	// Use this for initialization
 	void Start () {
+		SpawnTool();
+	}
+
+	[Client]
+	void SpawnTool()
+	{
 		if (!isLocalPlayer)
 			return;
 
@@ -30,17 +38,19 @@ public class ToolController : NetworkBehaviour {
 
 		m_ActiveTools = new GameObject[m_AvailableTools.Length];
 
-		for (int x = 0; x < m_AvailableTools.Length; x++)
-		{
-			CmdSpawnObject(m_AvailableTools[x], x);
-		}
+		//for (int x = 0; x < m_AvailableTools.Length; x++)
+		//{
+		//	CmdSpawnObject(m_AvailableTools[x], x);
+		//}
+
+		CmdSpawnObject2(laserTest);
+
 
 		CmdEnableTool(0);
 	}
 
 	void Awake()
 	{
-
 	}
 
 	[Command]
@@ -63,6 +73,14 @@ public class ToolController : NetworkBehaviour {
 	}
 
 
+	[Command]
+	public void CmdSpawnObject2(GameObject obj)
+	{
+		var a = Instantiate(obj);
+		NetworkServer.Spawn(a);
+	}
+
+
 	// Update is called once per frame
 	void Update () {
 
@@ -71,6 +89,8 @@ public class ToolController : NetworkBehaviour {
 
 
 		transform.position = InputTracking.GetLocalPosition(VRNode.RightHand);
+		transform.rotation = InputTracking.GetLocalRotation(VRNode.RightHand);
+
 
 
 		Debug.Log("Horizontal: " + Input.GetAxis("Horizontal"));
