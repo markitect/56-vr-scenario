@@ -7,11 +7,11 @@ public class ArControls : NetworkBehaviour
 {
     KeywordRecognizer m_KeywordRecognizer = null;
     GestureRecognizer m_GestureReconizer = null;
-    public GameObject LaserWall;
-    public GameObject RedMirror;
+    public GameObject LaserWallPrefab;
+    public GameObject RedMirrorPrefab;
 
-    GameObject Wall1;
-    GameObject Wall2;
+    GameObject LocalWall1;
+    GameObject LocalWall2;
     //GameObject RedMirror;
 
     bool RedMirrorMoved = false;
@@ -42,7 +42,7 @@ public class ArControls : NetworkBehaviour
         m_GestureReconizer.NavigationUpdatedEvent += M_GestureReconizer_NavigationUpdatedEvent;
         m_GestureReconizer.StartCapturingGestures();
 
-        LaserWall = Resources.Load("ArResources/Prefabs/LaserBlock") as GameObject;
+        LaserWallPrefab = Resources.Load("ArResources/Prefabs/LaserBlock") as GameObject;
     }
 
     private void M_GestureReconizer_NavigationUpdatedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headRay)
@@ -75,8 +75,8 @@ public class ArControls : NetworkBehaviour
 
         if (RedMirrorMoved)
         {
-            RedMirror = GameObject.Find("RedMirror");
-            MoveObject(RedMirror);
+            RedMirrorPrefab = GameObject.Find("RedMirror");
+            MoveObject(RedMirrorPrefab);
         }
     }
     
@@ -107,9 +107,8 @@ public class ArControls : NetworkBehaviour
                 m_WallCount += 1;
 
             if (isLocalPlayer)
-            {
-                Wall1 = Instantiate(LaserWall);
-                CmdSpawnObject(Wall1);
+            {   
+                CmdSpawnObject(LaserWallPrefab);
             }
 
             //}
@@ -133,16 +132,16 @@ public class ArControls : NetworkBehaviour
 
         //if (m_WallCount.Equals(1))
         //{
-        if (Wall1 == null)
+        if (LocalWall1 == null)
         {
             return;
         }
-        MoveObject(Wall1);
+        MoveObject(LocalWall1);
         //}
 
         if (m_WallCount.Equals(2))
         {
-            MoveObject(LaserWall);
+            MoveObject(LaserWallPrefab);
         }
     }
 
@@ -157,8 +156,8 @@ public class ArControls : NetworkBehaviour
     [Command]
     public void CmdSpawnObject(GameObject obj)
     {
-        //var spawnedObj = Instantiate(obj);
-        NetworkServer.Spawn(obj);
+        LocalWall1 = Instantiate(obj);
+        NetworkServer.Spawn(LocalWall1);
     }
 
     //[Command]
