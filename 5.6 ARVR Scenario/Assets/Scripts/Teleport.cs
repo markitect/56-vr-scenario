@@ -7,6 +7,8 @@ public class Teleport : MonoBehaviour {
 	public Transform playerTransform;
     public float delatTimeBeforeTeleport;
     public int deltaBlink;
+    public GUITexture fadeTexture;
+    public float fadeInSpeed;
 
     float timer;
     int count;
@@ -20,16 +22,30 @@ public class Teleport : MonoBehaviour {
 		Vector3 start = this.gameObject.transform.position;
 		Vector3 end = (this.transform.forward * 20) + start;
 
+        // Fade in texture if any
+        Color oldColor = fadeTexture.color;
+        oldColor.a = Mathf.Lerp(oldColor.a, 0, fadeInSpeed);
+        fadeTexture.color = oldColor;
+
 		RaycastHit hit;
 		if (Physics.Raycast(start, end, out hit))
 		{
             if (hit.collider.gameObject.name == "TeleportPlatform")
             {
+                // When hit a teleport platform, update the target teleport
                 targetTeleportPosition = hit.collider.gameObject.transform.position;
+
                 if (targetTeleportPosition == hit.collider.gameObject.transform.position && timer >= delatTimeBeforeTeleport)
                 {
+                    // Black the screen
+                    Color currentColor = fadeTexture.color;
+                    currentColor.a = 1;
+                    fadeTexture.color = currentColor;
+
+                    // Move player position
                     playerTransform.position = hit.collider.gameObject.transform.position;
                     playerTransform.Translate(Vector3.up * 0.5f);
+
                     Reset();
 
                     // Need to make sure to change the teleport's scale back
@@ -38,6 +54,8 @@ public class Teleport : MonoBehaviour {
                 }
                 else if (targetTeleportPosition == hit.collider.gameObject.transform.position)
                 {
+                    // Player still looking at the same teleport but not long enough before moving
+                    // Increase timer
                     timer += Time.deltaTime;
 
                     // Make the target teleport blink by changing its local scale
@@ -57,11 +75,13 @@ public class Teleport : MonoBehaviour {
                 }
                 else
                 {
+                    // Player look at some other teleport
                     Reset();
                 }
             }
             else
             {
+                // Player look at somewhere else
                 Reset();
             }
 		}
