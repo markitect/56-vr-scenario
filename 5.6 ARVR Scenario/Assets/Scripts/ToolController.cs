@@ -20,7 +20,7 @@ public class ToolController : NetworkBehaviour {
 	private bool b_CanChangeTool;
 
 	public GameObject laserTest;
-
+	private GameObject laserInstance;
 
 
 	// Use this for initialization
@@ -30,7 +30,7 @@ public class ToolController : NetworkBehaviour {
 
 		b_CanChangeTool = true;
 
-		m_ActiveTools = new GameObject[m_AvailableTools.Length];
+		//m_ActiveTools = new GameObject[m_AvailableTools.Length];
         laserTest = Resources.Load("Prefabs/ArResources/Prefabs/LaserGun") as GameObject;
 
         //for (int x = 0; x < m_AvailableTools.Length; x++)
@@ -58,20 +58,20 @@ public class ToolController : NetworkBehaviour {
 		}
 	}
 
-	[Command]
-	public void CmdSpawnObject(GameObject obj, int i)
-	{
-		m_ActiveTools[i] = Instantiate(obj);
-		NetworkServer.Spawn(m_ActiveTools[i]);
-		m_ActiveTools[i].SetActive(false);
-	}
+	//[Command]
+	//public void CmdSpawnObject(GameObject obj, int i)
+	//{
+	//	m_ActiveTools[i] = Instantiate(obj);
+	//	NetworkServer.Spawn(m_ActiveTools[i]);
+	//	m_ActiveTools[i].SetActive(false);
+	//}
 
 
 	[Command]
 	public void CmdSpawnObject2(GameObject obj)
-	{    
-		var a = Instantiate(obj);
-		NetworkServer.Spawn(a);
+	{
+		laserInstance = Instantiate(obj);
+		NetworkServer.Spawn(laserInstance);
 	}
 
 
@@ -82,8 +82,8 @@ public class ToolController : NetworkBehaviour {
 			return;
 
 
-		transform.position = InputTracking.GetLocalPosition(VRNode.RightHand);
-		transform.rotation = InputTracking.GetLocalRotation(VRNode.RightHand);
+		laserInstance.transform.position = InputTracking.GetLocalPosition(VRNode.RightHand);
+		laserInstance.transform.rotation = InputTracking.GetLocalRotation(VRNode.RightHand);
 
 
 
