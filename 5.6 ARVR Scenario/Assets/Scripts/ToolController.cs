@@ -25,12 +25,6 @@ public class ToolController : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		SpawnTool();
-	}
-
-	[Client]
-	void SpawnTool()
-	{
 		if (!isLocalPlayer)
 			return;
 

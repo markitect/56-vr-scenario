@@ -43,11 +43,19 @@ public class Player : NetworkBehaviour
         else
         {
             role = PlayerRoles.Shooter;
-	        m_toolControls.enabled = true;
+	        RpcActivateVRRig();
+
         }
     }
 
-    [ClientRpc]
+	[ClientRpc]
+	public void RpcActivateVRRig()
+	{
+	        m_toolControls.enabled = true;
+	}
+
+
+	[ClientRpc]
     public void RpcActivateArRig()
     {
         // We to destroy VR camera to create a AR camera
