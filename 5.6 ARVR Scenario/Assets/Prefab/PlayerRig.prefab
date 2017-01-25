@@ -145,7 +145,6 @@ GameObject:
   - component: {fileID: 114123233344156658}
   - component: {fileID: 114450044262464324}
   - component: {fileID: 114273118986665730}
-  - component: {fileID: 114096034828822422}
   m_Layer: 0
   m_Name: PlayerRig
   m_TagString: Untagged
@@ -657,22 +656,6 @@ Light:
   m_CCT: 6570
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114096034828822422
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1555254615576578}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 614b917743d0b7848bcc7d016142151b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ToolPosition: {fileID: 0}
-  m_AvailableTools:
-  - {fileID: 1000011454856410, guid: 9d7dd9042967d4e90bbc1e277017bca5, type: 2}
-  m_ChangeTimeLimit: 0
-  laserTest: {fileID: 1000011454856410, guid: 9d7dd9042967d4e90bbc1e277017bca5, type: 2}
 --- !u!114 &114123233344156658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -710,7 +693,7 @@ MonoBehaviour:
   childCamera: {fileID: 20282625848835418}
   arChildCamera: {fileID: 20197698019297238}
   netWorkTransfromChild: {fileID: 114450044262464324}
-  m_toolControls: {fileID: 114096034828822422}
+  m_toolControls: {fileID: 0}
 --- !u!114 &114450044262464324
 MonoBehaviour:
   m_ObjectHideFlags: 1

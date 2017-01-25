@@ -18,8 +18,6 @@ public class Player : NetworkBehaviour
     public Camera arChildCamera;
     public NetworkTransformChild netWorkTransfromChild;
 
-	public ToolController m_toolControls;
-
 	void OnStartLocalPlayer()
 	{
     }
@@ -44,16 +42,10 @@ public class Player : NetworkBehaviour
         else
         {
             role = PlayerRoles.Shooter;
-	        RpcActivateVRRig();
             gameObject.AddComponent<ToolController>();
         }
     }
 
-	[ClientRpc]
-	public void RpcActivateVRRig()
-	{
-	        m_toolControls.enabled = true;
-	}
 
 
 	[ClientRpc]
