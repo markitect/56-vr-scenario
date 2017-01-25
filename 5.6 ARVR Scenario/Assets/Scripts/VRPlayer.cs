@@ -39,6 +39,12 @@ public class VRPlayer : NetworkBehaviour
             RpcActivateArRig();
             gameObject.AddComponent<ArControls>();
         }
+
+		if (VRSettings.loadedDeviceName == "OpenVR"
+		    || VRSettings.loadedDeviceName == "Oculus")
+		{
+
+		}
 	}
 
     [ClientRpc]

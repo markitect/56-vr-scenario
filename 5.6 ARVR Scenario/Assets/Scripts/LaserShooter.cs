@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class LaserShooter : MonoBehaviour
+public class LaserShooter : NetworkBehaviour
 {
     public Color LaserColor;
 
@@ -26,6 +27,8 @@ public class LaserShooter : MonoBehaviour
     private float m_BeamLength;
     private LineRenderer m_Beam;
     private float m_BeamSpeed;
+
+	public bool isScoring;
 
     void Update()
     {

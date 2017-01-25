@@ -29,6 +29,8 @@ public class ShootLaser : MonoBehaviour
 	private List<GameObject> newPointSpheres = new List<GameObject>();
 	private List<GameObject> linePointSpheres = new List<GameObject>();
 
+
+
 	// Use this for initialization
 	void Start()
 	{
