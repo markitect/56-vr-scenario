@@ -31,16 +31,16 @@ public class ToolController : NetworkBehaviour {
 		b_CanChangeTool = true;
 
 		m_ActiveTools = new GameObject[m_AvailableTools.Length];
+        laserTest = Resources.Load("Prefabs/Prefabs/LaserGun") as GameObject;
 
-		//for (int x = 0; x < m_AvailableTools.Length; x++)
-		//{
-		//	CmdSpawnObject(m_AvailableTools[x], x);
-		//}
+        //for (int x = 0; x < m_AvailableTools.Length; x++)
+        //{
+        //	CmdSpawnObject(m_AvailableTools[x], x);
+        //}
 
-		CmdSpawnObject2(laserTest);
+        CmdSpawnObject2(laserTest);
 
-
-		CmdEnableTool(0);
+		//CmdEnableTool(0);
 	}
 
 	void Awake()
@@ -69,7 +69,7 @@ public class ToolController : NetworkBehaviour {
 
 	[Command]
 	public void CmdSpawnObject2(GameObject obj)
-	{
+	{    
 		var a = Instantiate(obj);
 		NetworkServer.Spawn(a);
 	}

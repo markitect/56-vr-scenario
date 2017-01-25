@@ -40,11 +40,12 @@ public class Player : NetworkBehaviour
             role = PlayerRoles.Blocker;
             gameObject.AddComponent<ArControls>();
         }
+
         else
         {
             role = PlayerRoles.Shooter;
 	        RpcActivateVRRig();
-
+            gameObject.AddComponent<ToolController>();
         }
     }
 
