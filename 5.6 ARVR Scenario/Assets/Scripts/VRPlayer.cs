@@ -24,9 +24,9 @@ public class VRPlayer : NetworkBehaviour
 
 	void Start()
 	{
-        LaserBlock1 = GameObject.Find("LaserBlock1");
-        LaserBlock2 = GameObject.Find("LaserBlock2");
-        RedMirror = GameObject.Find("RedMirror");
+        //LaserBlock1 = GameObject.Find("LaserBlock1");
+        //LaserBlock2 = GameObject.Find("LaserBlock2");
+        //RedMirror = GameObject.Find("RedMirror");
 
         if (!isLocalPlayer)
 		{
@@ -37,6 +37,7 @@ public class VRPlayer : NetworkBehaviour
 		if (VRSettings.loadedDeviceName == "HoloLens")
 		{
             RpcActivateArRig();
+            gameObject.AddComponent<ArControls>();
         }
 	}
 

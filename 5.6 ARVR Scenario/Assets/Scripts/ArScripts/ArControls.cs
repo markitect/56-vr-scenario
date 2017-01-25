@@ -27,6 +27,8 @@ public class ArControls : NetworkBehaviour
 
     void Start()
     {
+        controlWords = new string[] { "Wall" };
+
         m_KeywordRecognizer = new KeywordRecognizer(controlWords);
         m_KeywordRecognizer.OnPhraseRecognized += M_KeywordRecognizer_OnPhraseRecognized;
         m_KeywordRecognizer.Start();
@@ -39,6 +41,8 @@ public class ArControls : NetworkBehaviour
         m_GestureReconizer.TappedEvent += M_GestureReconizer_TappedEvent;
         m_GestureReconizer.NavigationUpdatedEvent += M_GestureReconizer_NavigationUpdatedEvent;
         m_GestureReconizer.StartCapturingGestures();
+
+        LaserWall = Resources.Load("ArResources/Prefabs/LaserBlock") as GameObject;
     }
 
     private void M_GestureReconizer_NavigationUpdatedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headRay)
@@ -102,8 +106,11 @@ public class ArControls : NetworkBehaviour
                 WallTracking = true;
                 m_WallCount += 1;
 
-            Wall1 = Instantiate(LaserWall);
-            CmdSpawnObject(Wall1);
+            if (isLocalPlayer)
+            {
+                Wall1 = Instantiate(LaserWall);
+                CmdSpawnObject(Wall1);
+            }
 
             //}
             //if (m_WallCount > m_AllowedWalls)
@@ -141,7 +148,7 @@ public class ArControls : NetworkBehaviour
 
     public void MoveObject(GameObject obj)
     {
-        var cam = transform.GetComponentInParent<Camera>().transform;
+        var cam = transform.GetComponentInChildren<Camera>().transform;
         Vector3 move = cam.forward * 4f + cam.position;
         obj.transform.position = Vector3.Lerp(obj.transform.position, move, Time.deltaTime * m_currentTrackSpeed);
         obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, cam.rotation, Time.deltaTime * m_currentTrackSpeed);
@@ -150,6 +157,14 @@ public class ArControls : NetworkBehaviour
     [Command]
     public void CmdSpawnObject(GameObject obj)
     {
+        //var spawnedObj = Instantiate(obj);
         NetworkServer.Spawn(obj);
     }
+
+    //[Command]
+    //public void CmdSpawnWall()
+    //{
+    //    var spawnedObj = Instantiate(LaserWall);
+    //    NetworkServer.Spawn(spawnedObj);
+    //}
 }

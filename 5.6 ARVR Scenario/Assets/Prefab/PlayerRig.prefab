@@ -181,8 +181,6 @@ GameObject:
   - component: {fileID: 92300221865796506}
   - component: {fileID: 124287089416951300}
   - component: {fileID: 81249023285476770}
-  - component: {fileID: 114764771045671230}
-  - component: {fileID: 114201665330178226}
   m_Layer: 0
   m_Name: ArPlayer
   m_TagString: MainCamera
@@ -679,26 +677,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &114201665330178226
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1766184295273366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61fd7798569672a4da5d457876a951ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LaserWall: {fileID: 1987227842866444, guid: 744c20cbb5a7aaf41bee85e80acf2e10, type: 2}
-  RedMirror: {fileID: 1619390745029496, guid: a0b7862524e9cf2468e1b8db1afeaaeb, type: 2}
-  controlWords:
-  - Wall
-  - Red
-  - Blue
-  - Yellow
-  m_CoolDown: 10
-  m_AllowedWalls: 2
 --- !u!114 &114273118986665730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -814,38 +792,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114764771045671230
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1766184295273366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 166
-    i1: 154
-    i2: 58
-    i3: 205
-    i4: 182
-    i5: 206
-    i6: 251
-    i7: 132
-    i8: 57
-    i9: 82
-    i10: 76
-    i11: 102
-    i12: 19
-    i13: 166
-    i14: 152
-    i15: 108
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114797627029774424
 MonoBehaviour:
   m_ObjectHideFlags: 1
