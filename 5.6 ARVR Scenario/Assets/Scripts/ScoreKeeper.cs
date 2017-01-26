@@ -6,12 +6,18 @@ using UnityEngine.Networking;
 
 public class ScoreKeeper : NetworkBehaviour
 {
+    [SerializeField] private float rate;
 
-	[SyncVar]
+    [SyncVar]
 	public int score;
-	public const float rate = 1;
 
-	public ScoreManager m_scoreManager;
+    public float Rate
+    {
+        get { return rate; }
+    }
+
+    public ScoreManager m_scoreManager;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -28,6 +34,8 @@ public class ScoreKeeper : NetworkBehaviour
     public void Score()
     {
         score += 1;
+        
+        Debug.Log("You scored!  Score is " + score);
     }
 
 	public float GetScore()

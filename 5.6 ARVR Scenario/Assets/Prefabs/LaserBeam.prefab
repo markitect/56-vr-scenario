@@ -52,12 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e8df5a83a154635a4d6b078ea6bfc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserColor: {r: 0, g: 0, b: 0, a: 0}
-  speed: 2
-  isFiring: 0
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 1792
 --- !u!120 &120204160203755540
 LineRenderer:
   m_ObjectHideFlags: 1

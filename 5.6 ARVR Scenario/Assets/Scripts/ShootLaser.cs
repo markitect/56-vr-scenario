@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VR.WSA.Persistence;
 
 public class ShootLaser : MonoBehaviour
 {
 
-	public Color laserColor;
+    public Color laserColor { get; set; }
+    public float speed { get; set; }
+    public float length { get; set; }
+    public bool isFiring { get; private set; }
 
-	public float speed = 2f;
-
-    public float length;
-
-	public bool isFiring = false;
-
-	public LayerMask collisionLayers;
+    public LayerMask collisionLayers;
 
 	private LineRenderer lineRenderer;
 
@@ -26,10 +24,7 @@ public class ShootLaser : MonoBehaviour
 	private Vector3 start;
 	private Vector3 end;
 	private Vector3 direction;
-	private bool ended = false;
-
-	private List<GameObject> newPointSpheres = new List<GameObject>();
-	private List<GameObject> linePointSpheres = new List<GameObject>();
+    private bool ended;
 
     private bool isScoring;
     private ScoreKeeper scorer;
@@ -46,8 +41,6 @@ public class ShootLaser : MonoBehaviour
 		{
 			this.lineRenderer = this.gameObject.AddComponent<LineRenderer>();
 		}
-
-		this.laserColor = Color.red;
 	}
 
 	// Update is called once per frame
@@ -71,14 +64,6 @@ public class ShootLaser : MonoBehaviour
 				RaycastForMovement();
 			}
 
-			if (Input.GetMouseButtonDown(1))
-			{
-				this.newPoints.Clear();
-				this.linePoints.Clear();
-				this.isFiring = false;
-				this.ended = false;
-			}
-
 			this.lineRenderer.numPositions = this.linePoints.Count;
 			this.lineRenderer.SetPositions(this.linePoints.ToArray());
 
@@ -92,7 +77,7 @@ public class ShootLaser : MonoBehaviour
 	    {
 	        scoreTimer += Time.deltaTime;
 
-	        if (scorer != null && scoreTimer >= ScoreKeeper.rate)
+	        if (scorer != null && scoreTimer >= scorer.Rate)
 	        {
 	            scorer.Score();
 	        }
@@ -100,14 +85,14 @@ public class ShootLaser : MonoBehaviour
 
 	    if (isDissolving)
 	    {
-	        // take the start point and move it to the next point by delta speed.
+            // move the first point in the line to the 2nd point in the line by speed divided by the distance between the lines.
 
-        // figure out direction from starting point to the next point
 	        if (linePoints.Count > 1)
 	        {
 	            var dissolveStart = linePoints[0];
 	            var lineFraction = speed*Time.deltaTime / Vector3.Distance(dissolveStart, linePoints[1]);
 
+                // if the line fraction is 1 then we have reached point 2.  Delete the first point to shorten the line.
 	            if (lineFraction < 1)
 	            {
                     linePoints[0] = Vector3.Lerp(dissolveStart, linePoints[1], lineFraction);
@@ -117,7 +102,10 @@ public class ShootLaser : MonoBehaviour
                     linePoints.RemoveAt(0);
                 }
 	        }
-	        else
+
+            // this objects job is done as there is only 1 point left on the line.
+            // this won't interfere with creation since it is regulated by the isDissolving flag.
+	        if (linePoints.Count <= 1)
 	        {
 	            GameObject.Destroy(this.gameObject);
 	        }
@@ -222,18 +210,6 @@ public class ShootLaser : MonoBehaviour
                     this.ended = true;
                     break;
             }
-
-   //         if (closestHit.collider.gameObject.layer != LayerMask.NameToLayer("Wall"))
-			//{
-			//	var reflection = Vector3.Reflect(this.end - this.start, closestHit.normal);
-			//	this.direction = reflection.normalized;
-			//	this.start = this.end;
-			//	this.linePoints.Add(this.end);
-			//}
-			//else
-			//{
-			//	this.ended = true;
-			//}
 		}
 	}
 
