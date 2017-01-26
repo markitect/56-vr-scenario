@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 61fd7798569672a4da5d457876a951ab
+timeCreated: 1485307614
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - LaserWall: {fileID: 1987227842866444, guid: 744c20cbb5a7aaf41bee85e80acf2e10,
+      type: 2}
+  - RedMirror: {fileID: 1619390745029496, guid: a0b7862524e9cf2468e1b8db1afeaaeb,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

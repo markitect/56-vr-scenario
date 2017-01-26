@@ -64,6 +64,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1468008526463618
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4090518259499662}
+  m_Layer: 0
+  m_Name: ToolPlacementPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1555254615576578
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,6 +98,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4090518259499662
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1468008526463618}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1, y: -0.3, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4491131851307822}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4312062445212848
 Transform:
   m_ObjectHideFlags: 1
@@ -103,7 +131,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555254615576578}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.698199, y: 1.7077804, z: 0.53386134}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4491131851307822}
@@ -117,11 +145,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1118874535832482}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.056576, y: -0.82778037, z: -2.8452032}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4698185672154356}
   - {fileID: 4312062445212848}
+  - {fileID: 4090518259499662}
   m_Father: {fileID: 4319429486292850}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -156,7 +185,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: NaN
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -354,6 +383,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7192f70c4e7255d448e2556471f34b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ToolPosition: {fileID: 4090518259499662}
+  m_AvailableTools:
+  - {fileID: 1000011454856410, guid: 9d7dd9042967d4e90bbc1e277017bca5, type: 2}
+  - {fileID: 1465782399083276, guid: 8e316f76228868e48bab92f011ccc1e4, type: 2}
+  m_ChangeTimeLimit: 0.4
   childCamera: {fileID: 20282625848835418}
 --- !u!136 &136853923429669924
 CapsuleCollider:
