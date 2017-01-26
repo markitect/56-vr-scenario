@@ -693,6 +693,7 @@ MonoBehaviour:
   childCamera: {fileID: 20282625848835418}
   arChildCamera: {fileID: 20197698019297238}
   netWorkTransfromChild: {fileID: 114450044262464324}
+  m_toolControls: {fileID: 0}
 --- !u!114 &114450044262464324
 MonoBehaviour:
   m_ObjectHideFlags: 1
