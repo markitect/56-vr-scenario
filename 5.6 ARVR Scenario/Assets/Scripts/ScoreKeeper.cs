@@ -8,28 +8,27 @@ public class ScoreKeeper : NetworkBehaviour
 {
 
 	[SyncVar]
-	private float score;
-	public const float rate = 10;
+	public int score;
+	public const float rate = 1;
 
-	private LaserShooter m_ShootLaser;
 	public ScoreManager m_scoreManager;
 	// Use this for initialization
 	void Start ()
 	{
-		m_ShootLaser = GetComponent<LaserShooter>();
 		GameObject.Find("ScoreManager").GetComponent<ScoreManager>().RegisterScoreKeeper(this);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		if(!isServer)
 			return;
-
-		if (m_ShootLaser.isScoring)
-		{
-			score += rate * Time.deltaTime;
-		}
 	}
+
+    public void Score()
+    {
+        score += 1;
+    }
 
 	public float GetScore()
 	{

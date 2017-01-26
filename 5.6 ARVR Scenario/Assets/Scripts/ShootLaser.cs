@@ -10,6 +10,8 @@ public class ShootLaser : MonoBehaviour
 
 	public float speed = 2f;
 
+    public float length;
+
 	public bool isFiring = false;
 
 	public LayerMask collisionLayers;
@@ -29,10 +31,16 @@ public class ShootLaser : MonoBehaviour
 	private List<GameObject> newPointSpheres = new List<GameObject>();
 	private List<GameObject> linePointSpheres = new List<GameObject>();
 
+    private bool isScoring;
+    private ScoreKeeper scorer;
+    private float scoreTimer;
 
+    private bool isDissolving;
 
-	// Use this for initialization
-	void Start()
+    private float startTime;
+
+    // Use this for initialization
+    void Start()
 	{
 		if (!(this.lineRenderer = this.gameObject.GetComponent<LineRenderer>()))
 		{
@@ -71,22 +79,52 @@ public class ShootLaser : MonoBehaviour
 				this.ended = false;
 			}
 
-			this.lineRenderer.startWidth = .05f;
-			this.lineRenderer.startColor = this.laserColor;
-			this.lineRenderer.endColor = this.laserColor;
 			this.lineRenderer.numPositions = this.linePoints.Count;
 			this.lineRenderer.SetPositions(this.linePoints.ToArray());
+
+            if(speed * (Time.time - startTime) > length)
+            {
+                isDissolving = true;
+            }
 		}
-		else
-		{
-			if (Input.GetMouseButtonDown(0))
-			{
-				this.FireLaser();
-			}
-		}
+
+	    if (isScoring)
+	    {
+	        scoreTimer += Time.deltaTime;
+
+	        if (scorer != null && scoreTimer >= ScoreKeeper.rate)
+	        {
+	            scorer.Score();
+	        }
+	    }
+
+	    if (isDissolving)
+	    {
+	        // take the start point and move it to the next point by delta speed.
+
+        // figure out direction from starting point to the next point
+	        if (linePoints.Count > 1)
+	        {
+	            var dissolveStart = linePoints[0];
+	            var lineFraction = speed*Time.deltaTime / Vector3.Distance(dissolveStart, linePoints[1]);
+
+	            if (lineFraction < 1)
+	            {
+                    linePoints[0] = Vector3.Lerp(dissolveStart, linePoints[1], lineFraction);
+                }
+	            else
+	            {
+                    linePoints.RemoveAt(0);
+                }
+	        }
+	        else
+	        {
+	            GameObject.Destroy(this.gameObject);
+	        }
+	    }
 	}
 
-	public void FireLaser()
+	public void FireLaser(GameObject owner)
 	{
 		this.linePoints.Clear();
 		this.start = this.gameObject.transform.position;
@@ -94,7 +132,12 @@ public class ShootLaser : MonoBehaviour
 		this.end = this.start;
 		this.linePoints.Add(end);
 		this.direction = this.transform.forward;
-		this.isFiring = true;
+        this.lineRenderer.startWidth = .05f;
+        this.lineRenderer.startColor = this.laserColor;
+        this.lineRenderer.endColor = this.laserColor;
+	    scorer = owner.GetComponent<ScoreKeeper>();
+	    startTime = Time.time;
+        this.isFiring = true;
 		this.ended = false;
 	}
 
@@ -124,7 +167,7 @@ public class ShootLaser : MonoBehaviour
 
 		this.linePoints = this.newPoints;
 
-		// reset start and end tot he last two points in the list
+		// reset start and end to the last two points in the list
 		this.start = this.linePoints[this.linePoints.Count - 2];
 		this.end = this.linePoints[this.linePoints.Count - 1];
 	}
@@ -161,17 +204,36 @@ public class ShootLaser : MonoBehaviour
 		{
 			var closestHit = FindClosestHit(hits);
 
-			if (closestHit.collider.gameObject.layer != LayerMask.NameToLayer("Wall"))
-			{
-				var reflection = Vector3.Reflect(this.end - this.start, closestHit.normal);
-				this.direction = reflection.normalized;
-				this.start = this.end;
-				this.linePoints.Add(this.end);
-			}
-			else
-			{
-				this.ended = true;
-			}
+            switch (LayerMask.LayerToName(closestHit.collider.gameObject.layer))
+            {
+                case "Reflective":
+                    var reflection = Vector3.Reflect(this.end - this.start, closestHit.normal);
+                    this.direction = reflection.normalized;
+                    this.start = this.end;
+                    this.linePoints.Add(this.end);
+                    break;
+
+                case "ScoreTarget":
+                    isScoring = true;
+                    this.ended = true;
+                    break;
+
+                default:
+                    this.ended = true;
+                    break;
+            }
+
+   //         if (closestHit.collider.gameObject.layer != LayerMask.NameToLayer("Wall"))
+			//{
+			//	var reflection = Vector3.Reflect(this.end - this.start, closestHit.normal);
+			//	this.direction = reflection.normalized;
+			//	this.start = this.end;
+			//	this.linePoints.Add(this.end);
+			//}
+			//else
+			//{
+			//	this.ended = true;
+			//}
 		}
 	}
 

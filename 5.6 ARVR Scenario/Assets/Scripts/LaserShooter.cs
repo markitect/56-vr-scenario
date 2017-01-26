@@ -43,8 +43,6 @@ public class LaserShooter : NetworkBehaviour
         b_CanChangeColor = true;
     }
 
-	public bool isScoring;
-
     void Update()
     {
         m_ColorChangeTimer += Time.deltaTime;
@@ -70,7 +68,7 @@ public class LaserShooter : NetworkBehaviour
             case FireState.Charging:
                 if (Input.GetButtonDown("Fire1") || m_BeamLength >= m_MaxBeamLength)
                 {
-                    // m_BeamScript.Length = m_BeamLength
+                    m_BeamScript.length = m_BeamLength;
                     m_FireState = FireState.Firing;
 
                     // set beam length back to zero for next beam creation.
@@ -91,7 +89,7 @@ public class LaserShooter : NetworkBehaviour
                     m_Laserbeam.transform.position = m_BarrelTipPosition.position;
                     m_Laserbeam.transform.rotation = m_BarrelTipPosition.rotation;
 
-                    m_BeamScript.FireLaser();
+                    m_BeamScript.FireLaser(gameObject);
 
                     m_FireState = FireState.None;
                     break;
