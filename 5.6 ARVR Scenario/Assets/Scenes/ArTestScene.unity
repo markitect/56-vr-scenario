@@ -699,7 +699,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1447984033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -822479833, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 15a85f2f9d33bde4fb02a04fa2230b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
@@ -711,17 +711,12 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1555254615576578, guid: a69a3acdb6cefb8439524c6613a6986c,
-    type: 2}
+  m_PlayerPrefab: {fileID: 0}
   m_AutoCreatePlayer: 1
-  m_PlayerSpawnMethod: 1
+  m_PlayerSpawnMethod: 0
   m_OfflineScene: 
   m_OnlineScene: 
-  m_SpawnPrefabs:
-  - {fileID: 1106348523968688, guid: 7276f38a5450e544a9f057d327d43e0e, type: 2}
-  - {fileID: 1987227842866444, guid: 744c20cbb5a7aaf41bee85e80acf2e10, type: 2}
-  - {fileID: 1619390745029496, guid: a0b7862524e9cf2468e1b8db1afeaaeb, type: 2}
-  - {fileID: 1000011454856410, guid: 9d7dd9042967d4e90bbc1e277017bca5, type: 2}
+  m_SpawnPrefabs: []
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -761,7 +756,7 @@ MonoBehaviour:
     m_MaxTimerTimeout: 12000
     m_MinNetSimulatorTimeout: 1
     m_MaxNetSimulatorTimeout: 12000
-  m_Channels: 0500000000000000
+  m_Channels: 
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
@@ -774,6 +769,9 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+  spawnPosition: {fileID: 1083944598}
+  VRPlayer: {fileID: 1555254615576578, guid: a69a3acdb6cefb8439524c6613a6986c, type: 2}
+  ARPlayer: {fileID: 1924298971162492, guid: b3535bf7651f8894295ebce9e28f00f4, type: 2}
 --- !u!4 &1447984035
 Transform:
   m_ObjectHideFlags: 0
