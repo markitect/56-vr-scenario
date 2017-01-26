@@ -17,6 +17,7 @@ public class ArControls : NetworkBehaviour
     GameObject localWall1;
     GameObject localWall2;
 
+
     bool redWindowTracking = false;
     bool blueWindowTracking = false;
     bool yellowWindowTracking = false;
@@ -30,8 +31,13 @@ public class ArControls : NetworkBehaviour
     int wallCount = 0;
     int allowedWalls = 2;
 
-    void Start()
-    {
+#endif
+	public Camera cam;
+	void Start()
+	{
+		if (!isLocalPlayer)
+			cam.enabled = false;
+#if Unity_WSA
         controlWords = new string[] { "Wall" , "Red", "Blue", "Yellow" };
 
         keywordRecognizer = new KeywordRecognizer(controlWords);
@@ -285,5 +291,5 @@ public class ArControls : NetworkBehaviour
         wallCoolDown1 = coolDown;
     }
 #endif
-}
+	}
 
