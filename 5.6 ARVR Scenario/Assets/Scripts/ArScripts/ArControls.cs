@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+#if UNITY_WSA
 using UnityEngine.VR.WSA.Input;
+#endif
 using UnityEngine.Windows.Speech;
 using UnityEngine.Networking;
 
@@ -62,18 +64,6 @@ public class ArControls : NetworkBehaviour
             }
 
             if (hit.transform.gameObject.layer == 10)
-            {
-                var hitObject = hit.transform.gameObject;
-                hitObject.transform.Rotate(normalizedOffset);
-            }
-
-            if (hit.transform.gameObject.layer == 11)
-            {
-                var hitObject = hit.transform.gameObject;
-                hitObject.transform.Rotate(normalizedOffset);
-            }
-
-            if (hit.transform.gameObject.layer == 12)
             {
                 var hitObject = hit.transform.gameObject;
                 hitObject.transform.Rotate(normalizedOffset);
