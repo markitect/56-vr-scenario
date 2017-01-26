@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 
 public class ShootLaser : MonoBehaviour
 {
-
 	public Color laserColor;
 
 	public float speed = 2f;
@@ -159,13 +159,44 @@ public class ShootLaser : MonoBehaviour
 		{
 			var closestHit = FindClosestHit(hits);
 
-			if (closestHit.collider.gameObject.layer != LayerMask.NameToLayer("Wall"))
+			if (closestHit.collider.gameObject.layer != LayerMask.NameToLayer("Wall") && closestHit.collider.gameObject.layer != LayerMask.NameToLayer("Prism"))
 			{
-				var reflection = Vector3.Reflect(this.end - this.start, closestHit.normal);
+                var reflection = Vector3.Reflect(this.end - this.start, closestHit.normal);
 				this.direction = reflection.normalized;
 				this.start = this.end;
 				this.linePoints.Add(this.end);
 			}
+            else if (closestHit.collider.gameObject.layer == LayerMask.NameToLayer("Prism"))
+            {
+                ended = true;
+                GameObject faceHit = closestHit.collider.gameObject;
+                GameObject parentPrism = faceHit.transform.parent.gameObject;
+
+                if (faceHit.name == "Face1")
+                {
+                    GameObject face2 = parentPrism.transform.GetChild(2).gameObject;
+                    face2.GetComponent<PrismFaceCollision>().SplitLaser();                  
+                    GameObject face3 = parentPrism.transform.GetChild(3).gameObject;
+                    face3.GetComponent<PrismFaceCollision>().SplitLaser();
+
+                }
+                else if (faceHit.name == "Face2")
+                {
+                    GameObject face1 = parentPrism.transform.GetChild(1).gameObject;
+                    face1.GetComponent<PrismFaceCollision>().SplitLaser();
+                    GameObject face3 = parentPrism.transform.GetChild(3).gameObject;
+                    face3.GetComponent<PrismFaceCollision>().SplitLaser();
+                }
+                else
+                {
+                    GameObject face1 = parentPrism.transform.GetChild(1).gameObject;
+                    face1.GetComponent<PrismFaceCollision>().SplitLaser();
+                    GameObject face2 = parentPrism.transform.GetChild(2).gameObject;
+                    face2.GetComponent<PrismFaceCollision>().SplitLaser();
+                }
+                
+
+            }
 			else
 			{
 				this.ended = true;
