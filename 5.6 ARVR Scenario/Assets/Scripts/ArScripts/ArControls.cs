@@ -57,7 +57,10 @@ public class ArControls : NetworkBehaviour
         redWindowPrefab = Resources.Load("ArResources/Prefabs/RedWindow") as GameObject;
         blueWindowPrefab = Resources.Load("ArResources/Prefabs/BlueWindow") as GameObject;
         yellowWindowPrefab = Resources.Load("ArResources/Prefabs/YellowWindow") as GameObject;
+#endif
     }
+#if Unity_WSA
+		
 
     private void M_GestureReconizer_NavigationUpdatedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headRay)
     {
@@ -291,5 +294,4 @@ public class ArControls : NetworkBehaviour
         wallCoolDown1 = coolDown;
     }
 #endif
-	}
-
+}
