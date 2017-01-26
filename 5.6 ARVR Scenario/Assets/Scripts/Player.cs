@@ -28,12 +28,11 @@ public class Player : NetworkBehaviour
 	{
         if (VRSettings.loadedDeviceName == "HoloLens")
         {
-            //CmdActivateArRig();
-            RpcActivateArRig();
+            CmdActivateArRig();
+            //RpcActivateArRig();
             role = PlayerRoles.Blocker;
             gameObject.AddComponent<ArControls>();
         }
-
         else
         {
             role = PlayerRoles.Shooter;
