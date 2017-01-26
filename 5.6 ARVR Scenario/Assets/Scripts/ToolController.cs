@@ -31,10 +31,6 @@ public class ToolController : NetworkBehaviour {
 
 		b_CanChangeTool = true;
 
-        if (VRSettings.loadedDeviceName != "HoloLens")
-        {
-            CmdSpawnLaserObject();
-        }
 
 		//CmdEnableTool();
 	}
@@ -43,25 +39,7 @@ public class ToolController : NetworkBehaviour {
 	{
 	}
 
-	[Command]
-	public void CmdEnableTool()
-	{
-		m_ActiveTools[m_CurrentToolIndex].SetActive(true);
-		for (int x = 0; x < m_ActiveTools.Length; x++)
-		{
-			if(x != m_CurrentToolIndex)
-				m_ActiveTools[x].SetActive(false);
-		}
-	}
 
-	[Command]
-	public void CmdSpawnLaserObject()
-	{
-		laserInstance = Instantiate(LaserPrefab);
-		NetworkServer.Spawn(laserInstance);
-		laserInstance.transform.parent = transform;
-		laserInstance.transform.localPosition = Vector3.zero;
-	}
 
 	// Update is called once per frame
 	void Update () {
