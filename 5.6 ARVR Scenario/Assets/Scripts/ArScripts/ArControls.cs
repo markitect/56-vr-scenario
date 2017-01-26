@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-#if UNITY_WSA
+#if UNITY_WSA || UNITY_EDITOR
 using UnityEngine.VR.WSA.Input;
 using UnityEngine.Windows.Speech;
 #endif
@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class ArControls : NetworkBehaviour
 {
-#if UNITY_WSA
+#if UNITY_WSA || UNITY_EDITOR
     KeywordRecognizer keywordRecognizer = null;
     GestureRecognizer gestureReconizer = null;
     GameObject laserWallPrefab;
@@ -16,7 +16,7 @@ public class ArControls : NetworkBehaviour
     GameObject yellowWindowPrefab;
     GameObject localWall1;
     GameObject localWall2;
-
+#endif
     bool redWindowTracking = false;
     bool blueWindowTracking = false;
     bool yellowWindowTracking = false;
@@ -33,7 +33,7 @@ public class ArControls : NetworkBehaviour
     void Start()
     {
         controlWords = new string[] { "Wall" , "Red", "Blue", "Yellow" };
-
+#if UNITY_WSA || UNITY_EDITOR
         keywordRecognizer = new KeywordRecognizer(controlWords);
         keywordRecognizer.OnPhraseRecognized += M_KeywordRecognizer_OnPhraseRecognized;
         keywordRecognizer.Start();
@@ -46,6 +46,7 @@ public class ArControls : NetworkBehaviour
         gestureReconizer.TappedEvent += M_GestureReconizer_TappedEvent;
         gestureReconizer.NavigationUpdatedEvent += M_GestureReconizer_NavigationUpdatedEvent;
         gestureReconizer.StartCapturingGestures();
+#endif
 
         laserWallPrefab = Resources.Load("ArResources/Prefabs/LaserBlock") as GameObject;
         redWindowPrefab = Resources.Load("ArResources/Prefabs/RedWindow") as GameObject;
@@ -53,31 +54,13 @@ public class ArControls : NetworkBehaviour
         yellowWindowPrefab = Resources.Load("ArResources/Prefabs/YellowWindow") as GameObject;
     }
 
-    private void M_GestureReconizer_NavigationUpdatedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headRay)
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(headRay, out hit, 50f))
-        {
-            if (hit.transform.gameObject.layer == 9)
-            {
-                var hitObject = hit.transform.gameObject;
-                hitObject.transform.Rotate(normalizedOffset);
-            }
-
-            if (hit.transform.gameObject.layer == 10)
-            {
-                var hitObject = hit.transform.gameObject;
-                hitObject.transform.Rotate(normalizedOffset);
-            }
-        }
-    }
-
     void Update()
     {
         UpdateLoopForWalls();
         UpdateLoopForWindows();
     }
-    
+
+#if UNITY_WSA || UNITY_EDITOR
     private void M_GestureReconizer_TappedEvent(InteractionSourceKind source, int tapCount, Ray headRay)
     {
         if (laserBlockTracking)
@@ -150,7 +133,27 @@ public class ArControls : NetworkBehaviour
             }
         }
     }
-    
+
+    private void M_GestureReconizer_NavigationUpdatedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headRay)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(headRay, out hit, 50f))
+        {
+            if (hit.transform.gameObject.layer == 9)
+            {
+                var hitObject = hit.transform.gameObject;
+                hitObject.transform.Rotate(normalizedOffset);
+            }
+
+            if (hit.transform.gameObject.layer == 10)
+            {
+                var hitObject = hit.transform.gameObject;
+                hitObject.transform.Rotate(normalizedOffset);
+            }
+        }
+    }
+#endif
+
     public void MoveWall()
     {
         if (wallCount.Equals(1))
@@ -272,6 +275,5 @@ public class ArControls : NetworkBehaviour
         NetworkServer.Spawn(window);
         wallCoolDown1 = coolDown;
     }
-#endif
 }
 
