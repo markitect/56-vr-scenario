@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000011718944610
 GameObject:
   m_ObjectHideFlags: 1
@@ -353,7 +353,7 @@ MonoBehaviour:
     i14: 188
     i15: 165
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114621324391365386
 MonoBehaviour:
   m_ObjectHideFlags: 1

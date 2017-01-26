@@ -35,11 +35,12 @@ public class ToolController : NetworkBehaviour {
 		//m_ActiveTools = new GameObject[m_AvailableTools.Length];
         laserTest = Resources.Load("ArResources/Prefabs/LaserGun") as GameObject;
 
-        //for (int x = 0; x < m_AvailableTools.Length; x++)
-        //{
-        //	CmdSpawnObject(m_AvailableTools[x], x);
-        //}
+		//for (int x = 0; x < m_AvailableTools.Length; x++)
+		//{
+		//	CmdSpawnObject(m_AvailableTools[x], x);
+		//}
 
+		CmdSpawnObject2(laserTest);
 
 		//CmdEnableTool(0);
 	}
@@ -81,12 +82,6 @@ public class ToolController : NetworkBehaviour {
 
 		if(!isLocalPlayer)
 			return;
-
-
-		if (time < WaitTimeBeforeSpawning)
-			CmdSpawnObject2(laserTest);
-		else
-			time += Time.deltaTime;
 
 
 		//laserInstance.transform.position = InputTracking.GetLocalPosition(VRNode.RightHand);
