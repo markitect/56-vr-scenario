@@ -21,6 +21,7 @@ public class Player : NetworkBehaviour
 
 	void OnStartLocalPlayer()
 	{
+
     }
 
 	void Start()
@@ -28,6 +29,7 @@ public class Player : NetworkBehaviour
         if (VRSettings.loadedDeviceName == "HoloLens")
         {
             CmdActivateArRig();
+            RpcActivateArRig();
             role = PlayerRoles.Blocker;
             gameObject.AddComponent<ArControls>();
         }
@@ -58,6 +60,22 @@ public class Player : NetworkBehaviour
         VRPlayerInstance.SetActive(false);
 		VRPlayerTools.SetActive(false);
 		netWorkTransfromChild.target = ARPlayerInstance.transform;
+    }
+
+    [ClientRpc]
+    public void RpcActivateArRig()
+    {
+        var blocker = GameObject.FindGameObjectWithTag("Blocker");
+
+        // We to destroy VR camera to create a AR camera
+        Destroy(childCamera);
+
+        blocker.GetComponent<ToolController>().enabled = false;
+
+        blocker.SetActive(true);
+        blocker.SetActive(false);
+        blocker.SetActive(false);
+        netWorkTransfromChild.target = blocker.transform;
     }
 
     void Update()

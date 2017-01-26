@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4491131851307822}
   - component: {fileID: 20282625848835418}
   - component: {fileID: 81601437286849812}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: VRPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 92300221865796506}
   - component: {fileID: 124287089416951300}
   - component: {fileID: 81249023285476770}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ArPlayer
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

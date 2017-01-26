@@ -31,7 +31,10 @@ public class ToolController : NetworkBehaviour {
 
 		b_CanChangeTool = true;
 
-		CmdSpawnLaserObject();
+        if (VRSettings.loadedDeviceName != "HoloLens")
+        {
+            CmdSpawnLaserObject();
+        }
 
 		//CmdEnableTool();
 	}
