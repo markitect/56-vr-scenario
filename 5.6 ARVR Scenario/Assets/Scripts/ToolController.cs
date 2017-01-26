@@ -22,6 +22,8 @@ public class ToolController : NetworkBehaviour {
 	public GameObject laserTest;
 	private GameObject laserInstance;
 
+	private float WaitTimeBeforeSpawning = 5.0f;
+	private float time = 0.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -38,7 +40,6 @@ public class ToolController : NetworkBehaviour {
         //	CmdSpawnObject(m_AvailableTools[x], x);
         //}
 
-        CmdSpawnObject2(laserTest);
 
 		//CmdEnableTool(0);
 	}
@@ -80,6 +81,12 @@ public class ToolController : NetworkBehaviour {
 
 		if(!isLocalPlayer)
 			return;
+
+
+		if (time < WaitTimeBeforeSpawning)
+			CmdSpawnObject2(laserTest);
+		else
+			time += Time.deltaTime;
 
 
 		//laserInstance.transform.position = InputTracking.GetLocalPosition(VRNode.RightHand);
