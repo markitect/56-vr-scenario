@@ -72,9 +72,9 @@ GameObject:
   - component: {fileID: 4491131851307822}
   - component: {fileID: 20282625848835418}
   - component: {fileID: 81601437286849812}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: VRPlayer
-  m_TagString: Untagged
+  m_TagString: Shooter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 224720444739356292}
   - component: {fileID: 222370659724663114}
   - component: {fileID: 114758200263513202}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: OuterCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 224400776973051166}
   - component: {fileID: 222487555789216054}
   - component: {fileID: 114797627029774424}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: InnerCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,9 +312,9 @@ GameObject:
   - component: {fileID: 92300221865796506}
   - component: {fileID: 124287089416951300}
   - component: {fileID: 81249023285476770}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: ArPlayer
-  m_TagString: MainCamera
+  m_TagString: Blocker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 223491899590360374}
   - component: {fileID: 114708503703843042}
   - component: {fileID: 114901230430859908}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1238,6 +1238,7 @@ MonoBehaviour:
   m_defaultTrackSpeed: 6.5
   m_hoveringTrackSpeed: 10
   m_selectingTrackSpeed: 20
+  targetCamera: {fileID: 0}
   m_innerCircle: {fileID: 0}
   m_innerCircleDefault: {x: 0.5, y: 0.5, z: 0.5}
   m_innerCircleSelect: {x: 1, y: 1, z: 1}

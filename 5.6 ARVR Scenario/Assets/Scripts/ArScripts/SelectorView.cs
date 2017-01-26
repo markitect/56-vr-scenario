@@ -21,7 +21,7 @@ public class SelectorView : MonoBehaviour {
 
         if (m_parent == null)
         {
-            m_parent = Camera.main.transform;
+            m_parent = FindObjectOfType<Camera>().transform;
         }
     }
 

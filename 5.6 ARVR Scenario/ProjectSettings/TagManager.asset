@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Laser
+  - Blocker
+  - Shooter
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - Reflective
   - Wall
   - Window
-  - Blocker
-  - Shooter
+  - 
+  - 
   - 
   - 
   - 
