@@ -23,6 +23,7 @@ public class LaserShooter : MonoBehaviour
     private bool b_CanChangeColor;
     private int m_CurrentColorIndex;
     private float m_ColorChangeTimer;
+    private Light m_ColorIndicator;
 
 
     [SerializeField] private GameObject m_LaserBeamPrefab;
@@ -40,6 +41,7 @@ public class LaserShooter : MonoBehaviour
     void Start()
     {
         b_CanChangeColor = true;
+        m_ColorIndicator = gameObject.GetComponentInChildren<Light>();
     }
 
     void Update()
@@ -101,19 +103,26 @@ public class LaserShooter : MonoBehaviour
 
         if (Input.GetAxis("Vertical") > .5 && b_CanChangeColor)
         {
-            m_CurrentColorIndex = (m_CurrentColorIndex + 1)%m_AvailableColors.Length;
-            b_CanChangeColor = false;
-            m_ColorChangeTimer = 0;
+            ChangeColor(1);
         }
 
         if (Input.GetAxis("Vertical") < -.5 && b_CanChangeColor)
         {
-            m_CurrentColorIndex = (m_CurrentColorIndex - 1) % m_AvailableColors.Length;
-            b_CanChangeColor = false;
-            m_ColorChangeTimer = 0;
+            ChangeColor(-1);
         }
 
         if (m_ColorChangeTimer > m_ColorChangeTimeLimit)
             b_CanChangeColor = true;
+    }
+
+    public void ChangeColor(int indexAmount)
+    {
+        m_CurrentColorIndex = (m_CurrentColorIndex + indexAmount) % m_AvailableColors.Length;
+
+        if(m_ColorIndicator != null)
+            m_ColorIndicator.color = m_AvailableColors[m_CurrentColorIndex];
+
+        b_CanChangeColor = false;
+        m_ColorChangeTimer = 0;
     }
 }
