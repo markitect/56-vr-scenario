@@ -14,7 +14,7 @@ public class ToolPositionController : MonoBehaviour
 
 	// Update is called once per frame
 	void Update () {
-		if (VRSettings.loadedDeviceName == "Oculus" || VRSettings.loadedDeviceName == "Vive")
+		if (VRSettings.loadedDeviceName == "Oculus" || VRSettings.loadedDeviceName == "OpenVR")
 		{
 			transform.localPosition = InputTracking.GetLocalPosition(VRNode.RightHand);
 			transform.localRotation = InputTracking.GetLocalRotation(VRNode.RightHand);
