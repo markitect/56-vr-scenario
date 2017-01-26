@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ShootLaser : MonoBehaviour
 {
-
-	public Color laserColor;
+    public LaserColor laserColor;
+	public Color renderColor;
 
 	public float speed = 2f;
 
@@ -39,7 +39,7 @@ public class ShootLaser : MonoBehaviour
 			this.lineRenderer = this.gameObject.AddComponent<LineRenderer>();
 		}
 
-		this.laserColor = Color.red;
+		this.renderColor = Color.red;
 	}
 
 	// Update is called once per frame
@@ -72,8 +72,8 @@ public class ShootLaser : MonoBehaviour
 			}
 
 			this.lineRenderer.startWidth = .05f;
-			this.lineRenderer.startColor = this.laserColor;
-			this.lineRenderer.endColor = this.laserColor;
+			this.lineRenderer.startColor = this.renderColor;
+			this.lineRenderer.endColor = this.renderColor;
 			this.lineRenderer.numPositions = this.linePoints.Count;
 			this.lineRenderer.SetPositions(this.linePoints.ToArray());
 		}
@@ -96,6 +96,7 @@ public class ShootLaser : MonoBehaviour
 		this.direction = this.transform.forward;
 		this.isFiring = true;
 		this.ended = false;
+        this.laserColor = LaserColor.red;
 	}
 
 	private void RecalcuateReflections()
@@ -136,16 +137,24 @@ public class ShootLaser : MonoBehaviour
 		if (hits.Length > 0)
 		{
 			var closestHit = FindClosestHit(hits);
-
-			this.newPoints.Add(closestHit.point);
+            var closestGameObject = closestHit.collider.gameObject;
+            this.newPoints.Add(closestHit.point);
 			this.end = closestHit.point;
-			if (closestHit.collider.gameObject.layer != LayerMask.NameToLayer("Wall"))
+			if (closestHit.collider.gameObject.layer == LayerMask.NameToLayer("Reflective"))
 			{
 				var reflection = Vector3.Reflect(this.end - this.start, closestHit.normal);
 				this.direction = reflection.normalized;
 				return true;
 			}
-			else
+            else if (closestGameObject.layer == LayerMask.NameToLayer("Window"))
+            {
+                if (closestGameObject.GetComponent<WindowBlock>().WindowColor == this.laserColor)
+                {
+                    return false;
+                }
+                closestGameObject.GetComponent<BoxCollider>().enabled = false;
+            }
+            else
 			{
 				return false;
 			}
@@ -160,14 +169,23 @@ public class ShootLaser : MonoBehaviour
 		if (hits.Length > 0)
 		{
 			var closestHit = FindClosestHit(hits);
+            var closestGameObject = closestHit.collider.gameObject;
 
-			if (closestHit.collider.gameObject.layer != LayerMask.NameToLayer("Wall"))
+            if (closestGameObject.layer != LayerMask.NameToLayer("Reflective"))
 			{
 				var reflection = Vector3.Reflect(this.end - this.start, closestHit.normal);
 				this.direction = reflection.normalized;
 				this.start = this.end;
 				this.linePoints.Add(this.end);
 			}
+            else if(closestGameObject.layer == LayerMask.NameToLayer("Window"))
+            {
+                if(closestGameObject.GetComponent<WindowBlock>().WindowColor == this.laserColor)
+                {
+                    this.ended = true;
+                }
+                closestGameObject.GetComponent<BoxCollider>().enabled = false;
+            }
 			else
 			{
 				this.ended = true;
