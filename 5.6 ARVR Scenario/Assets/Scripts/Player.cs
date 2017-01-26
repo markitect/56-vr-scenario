@@ -10,6 +10,7 @@ public class Player : NetworkBehaviour
 
     public GameObject ARPlayerInstance;
     public GameObject VRPlayerInstance;
+	public GameObject VRPlayerTools;
 
 
 	public Camera childCamera;
@@ -55,7 +56,8 @@ public class Player : NetworkBehaviour
 
 		ARPlayerInstance.SetActive(true);
         VRPlayerInstance.SetActive(false);
-        netWorkTransfromChild.target = ARPlayerInstance.transform;
+		VRPlayerTools.SetActive(false);
+		netWorkTransfromChild.target = ARPlayerInstance.transform;
     }
 
     void Update()

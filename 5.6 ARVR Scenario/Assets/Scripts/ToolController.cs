@@ -10,8 +10,6 @@ public class ToolController : NetworkBehaviour {
 	[SerializeField]
 	private Transform m_ToolPosition;
 	[SerializeField]
-	private GameObject[] m_AvailableTools;
-	[SerializeField]
 	private float m_ChangeTimeLimit;
 
 	private GameObject[] m_ActiveTools;
@@ -19,7 +17,8 @@ public class ToolController : NetworkBehaviour {
 	private float m_ToolChangeTimer;
 	private bool b_CanChangeTool;
 
-	public GameObject laserTest;
+
+	public GameObject LaserPrefab;
 	private GameObject laserInstance;
 
 	private float WaitTimeBeforeSpawning = 5.0f;
@@ -32,17 +31,9 @@ public class ToolController : NetworkBehaviour {
 
 		b_CanChangeTool = true;
 
-		//m_ActiveTools = new GameObject[m_AvailableTools.Length];
-        laserTest = Resources.Load("ArResources/Prefabs/LaserGun") as GameObject;
+		CmdSpawnLaserObject();
 
-		//for (int x = 0; x < m_AvailableTools.Length; x++)
-		//{
-		//	CmdSpawnObject(m_AvailableTools[x], x);
-		//}
-
-		CmdSpawnObject2();
-
-		//CmdEnableTool(0);
+		//CmdEnableTool();
 	}
 
 	void Awake()
@@ -50,68 +41,56 @@ public class ToolController : NetworkBehaviour {
 	}
 
 	[Command]
-	public void CmdEnableTool(int i)
+	public void CmdEnableTool()
 	{
-		m_ActiveTools[i].SetActive(true);
+		m_ActiveTools[m_CurrentToolIndex].SetActive(true);
 		for (int x = 0; x < m_ActiveTools.Length; x++)
 		{
-			if(x != i)
+			if(x != m_CurrentToolIndex)
 				m_ActiveTools[x].SetActive(false);
 		}
 	}
 
-	//[Command]
-	//public void CmdSpawnObject(GameObject obj, int i)
-	//{
-	//	m_ActiveTools[i] = Instantiate(obj);
-	//	NetworkServer.Spawn(m_ActiveTools[i]);
-	//	m_ActiveTools[i].SetActive(false);
-	//}
-
-
 	[Command]
-	public void CmdSpawnObject2()
+	public void CmdSpawnLaserObject()
 	{
-		laserInstance = Instantiate(laserTest);
+		laserInstance = Instantiate(LaserPrefab);
 		NetworkServer.Spawn(laserInstance);
+		laserInstance.transform.parent = transform;
+		laserInstance.transform.localPosition = Vector3.zero;
 	}
-
 
 	// Update is called once per frame
 	void Update () {
-
 		if(!isLocalPlayer)
 			return;
-
 
 		//laserInstance.transform.position = InputTracking.GetLocalPosition(VRNode.RightHand);
 		//laserInstance.transform.rotation = InputTracking.GetLocalRotation(VRNode.RightHand);
 
+		//Debug.Log("Horizontal: " + Input.GetAxis("Horizontal"));
 
+		//m_ToolChangeTimer += Time.deltaTime;
 
-		Debug.Log("Horizontal: " + Input.GetAxis("Horizontal"));
+		//if (Input.GetAxis("Horizontal") > .5f && b_CanChangeTool)
+		//{
+		//	m_CurrentToolIndex = (m_CurrentToolIndex + 1) % m_ActiveTools.Length;
+		//	CmdEnableTool();
 
-		m_ToolChangeTimer += Time.deltaTime;
+		//	m_ToolChangeTimer = 0;
+		//	b_CanChangeTool = false;
+		//}
 
-		if (Input.GetAxis("Horizontal") > .5f && b_CanChangeTool)
-		{
-			m_CurrentToolIndex = (m_CurrentToolIndex + 1) % m_ActiveTools.Length;
-			CmdEnableTool(m_CurrentToolIndex);
+		//if (Input.GetAxis("Horizontal") < -.5f && b_CanChangeTool)
+		//{
+		//	m_CurrentToolIndex = (m_CurrentToolIndex - 1) % m_ActiveTools.Length;
+		//	CmdEnableTool();
 
-			m_ToolChangeTimer = 0;
-			b_CanChangeTool = false;
-		}
+		//	m_ToolChangeTimer = 0;
+		//	b_CanChangeTool = false;
+		//}
 
-		if (Input.GetAxis("Horizontal") < -.5f && b_CanChangeTool)
-		{
-			m_CurrentToolIndex = (m_CurrentToolIndex - 1) % m_ActiveTools.Length;
-			CmdEnableTool(m_CurrentToolIndex);
-
-			m_ToolChangeTimer = 0;
-			b_CanChangeTool = false;
-		}
-
-		if (m_ToolChangeTimer > m_ChangeTimeLimit && b_CanChangeTool == false)
-			b_CanChangeTool = true;
+		//if (m_ToolChangeTimer > m_ChangeTimeLimit && b_CanChangeTool == false)
+		//	b_CanChangeTool = true;
 	}
 }
