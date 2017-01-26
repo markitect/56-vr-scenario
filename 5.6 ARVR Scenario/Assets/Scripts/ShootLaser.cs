@@ -36,8 +36,6 @@ public class ShootLaser : MonoBehaviour
 		{
 			this.lineRenderer = this.gameObject.AddComponent<LineRenderer>();
 		}
-
-		this.laserColor = Color.red;
 	}
 
 	// Update is called once per frame
@@ -171,31 +169,7 @@ public class ShootLaser : MonoBehaviour
                 ended = true;
                 GameObject faceHit = closestHit.collider.gameObject;
                 GameObject parentPrism = faceHit.transform.parent.gameObject;
-
-                if (faceHit.name == "Face1")
-                {
-                    GameObject face2 = parentPrism.transform.GetChild(2).gameObject;
-                    face2.GetComponent<PrismFaceCollision>().SplitLaser();                  
-                    GameObject face3 = parentPrism.transform.GetChild(3).gameObject;
-                    face3.GetComponent<PrismFaceCollision>().SplitLaser();
-
-                }
-                else if (faceHit.name == "Face2")
-                {
-                    GameObject face1 = parentPrism.transform.GetChild(1).gameObject;
-                    face1.GetComponent<PrismFaceCollision>().SplitLaser();
-                    GameObject face3 = parentPrism.transform.GetChild(3).gameObject;
-                    face3.GetComponent<PrismFaceCollision>().SplitLaser();
-                }
-                else
-                {
-                    GameObject face1 = parentPrism.transform.GetChild(1).gameObject;
-                    face1.GetComponent<PrismFaceCollision>().SplitLaser();
-                    GameObject face2 = parentPrism.transform.GetChild(2).gameObject;
-                    face2.GetComponent<PrismFaceCollision>().SplitLaser();
-                }
-                
-
+                parentPrism.GetComponent<LaserSplitter>().SplitLaser(faceHit, laserColor, speed);   
             }
 			else
 			{
