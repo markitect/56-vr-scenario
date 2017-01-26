@@ -121,7 +121,7 @@ public class ArControls : NetworkBehaviour
 
                 if (isLocalPlayer)
                 {
-                    CmdSpawnObject(laserWallPrefab);
+                    CmdSpawnWallObject();
                 }
 
             }
@@ -137,7 +137,7 @@ public class ArControls : NetworkBehaviour
             redWindowTracking = true;
             if(isLocalPlayer)
             {
-                CmdSpawnObject(redWindowPrefab);
+                CmdSpawnRedWindowObject();
             }
         }
 
@@ -146,16 +146,16 @@ public class ArControls : NetworkBehaviour
             blueWindowTracking = true;
             if (isLocalPlayer)
             {
-                CmdSpawnObject(blueWindowPrefab);
+                CmdSpawnBlueWindowObject();
             }
         }
 
-        if (args.text == "Blue")
+        if (args.text == "Yellow")
         {
             yellowWindowTracking = true;
             if (isLocalPlayer)
             {
-                CmdSpawnObject(yellowWindowPrefab);
+                CmdSpawnYellowWindowObject();
             }
         }
     }
@@ -242,19 +242,43 @@ public class ArControls : NetworkBehaviour
     }
 
     [Command]
-    public void CmdSpawnObject(GameObject obj)
+    public void CmdSpawnWallObject()
     {
         if (!localWall1)
         {
-            localWall1 = Instantiate(obj);
+            localWall1 = Instantiate(laserWallPrefab);
             NetworkServer.Spawn(localWall1);
             wallCoolDown1 = coolDown;
         }
         else if(localWall1)
         {
-            localWall2 = Instantiate(obj);
+            localWall2 = Instantiate(laserWallPrefab);
             NetworkServer.Spawn(localWall2);
             wallCoolDown2 = coolDown;
         }
+    }
+
+    [Command]
+    public void CmdSpawnRedWindowObject()
+    {
+        var window = Instantiate(redWindowPrefab);
+        NetworkServer.Spawn(window);
+        wallCoolDown1 = coolDown;
+    }
+
+    [Command]
+    public void CmdSpawnYellowWindowObject()
+    {
+        var window = Instantiate(yellowWindowPrefab);
+        NetworkServer.Spawn(window);
+        wallCoolDown1 = coolDown;
+    }
+
+    [Command]
+    public void CmdSpawnBlueWindowObject()
+    {
+        var window = Instantiate(blueWindowPrefab);
+        NetworkServer.Spawn(window);
+        wallCoolDown1 = coolDown;
     }
 }
