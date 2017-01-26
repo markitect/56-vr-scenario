@@ -24,14 +24,6 @@ public class Player : NetworkBehaviour
 
 	void Start()
 	{
-        if (!isLocalPlayer)
-		{
-			Destroy(childCamera);
-			return;
-		}
-
-
-
         if (VRSettings.loadedDeviceName == "HoloLens")
         {
             CmdActivateArRig();
@@ -42,9 +34,14 @@ public class Player : NetworkBehaviour
         else
         {
             role = PlayerRoles.Shooter;
-            gameObject.AddComponent<ToolController>();
         }
-    }
+
+		if (!isLocalPlayer)
+		{
+			Destroy(childCamera);
+			return;
+		}
+	}
 
 
 
@@ -54,7 +51,9 @@ public class Player : NetworkBehaviour
         // We to destroy VR camera to create a AR camera
         Destroy(childCamera);
 
-        ARPlayerInstance.SetActive(true);
+		gameObject.GetComponent<ToolController>().enabled = false;
+
+		ARPlayerInstance.SetActive(true);
         VRPlayerInstance.SetActive(false);
         netWorkTransfromChild.target = ARPlayerInstance.transform;
     }

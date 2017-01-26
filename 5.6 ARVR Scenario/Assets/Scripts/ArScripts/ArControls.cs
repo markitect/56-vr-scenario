@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+#if Unity_WSA
 using UnityEngine.VR.WSA.Input;
+#endif
 using UnityEngine.Windows.Speech;
 using UnityEngine.Networking;
 
 public class ArControls : NetworkBehaviour
 {
+#if Unity_WSA
     KeywordRecognizer keywordRecognizer = null;
     GestureRecognizer gestureReconizer = null;
     GameObject laserWallPrefab;
@@ -281,4 +284,6 @@ public class ArControls : NetworkBehaviour
         NetworkServer.Spawn(window);
         wallCoolDown1 = coolDown;
     }
+#endif
 }
+

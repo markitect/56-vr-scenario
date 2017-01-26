@@ -39,10 +39,8 @@ public class ToolController : NetworkBehaviour {
 		//{
 		//	CmdSpawnObject(m_AvailableTools[x], x);
 		//}
-		
-		Debug.Log(NetworkServer.serverHostId);
 
-		CmdSpawnObject2(laserTest);
+		CmdSpawnObject2();
 
 		//CmdEnableTool(0);
 	}
@@ -72,9 +70,9 @@ public class ToolController : NetworkBehaviour {
 
 
 	[Command]
-	public void CmdSpawnObject2(GameObject obj)
+	public void CmdSpawnObject2()
 	{
-		laserInstance = Instantiate(obj);
+		laserInstance = Instantiate(laserTest);
 		NetworkServer.Spawn(laserInstance);
 	}
 

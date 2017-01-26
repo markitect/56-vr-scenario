@@ -57,7 +57,7 @@ public class LaserShooter : NetworkBehaviour
                     m_Laserbeam = Instantiate(m_LaserBeamPrefab);
                     m_Beam = m_Laserbeam.GetComponent<LineRenderer>();
                     m_BeamScript = m_Laserbeam.GetComponent<ShootLaser>();
-                    m_BeamScript.laserColor = m_AvailableColors[m_CurrentColorIndex];
+                    //m_BeamScript.laserColor = m_AvailableColors[m_CurrentColorIndex];
                     m_BeamSpeed = m_MaxBeamSpeed;
 
                     if (m_ChargingEffect != null)
