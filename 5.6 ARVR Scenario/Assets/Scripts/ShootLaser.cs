@@ -3,41 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class ShootLaser : MonoBehaviour
 {
 
-	public Color laserColor;
-
-	public float speed = 2f;
+	public Color renderColor;
+	public float speed;
 
 	public bool isFiring = false;
 
 	public LayerMask collisionLayers;
+	public LayerMask laserLayerMask;
 
 	private LineRenderer lineRenderer;
 
 	private List<Vector3> linePoints = new List<Vector3>();
-	private List<Vector3> newPoints = new List<Vector3>();
-
-	private float segmentLength;
-
+	
 	private Vector3 start;
 	private Vector3 end;
 	private Vector3 direction;
-	private bool ended = false;
 
-	private List<GameObject> newPointSpheres = new List<GameObject>();
-	private List<GameObject> linePointSpheres = new List<GameObject>();
+	private float laserDistance;
 
 	// Use this for initialization
 	void Start()
 	{
-		if (!(this.lineRenderer = this.gameObject.GetComponent<LineRenderer>()))
-		{
-			this.lineRenderer = this.gameObject.AddComponent<LineRenderer>();
-		}
-
-		this.laserColor = Color.red;
+		this.lineRenderer = this.gameObject.GetComponent<LineRenderer>();
 	}
 
 	// Update is called once per frame
@@ -45,39 +36,25 @@ public class ShootLaser : MonoBehaviour
 	{
 		if (this.isFiring)
 		{
-			if (!this.ended)
-			{
-				end += this.direction * Time.deltaTime * speed;
-				this.linePoints[this.linePoints.Count - 1] = end;
-			}
+			var step = Time.deltaTime * speed;
+			this.end += this.direction * step;
+			this.laserDistance += (this.direction * step).magnitude;
+			this.linePoints[this.linePoints.Count - 1] = end;
+			this.direction = Vector3.zero;
 
-			if (this.linePoints.Count > 2 || this.ended)
-			{
-				RecalcuateReflections();
-			}
+			RecalculatePoints();
 
-			if (!ended)
+			if (this.laserDistance < 20f)
 			{
 				RaycastForMovement();
 			}
 
-			if (Input.GetMouseButtonDown(1))
-			{
-				this.newPoints.Clear();
-				this.linePoints.Clear();
-				this.isFiring = false;
-				this.ended = false;
-			}
-
-			this.lineRenderer.startWidth = .05f;
-			this.lineRenderer.startColor = this.laserColor;
-			this.lineRenderer.endColor = this.laserColor;
 			this.lineRenderer.numPositions = this.linePoints.Count;
 			this.lineRenderer.SetPositions(this.linePoints.ToArray());
 		}
 		else
 		{
-			if (Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButtonDown(1))
 			{
 				this.FireLaser();
 			}
@@ -86,6 +63,9 @@ public class ShootLaser : MonoBehaviour
 
 	public void FireLaser()
 	{
+		this.lineRenderer.startWidth = .05f;
+		this.lineRenderer.startColor = this.renderColor;
+		this.lineRenderer.endColor = this.renderColor;
 		this.linePoints.Clear();
 		this.start = this.gameObject.transform.position;
 		this.linePoints.Add(start);
@@ -93,99 +73,66 @@ public class ShootLaser : MonoBehaviour
 		this.linePoints.Add(end);
 		this.direction = this.transform.forward;
 		this.isFiring = true;
-		this.ended = false;
+		this.collisionLayers |= this.laserLayerMask;
 	}
 
-	private void RecalcuateReflections()
+	private void RecalculatePoints()
 	{
-		var currentEnd = this.end;
-		this.start = this.linePoints[0];
-		this.newPoints = new List<Vector3> { start };
-		this.direction = this.transform.forward;
+		var currentStart = this.linePoints.FirstOrDefault();
+		var newDirection = this.transform.forward;
+		this.linePoints.Clear();
+		this.linePoints.Add(currentStart);
 
-		if (!this.ended)
+		var distanceTraveled = this.laserDistance;
+
+		for (var i = 0; i < this.lineRenderer.numPositions; ++i)
 		{
-			while (this.RaycastReflections() && this.newPoints.Count < this.linePoints.Count - 1)
+
+			RaycastHit hit;
+			if (Physics.Raycast(new Ray(this.linePoints[i], newDirection), out hit, 1000f, this.collisionLayers) &&
+				(hit.point - this.linePoints[i]).magnitude < distanceTraveled)
 			{
-				start = newPoints[newPoints.Count - 1];
-			}
-			
-			this.newPoints.Add(currentEnd);
-		}
-		else
-		{
-			while (this.RaycastReflections())
-			{
-				start = newPoints[newPoints.Count - 1];
-			}
-		}
-
-		this.linePoints = this.newPoints;
-
-		// reset start and end tot he last two points in the list
-		this.start = this.linePoints[this.linePoints.Count - 2];
-		this.end = this.linePoints[this.linePoints.Count - 1];
-	}
-
-	private bool RaycastReflections()
-	{
-		var hits = Physics.RaycastAll(new Ray(start, this.direction), this.collisionLayers);
-
-		if (hits.Length > 0)
-		{
-			var closestHit = FindClosestHit(hits);
-
-			this.newPoints.Add(closestHit.point);
-			this.end = closestHit.point;
-			if (closestHit.collider.gameObject.layer != LayerMask.NameToLayer("Wall"))
-			{
-				var reflection = Vector3.Reflect(this.end - this.start, closestHit.normal);
-				this.direction = reflection.normalized;
-				return true;
+				var hitObject = hit.transform.gameObject;
+				this.linePoints.Add(hit.point);
+				distanceTraveled -= (hit.point - this.linePoints[i]).magnitude;
+				if (hitObject.layer == LayerMask.NameToLayer("Reflective"))
+				{
+					newDirection = Vector3.Reflect((hit.point - this.linePoints[i]).normalized, hit.normal);
+				}
+				else
+				{
+					return;
+				}
 			}
 			else
 			{
-				return false;
+				this.linePoints.Add(this.linePoints.Last() + (newDirection * distanceTraveled));
+				return;
 			}
 		}
-		return false;
 	}
 
 	private void RaycastForMovement()
 	{
-		var hits = Physics.RaycastAll(new Ray(this.start, (this.end - this.start).normalized), Vector3.Distance(start, end), this.collisionLayers);
-
-		if (hits.Length > 0)
+		RaycastHit hit;
+		if (Physics.Raycast(new Ray(this.start, (this.end - this.start).normalized), out hit, Vector3.Distance(start, end), this.collisionLayers))
 		{
-			var closestHit = FindClosestHit(hits);
-
-			if (closestHit.collider.gameObject.layer != LayerMask.NameToLayer("Wall"))
+			var closestGameObject = hit.collider.gameObject;
+			if (closestGameObject.layer == LayerMask.NameToLayer("Reflective"))
 			{
-				var reflection = Vector3.Reflect(this.end - this.start, closestHit.normal);
+				var reflection = Vector3.Reflect(this.end - this.start, hit.normal);
 				this.direction = reflection.normalized;
 				this.start = this.end;
 				this.linePoints.Add(this.end);
+				return;
 			}
 			else
 			{
-				this.ended = true;
+				this.linePoints.Add(hit.point);
+				this.direction = Vector3.zero;
+				return;
 			}
 		}
-	}
-
-	private RaycastHit FindClosestHit(RaycastHit[] hits)
-	{
-		var closestDistance = Vector3.Distance(start, hits[0].point);
-		var closestHit = hits[0];
-
-		for (var i = 1; i < hits.Length; ++i)
-		{
-			if (closestDistance > Vector3.Distance(start, hits[i].point))
-			{
-				closestHit = hits[i];
-			}
-		}
-
-		return closestHit;
+		this.direction = (this.end - this.start).normalized;
 	}
 }
