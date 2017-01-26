@@ -39,6 +39,8 @@ public class ToolController : NetworkBehaviour {
 		//{
 		//	CmdSpawnObject(m_AvailableTools[x], x);
 		//}
+		
+		Debug.Log(NetworkServer.serverHostId);
 
 		CmdSpawnObject2(laserTest);
 
