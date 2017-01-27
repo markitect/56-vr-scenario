@@ -52,7 +52,6 @@ public class LaserShooter : NetworkBehaviour
 		if(!isLocalPlayer)
 			return;
 
-
         m_ColorChangeTimer += Time.deltaTime;
 
         switch (m_FireState)
@@ -89,8 +88,6 @@ public class LaserShooter : NetworkBehaviour
                     m_Laserbeam.transform.rotation = m_BarrelTipPosition.rotation;
 
                     m_BeamScript.FireLaser();
-
-                    m_FireState = FireState.None;
                     break;
                 }
 
@@ -111,6 +108,7 @@ public class LaserShooter : NetworkBehaviour
 
         if (m_ColorChangeTimer > m_ColorChangeTimeLimit)
             b_CanChangeColor = true;
+
     }
 
     public void ChangeColor(int indexAmount)
@@ -130,6 +128,9 @@ public class LaserShooter : NetworkBehaviour
         m_Laserbeam = Instantiate(m_LaserBeamPrefab);
         m_Beam = m_Laserbeam.GetComponent<LineRenderer>();
         m_BeamScript = m_Laserbeam.GetComponent<ShootLaser>();
+
+        m_Laserbeam.transform.position = m_BarrelTipPosition.position;
+        m_Laserbeam.transform.rotation = m_BarrelTipPosition.rotation;
         //m_BeamScript.laserColor = m_AvailableColors[m_CurrentColorIndex];
         m_BeamSpeed = m_MaxBeamSpeed;
 
@@ -137,6 +138,9 @@ public class LaserShooter : NetworkBehaviour
             m_ChargingEffect.gameObject.SetActive(true);
 
         m_FireState = FireState.Charging;
+
+        m_Laserbeam.GetComponent<ShootLaser>().FireLaser();
+
         //Spawn on Server
         NetworkServer.Spawn(m_Laserbeam);
     }
