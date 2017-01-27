@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class LaserShooter : MonoBehaviour
+public class LaserShooter : NetworkBehaviour
 {
     private enum FireState
     {
@@ -24,12 +21,10 @@ public class LaserShooter : MonoBehaviour
     private bool b_CanChangeColor;
     private int m_CurrentColorIndex;
     private float m_ColorChangeTimer;
-    private Light m_ColorIndicator;
-
 
     [SerializeField] private GameObject m_LaserBeamPrefab;
     [SerializeField] private Transform m_BarrelTipPosition;
-    [SerializeField] private Text m_laerHUD;
+    [SerializeField] private Text m_LaserHUD;
 
     [SerializeField] private float m_MaxBeamLength;
     [SerializeField] private float m_MaxChargeTime;
@@ -43,7 +38,6 @@ public class LaserShooter : MonoBehaviour
     void Start()
     {
         b_CanChangeColor = true;
-        m_ColorIndicator = gameObject.GetComponentInChildren<Light>();
     }
 
     void Update()
@@ -80,7 +74,7 @@ public class LaserShooter : MonoBehaviour
                 }
 
                 m_BeamLength += m_MaxBeamLength * Time.deltaTime / m_MaxChargeTime;
-                m_laerHUD.text = m_BeamLength.ToString("n1");
+                m_LaserHUD.text = m_BeamLength.ToString("n1");
                
                 break;
 
@@ -96,7 +90,7 @@ public class LaserShooter : MonoBehaviour
 
                     m_BeamScript.FireLaser();
 
-                    m_laerHUD.text = "0.0";
+                    m_LaserHUD.text = "0.0";
 
                     m_FireState = FireState.None;
                     break;
@@ -125,8 +119,7 @@ public class LaserShooter : MonoBehaviour
     {
         m_CurrentColorIndex = (m_CurrentColorIndex + indexAmount) % m_AvailableColors.Length;
 
-        if(m_ColorIndicator != null)
-            m_ColorIndicator.color = m_laerHUD.color = m_AvailableColors[m_CurrentColorIndex];
+        m_LaserHUD.color = m_AvailableColors[m_CurrentColorIndex];
 
         b_CanChangeColor = false;
         m_ColorChangeTimer = 0;
