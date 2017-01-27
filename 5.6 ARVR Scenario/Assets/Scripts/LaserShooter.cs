@@ -49,6 +49,10 @@ public class LaserShooter : NetworkBehaviour
 
     void Update()
     {
+		if(!isLocalPlayer)
+			return;
+
+
         m_ColorChangeTimer += Time.deltaTime;
 
         switch (m_FireState)

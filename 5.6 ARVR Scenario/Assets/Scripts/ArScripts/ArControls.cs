@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class ArControls : NetworkBehaviour
 {
-#if UNITY_WSA || UNITY_EDITOR
+#if UNITY_WSA
     KeywordRecognizer keywordRecognizer = null;
     GestureRecognizer gestureReconizer = null;
     GameObject laserWallPrefab;
@@ -16,7 +16,7 @@ public class ArControls : NetworkBehaviour
     GameObject yellowWindowPrefab;
     GameObject localWall1;
     GameObject localWall2;
-#endif
+
 
     bool redWindowTracking = false;
     bool blueWindowTracking = false;
@@ -30,14 +30,18 @@ public class ArControls : NetworkBehaviour
     static float coolDown = 10f;
     int wallCount = 0;
     int allowedWalls = 2;
-
-	public GameObject arCamera;
+#endif
+	public Camera arCamera;
+	public GameObject crossHair;
 	void Start()
 	{
 		if (!isLocalPlayer)
-			arCamera.SetActive(false);
-#if UNITY_WSA || UNITY_EDITOR
-        controlWords = new string[] { "Wall" , "Red", "Blue", "Yellow" };
+		{
+			arCamera.enabled = false;
+			crossHair.SetActive(false);
+		}
+#if UNITY_WSA
+		controlWords = new string[] { "Wall" , "Red", "Blue", "Yellow" };
 
         keywordRecognizer = new KeywordRecognizer(controlWords);
         keywordRecognizer.OnPhraseRecognized += M_KeywordRecognizer_OnPhraseRecognized;
@@ -51,23 +55,23 @@ public class ArControls : NetworkBehaviour
         gestureReconizer.TappedEvent += M_GestureReconizer_TappedEvent;
         gestureReconizer.NavigationUpdatedEvent += M_GestureReconizer_NavigationUpdatedEvent;
         gestureReconizer.StartCapturingGestures();
-#endif
+
 
         laserWallPrefab = Resources.Load("ArResources/Prefabs/LaserBlock") as GameObject;
         redWindowPrefab = Resources.Load("ArResources/Prefabs/RedWindow") as GameObject;
         blueWindowPrefab = Resources.Load("ArResources/Prefabs/BlueWindow") as GameObject;
         yellowWindowPrefab = Resources.Load("ArResources/Prefabs/YellowWindow") as GameObject;
-    }
+#endif
+	}
 
-		
+#if UNITY_WSA
 
-    void Update()
+	void Update()
     {
         UpdateLoopForWalls();
         UpdateLoopForWindows();
     }
 
-#if UNITY_WSA || UNITY_EDITOR
     private void M_GestureReconizer_TappedEvent(InteractionSourceKind source, int tapCount, Ray headRay)
     {
         if (laserBlockTracking)
@@ -159,9 +163,9 @@ public class ArControls : NetworkBehaviour
             }
         }
     }
-#endif
 
-    public void MoveWall()
+
+	public void MoveWall()
     {
         if (wallCount.Equals(1))
         {
@@ -282,5 +286,5 @@ public class ArControls : NetworkBehaviour
         NetworkServer.Spawn(window);
         wallCoolDown1 = coolDown;
     }
+#endif
 }
-
