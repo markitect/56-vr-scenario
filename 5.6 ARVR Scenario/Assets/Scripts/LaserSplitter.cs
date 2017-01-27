@@ -40,7 +40,7 @@ public class LaserSplitter : MonoBehaviour {
                 laser.speed = newSpeed;
                 currentColor = GetNextLaserColor(currentColor);
                 laser.laserColor = currentColor;
-                laser.FireLaser();
+                laser.FireLaser(laserEmitter);
             }
         }
     }

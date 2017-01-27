@@ -42,6 +42,9 @@ public class LaserShooter : NetworkBehaviour
 
     void Update()
     {
+		if(!isLocalPlayer)
+			return;
+
         m_ColorChangeTimer += Time.deltaTime;
 
         switch (m_FireState)
@@ -49,23 +52,14 @@ public class LaserShooter : NetworkBehaviour
             case FireState.None:
                 if (Input.GetButtonDown("Fire1"))
                 {
-                    m_Laserbeam = Instantiate(m_LaserBeamPrefab);
-                    m_Beam = m_Laserbeam.GetComponent<LineRenderer>();
-                    m_BeamScript = m_Laserbeam.GetComponent<ShootLaser>();
-                    m_BeamScript.laserColor = m_AvailableColors[m_CurrentColorIndex];
-                    m_BeamSpeed = m_MaxBeamSpeed;
-
-                    if (m_ChargingEffect != null)
-                        m_ChargingEffect.gameObject.SetActive(true);
-
-                    m_FireState = FireState.Charging;
+                    CmdFireLaser();
                 }
                 break;
 
             case FireState.Charging:
                 if (Input.GetButtonDown("Fire1") || m_BeamLength >= m_MaxBeamLength)
                 {
-                    // m_BeamScript.Length = m_BeamLength
+                    m_BeamScript.length = m_BeamLength;
                     m_FireState = FireState.Firing;
 
                     // set beam length back to zero for next beam creation.
@@ -88,8 +82,7 @@ public class LaserShooter : NetworkBehaviour
                     m_Laserbeam.transform.position = m_BarrelTipPosition.position;
                     m_Laserbeam.transform.rotation = m_BarrelTipPosition.rotation;
 
-                    m_BeamScript.FireLaser();
-
+                    m_BeamScript.FireLaser(this.gameObject);
                     m_LaserHUD.text = "0.0";
 
                     m_FireState = FireState.None;
@@ -113,6 +106,7 @@ public class LaserShooter : NetworkBehaviour
 
         if (m_ColorChangeTimer > m_ColorChangeTimeLimit)
             b_CanChangeColor = true;
+
     }
 
     public void ChangeColor(int indexAmount)
@@ -123,5 +117,28 @@ public class LaserShooter : NetworkBehaviour
 
         b_CanChangeColor = false;
         m_ColorChangeTimer = 0;
+    }
+
+    [Command]
+    public void CmdFireLaser()
+    {
+        m_Laserbeam = Instantiate(m_LaserBeamPrefab);
+        m_Beam = m_Laserbeam.GetComponent<LineRenderer>();
+        m_BeamScript = m_Laserbeam.GetComponent<ShootLaser>();
+
+        m_Laserbeam.transform.position = m_BarrelTipPosition.position;
+        m_Laserbeam.transform.rotation = m_BarrelTipPosition.rotation;
+        //m_BeamScript.laserColor = m_AvailableColors[m_CurrentColorIndex];
+        m_BeamSpeed = m_MaxBeamSpeed;
+
+        if (m_ChargingEffect != null)
+            m_ChargingEffect.gameObject.SetActive(true);
+
+        m_FireState = FireState.Charging;
+
+        m_Laserbeam.GetComponent<ShootLaser>().FireLaser(this.gameObject);
+
+        //Spawn on Server
+        NetworkServer.Spawn(m_Laserbeam);
     }
 }
