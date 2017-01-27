@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserColors : MonoBehaviour {
+public class LaserColors {
 
     private static Color red = Color.red;
     private static Color blue = Color.blue;
@@ -13,14 +13,4 @@ public class LaserColors : MonoBehaviour {
 
     public static Color[] LaserColor = new Color[] { red, green, blue };
 
-
-    // Use this for initialization
-    void Start () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
