@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 114975158204754950}
   m_Layer: 0
   m_Name: ArPlayer
-  m_TagString: MainCamera
+  m_TagString: Blocker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -285,6 +285,7 @@ MonoBehaviour:
   m_defaultTrackSpeed: 6.5
   m_hoveringTrackSpeed: 10
   m_selectingTrackSpeed: 20
+  targetCamera: {fileID: 20567661122158448}
   m_innerCircle: {fileID: 0}
   m_innerCircleDefault: {x: 0.5, y: 0.5, z: 0.5}
   m_innerCircleSelect: {x: 1, y: 1, z: 1}
@@ -300,15 +301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fd7798569672a4da5d457876a951ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserWall: {fileID: 1987227842866444, guid: 744c20cbb5a7aaf41bee85e80acf2e10, type: 2}
-  RedMirror: {fileID: 1619390745029496, guid: a0b7862524e9cf2468e1b8db1afeaaeb, type: 2}
-  controlWords:
-  - Wall
-  - Red
-  - Blue
-  - Yellow
-  m_CoolDown: 10
-  m_AllowedWalls: 2
 --- !u!114 &114527035701461142
 MonoBehaviour:
   m_ObjectHideFlags: 1

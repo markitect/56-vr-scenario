@@ -225,10 +225,10 @@ PlayerSettings:
   m_BuildTargetGraphicsAPIs: []
   m_BuildTargetVRSettings:
   - m_BuildTarget: Standalone
-    m_Enabled: 0
+    m_Enabled: 1
     m_Devices:
-    - OpenVR
     - Oculus
+    - OpenVR
     - split
   - m_BuildTarget: Android
     m_Enabled: 1
@@ -631,8 +631,8 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.1
   apiCompatibilityLevel: 2
-  cloudProjectId: 9a4643ef-25da-4f10-85c7-382be0e595d6
-  projectName: 5.6 ARVR Scenario
-  organizationId: mark-gehan
+  cloudProjectId: 77c3da11-6206-46eb-8f3c-0c68bb2d86b7
+  projectName: HyperBeam
+  organizationId: williamj
   cloudEnabled: 0
   enableNewInputSystem: 0
