@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LaserShooter : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class LaserShooter : MonoBehaviour
 
     [SerializeField] private GameObject m_LaserBeamPrefab;
     [SerializeField] private Transform m_BarrelTipPosition;
+    [SerializeField] private Text m_laerHUD;
 
     [SerializeField] private float m_MaxBeamLength;
     [SerializeField] private float m_MaxChargeTime;
@@ -78,10 +80,12 @@ public class LaserShooter : MonoBehaviour
                 }
 
                 m_BeamLength += m_MaxBeamLength * Time.deltaTime / m_MaxChargeTime;
+                m_laerHUD.text = m_BeamLength.ToString("n1");
+               
                 break;
 
             case FireState.Firing:
-                if (Input.GetButtonDown("Fire1") || m_BeamSpeed <= m_MinBeamSpeed)
+                if (true)//(Input.GetButtonDown("Fire1") || m_BeamSpeed <= m_MinBeamSpeed)  bypassing speed charging for now.
                 {
                     if (m_ChargingEffect != null)
                         m_ChargingEffect.gameObject.SetActive(false);
@@ -92,6 +96,8 @@ public class LaserShooter : MonoBehaviour
 
                     m_BeamScript.FireLaser();
 
+                    m_laerHUD.text = "0.0";
+
                     m_FireState = FireState.None;
                     break;
                 }
@@ -101,12 +107,12 @@ public class LaserShooter : MonoBehaviour
                 break;
         }
 
-        if (Input.GetAxis("Vertical") > .5 && b_CanChangeColor)
+        if (Input.GetAxis("Vertical") > .5 && b_CanChangeColor && m_FireState != FireState.Charging)
         {
             ChangeColor(1);
         }
 
-        if (Input.GetAxis("Vertical") < -.5 && b_CanChangeColor)
+        if (Input.GetAxis("Vertical") < -.5 && b_CanChangeColor && m_FireState != FireState.Charging)
         {
             ChangeColor(-1);
         }
@@ -120,7 +126,7 @@ public class LaserShooter : MonoBehaviour
         m_CurrentColorIndex = (m_CurrentColorIndex + indexAmount) % m_AvailableColors.Length;
 
         if(m_ColorIndicator != null)
-            m_ColorIndicator.color = m_AvailableColors[m_CurrentColorIndex];
+            m_ColorIndicator.color = m_laerHUD.color = m_AvailableColors[m_CurrentColorIndex];
 
         b_CanChangeColor = false;
         m_ColorChangeTimer = 0;
