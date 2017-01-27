@@ -39,8 +39,8 @@ public class LaserSplitter : MonoBehaviour {
                 var laser = Instantiate(laserPrefab, laserEmitter.transform.position, laserEmitter.transform.rotation).GetComponent<ShootLaser>();
                 laser.speed = newSpeed;
                 currentColor = GetNextLaserColor(currentColor);
-                laser.renderColor = currentColor;
-                laser.FireLaser();
+                laser.laserColor = currentColor;
+                laser.FireLaser(laserEmitter);
             }
         }
     }

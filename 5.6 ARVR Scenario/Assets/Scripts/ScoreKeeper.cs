@@ -6,30 +6,37 @@ using UnityEngine.Networking;
 
 public class ScoreKeeper : NetworkBehaviour
 {
+    [SerializeField] private float rate;
 
-	[SyncVar]
-	private float score;
-	public const float rate = 10;
+    [SyncVar]
+	public int score;
 
-	private LaserShooter m_ShootLaser;
-	public ScoreManager m_scoreManager;
+    public float Rate
+    {
+        get { return rate; }
+    }
+
+    public ScoreManager m_scoreManager;
+
 	// Use this for initialization
 	void Start ()
 	{
-		m_ShootLaser = GetComponent<LaserShooter>();
 		GameObject.Find("ScoreManager").GetComponent<ScoreManager>().RegisterScoreKeeper(this);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		if(!isServer)
 			return;
-
-		if (m_ShootLaser.isScoring)
-		{
-			score += rate * Time.deltaTime;
-		}
 	}
+
+    public void Score()
+    {
+        score += 1;
+        
+        Debug.Log("You scored!  Score is " + score);
+    }
 
 	public float GetScore()
 	{
