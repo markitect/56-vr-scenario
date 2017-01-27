@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 114597587918914944}
   - component: {fileID: 114116333040334176}
   - component: {fileID: 114893596259187106}
+  - component: {fileID: 114134683548590482}
   m_Layer: 0
   m_Name: VRPlayerRig
   m_TagString: Untagged
@@ -610,9 +611,17 @@ MonoBehaviour:
   m_MinBeamSpeed: 5
   m_ChargingEffect: {fileID: 198998456430139934}
   m_AvailableColors:
-  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
   m_ColorChangeTimeLimit: 0
-  isScoring: 0
+  m_AvailableLaserLayers:
+  - serializedVersion: 2
+    m_Bits: 2048
+  - serializedVersion: 2
+    m_Bits: 4096
+  - serializedVersion: 2
+    m_Bits: 8192
 --- !u!114 &114123233344156658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -634,6 +643,20 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114134683548590482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1555254615576578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ccf8cb916e2804e93a2116bf74f13f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rate: 0.2
+  score: 0
+  m_scoreManager: {fileID: 0}
 --- !u!114 &114273118986665730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -645,7 +668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7192f70c4e7255d448e2556471f34b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ARPlayerInstance: {fileID: 0}
   VRPlayerInstance: {fileID: 1118874535832482}
   VRPlayerTools: {fileID: 1113060844762424}
   childCamera: {fileID: 20282625848835418}

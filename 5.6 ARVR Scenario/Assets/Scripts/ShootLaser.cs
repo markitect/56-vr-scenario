@@ -12,6 +12,7 @@ public class ShootLaser : MonoBehaviour
 	public float speed { get; set; }
 	public float length { get; set; }
 	public bool isFiring { get; private set; }
+	public ScoreKeeper scorer { get; private set; }
 
 	public LayerMask collisionLayers;
 	public LayerMask laserLayerMask;
@@ -24,7 +25,6 @@ public class ShootLaser : MonoBehaviour
 	private Vector3 end;
 	private Vector3 direction;
 	private bool isScoring;
-	private ScoreKeeper scorer;
 	private float scoreTimer;
 
 	private bool isDissolving;
@@ -33,25 +33,16 @@ public class ShootLaser : MonoBehaviour
 
 	private float startTime;
 
-
-    // Use this for initialization
-    void Start()
+	void Awake()
 	{
 		this.lineRenderer = this.gameObject.GetComponent<LineRenderer>();
 	}
 
+	// Use this for initialization
+
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.anyKey)
-		{
-			this.speed = 5f;
-			this.length = 10f;
-			this.laserLayerMask = LayerMask.NameToLayer("Red");
-			this.laserColor = Color.red;
-			this.FireLaser(this.gameObject);
-		}
-
 		if (this.isFiring)
 		{
 			var step = Time.deltaTime * speed;
@@ -59,10 +50,13 @@ public class ShootLaser : MonoBehaviour
 			this.laserDistance += (this.direction * step).magnitude;
 			this.linePoints[this.linePoints.Count - 1] = end;
 			this.direction = Vector3.zero;
+			
+			this.lineRenderer.numPositions = this.linePoints.Count;
+			this.lineRenderer.SetPositions(this.linePoints.ToArray());
 
 			RecalculatePoints();
 
-			if (laserDistance <= 30f)
+			if (this.laserDistance <= this.length)
 			{
 				RaycastForMovement();
 			}
@@ -111,13 +105,10 @@ public class ShootLaser : MonoBehaviour
 					GameObject.Destroy(this.gameObject);
 				}
 			}
-
-			this.lineRenderer.numPositions = this.linePoints.Count;
-			this.lineRenderer.SetPositions(this.linePoints.ToArray());
 		}
 	}
 
-	public void FireLaser(GameObject owner)
+	public void FireLaser(GameObject owner, float speed, float distance, LayerMask laserLayerMask, Color color)
 	{
 		this.linePoints.Clear();
 		this.start = this.gameObject.transform.position;
@@ -126,12 +117,15 @@ public class ShootLaser : MonoBehaviour
 		this.linePoints.Add(end);
 		this.direction = this.transform.forward;
 		this.lineRenderer.startWidth = .05f;
-		this.lineRenderer.startColor = this.laserColor;
-		this.lineRenderer.endColor = this.laserColor;
+		this.lineRenderer.startColor = color;
+		this.lineRenderer.endColor = color;
 		scorer = owner.GetComponent<ScoreKeeper>();
 		startTime = Time.time;
+		this.speed = speed;
+		this.length = distance;
+		this.laserColor = color;
 		this.isFiring = true;
-		this.collisionLayers |= 1 << this.laserLayerMask.value;
+		this.collisionLayers |= 1 << laserLayerMask.value;
 	}
 
 	private void RecalculatePoints()
@@ -166,7 +160,7 @@ public class ShootLaser : MonoBehaviour
 				this.linePoints.Add(this.linePoints.Last() + (newDirection*distanceTraveled));
 				return;
 			}
-            else
+			else
 			{
 				this.linePoints.Add(currentEnd);
 				return;
@@ -190,6 +184,13 @@ public class ShootLaser : MonoBehaviour
 
 				case "ScoreTarget":
 					isScoring = true;
+					return;
+				case "Prism":
+					this.start = this.end;
+					GameObject faceHit = hit.collider.gameObject;
+					faceHit.GetComponent<MeshRenderer>().material.color = laserColor;
+					GameObject parentPrism = faceHit.transform.parent.gameObject;
+					parentPrism.GetComponent<LaserSplitter>().SplitLaser(faceHit, this);
 					return;
 				default:
 					this.linePoints.Add(hit.point);
