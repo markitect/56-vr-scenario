@@ -28,11 +28,12 @@ public class ShootLaser : MonoBehaviour
 
 	private List<GameObject> newPointSpheres = new List<GameObject>();
 	private List<GameObject> linePointSpheres = new List<GameObject>();
+    private Color renderColor;
 
 
 
-	// Use this for initialization
-	void Start()
+    // Use this for initialization
+    void Start()
 	{
 		if (!(this.lineRenderer = this.gameObject.GetComponent<LineRenderer>()))
 		{
@@ -94,7 +95,7 @@ public class ShootLaser : MonoBehaviour
 		this.direction = this.transform.forward;
 		this.isFiring = true;
 		this.ended = false;
-        this.laserColor = LaserColor.red;
+        this.laserColor = Color.red;
 	}
 
 	private void RecalcuateReflections()
