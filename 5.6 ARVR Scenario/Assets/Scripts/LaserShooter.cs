@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class LaserShooter : NetworkBehaviour
 {
@@ -24,11 +21,10 @@ public class LaserShooter : NetworkBehaviour
     private bool b_CanChangeColor;
     private int m_CurrentColorIndex;
     private float m_ColorChangeTimer;
-    private Light m_ColorIndicator;
-
 
     [SerializeField] private GameObject m_LaserBeamPrefab;
     [SerializeField] private Transform m_BarrelTipPosition;
+    [SerializeField] private Text m_LaserHUD;
 
     [SerializeField] private float m_MaxBeamLength;
     [SerializeField] private float m_MaxChargeTime;
@@ -42,7 +38,6 @@ public class LaserShooter : NetworkBehaviour
     void Start()
     {
         b_CanChangeColor = true;
-        m_ColorIndicator = gameObject.GetComponentInChildren<Light>();
     }
 
     void Update()
@@ -73,10 +68,12 @@ public class LaserShooter : NetworkBehaviour
                 }
 
                 m_BeamLength += m_MaxBeamLength * Time.deltaTime / m_MaxChargeTime;
+                m_LaserHUD.text = m_BeamLength.ToString("n1");
+               
                 break;
 
             case FireState.Firing:
-                if (Input.GetButtonDown("Fire1") || m_BeamSpeed <= m_MinBeamSpeed)
+                if (true)//(Input.GetButtonDown("Fire1") || m_BeamSpeed <= m_MinBeamSpeed)  bypassing speed charging for now.
                 {
                     if (m_ChargingEffect != null)
                         m_ChargingEffect.gameObject.SetActive(false);
@@ -86,6 +83,8 @@ public class LaserShooter : NetworkBehaviour
                     m_Laserbeam.transform.rotation = m_BarrelTipPosition.rotation;
 
                     m_BeamScript.FireLaser(this.gameObject);
+                    m_LaserHUD.text = "0.0";
+
                     m_FireState = FireState.None;
                     break;
                 }
@@ -95,12 +94,12 @@ public class LaserShooter : NetworkBehaviour
                 break;
         }
 
-        if (Input.GetAxis("Vertical") > .5 && b_CanChangeColor)
+        if (Input.GetAxis("Vertical") > .5 && b_CanChangeColor && m_FireState != FireState.Charging)
         {
             ChangeColor(1);
         }
 
-        if (Input.GetAxis("Vertical") < -.5 && b_CanChangeColor)
+        if (Input.GetAxis("Vertical") < -.5 && b_CanChangeColor && m_FireState != FireState.Charging)
         {
             ChangeColor(-1);
         }
@@ -114,8 +113,7 @@ public class LaserShooter : NetworkBehaviour
     {
         m_CurrentColorIndex = (m_CurrentColorIndex + indexAmount) % m_AvailableColors.Length;
 
-        if(m_ColorIndicator != null)
-            m_ColorIndicator.color = m_AvailableColors[m_CurrentColorIndex];
+        m_LaserHUD.color = m_AvailableColors[m_CurrentColorIndex];
 
         b_CanChangeColor = false;
         m_ColorChangeTimer = 0;
