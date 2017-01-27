@@ -620,6 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fd7798569672a4da5d457876a951ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arCamera: {fileID: 20347218649103098}
+  crossHair: {fileID: 1381978193491622}
 --- !u!124 &124659693874687622
 Behaviour:
   m_ObjectHideFlags: 1
