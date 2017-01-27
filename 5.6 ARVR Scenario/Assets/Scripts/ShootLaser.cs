@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class ShootLaser : MonoBehaviour
 {
-	public Color laserColor;
+    public LaserColor laserColor;
+	public Color renderColor;
 
 	public float speed = 2f;
 
@@ -28,7 +29,7 @@ public class ShootLaser : MonoBehaviour
 
 	private List<GameObject> newPointSpheres = new List<GameObject>();
 	private List<GameObject> linePointSpheres = new List<GameObject>();
-    private Color renderColor;
+
 
 
 
@@ -95,7 +96,7 @@ public class ShootLaser : MonoBehaviour
 		this.direction = this.transform.forward;
 		this.isFiring = true;
 		this.ended = false;
-        this.laserColor = Color.red;
+        this.laserColor = LaserColor.red;
 	}
 
 	private void RecalcuateReflections()
@@ -182,7 +183,7 @@ public class ShootLaser : MonoBehaviour
                 ended = true;
                 GameObject faceHit = closestHit.collider.gameObject;
                 GameObject parentPrism = faceHit.transform.parent.gameObject;
-                parentPrism.GetComponent<LaserSplitter>().SplitLaser(faceHit, laserColor, speed);   
+                parentPrism.GetComponent<LaserSplitter>().SplitLaser(faceHit, renderColor, speed);   
             }
 			else
 			{
