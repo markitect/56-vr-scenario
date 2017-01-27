@@ -17,6 +17,7 @@ public class ArControls : NetworkBehaviour
     GameObject localWall1;
     GameObject localWall2;
 #endif
+
     bool redWindowTracking = false;
     bool blueWindowTracking = false;
     bool yellowWindowTracking = false;
@@ -30,10 +31,14 @@ public class ArControls : NetworkBehaviour
     int wallCount = 0;
     int allowedWalls = 2;
 
-    void Start()
-    {
-        controlWords = new string[] { "Wall" , "Red", "Blue", "Yellow" };
+	public GameObject arCamera;
+	void Start()
+	{
+		if (!isLocalPlayer)
+			arCamera.SetActive(false);
 #if UNITY_WSA || UNITY_EDITOR
+        controlWords = new string[] { "Wall" , "Red", "Blue", "Yellow" };
+
         keywordRecognizer = new KeywordRecognizer(controlWords);
         keywordRecognizer.OnPhraseRecognized += M_KeywordRecognizer_OnPhraseRecognized;
         keywordRecognizer.Start();
@@ -53,6 +58,8 @@ public class ArControls : NetworkBehaviour
         blueWindowPrefab = Resources.Load("ArResources/Prefabs/BlueWindow") as GameObject;
         yellowWindowPrefab = Resources.Load("ArResources/Prefabs/YellowWindow") as GameObject;
     }
+
+		
 
     void Update()
     {
