@@ -45,8 +45,6 @@ public class LaserShooter : NetworkBehaviour
         m_ColorIndicator = gameObject.GetComponentInChildren<Light>();
     }
 
-	public bool isScoring;
-
     void Update()
     {
 		if(!isLocalPlayer)
@@ -66,7 +64,7 @@ public class LaserShooter : NetworkBehaviour
             case FireState.Charging:
                 if (Input.GetButtonDown("Fire1") || m_BeamLength >= m_MaxBeamLength)
                 {
-                    // m_BeamScript.Length = m_BeamLength
+                    m_BeamScript.length = m_BeamLength;
                     m_FireState = FireState.Firing;
 
                     // set beam length back to zero for next beam creation.
@@ -87,7 +85,8 @@ public class LaserShooter : NetworkBehaviour
                     m_Laserbeam.transform.position = m_BarrelTipPosition.position;
                     m_Laserbeam.transform.rotation = m_BarrelTipPosition.rotation;
 
-                    m_BeamScript.FireLaser();
+                    m_BeamScript.FireLaser(this.gameObject);
+                    m_FireState = FireState.None;
                     break;
                 }
 
@@ -139,7 +138,7 @@ public class LaserShooter : NetworkBehaviour
 
         m_FireState = FireState.Charging;
 
-        m_Laserbeam.GetComponent<ShootLaser>().FireLaser();
+        m_Laserbeam.GetComponent<ShootLaser>().FireLaser(this.gameObject);
 
         //Spawn on Server
         NetworkServer.Spawn(m_Laserbeam);
