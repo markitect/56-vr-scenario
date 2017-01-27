@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class LaserShooter : MonoBehaviour
+public class LaserShooter : NetworkBehaviour
 {
     private enum FireState
     {
@@ -44,6 +45,8 @@ public class LaserShooter : MonoBehaviour
         m_ColorIndicator = gameObject.GetComponentInChildren<Light>();
     }
 
+	public bool isScoring;
+
     void Update()
     {
         m_ColorChangeTimer += Time.deltaTime;
@@ -56,7 +59,7 @@ public class LaserShooter : MonoBehaviour
                     m_Laserbeam = Instantiate(m_LaserBeamPrefab);
                     m_Beam = m_Laserbeam.GetComponent<LineRenderer>();
                     m_BeamScript = m_Laserbeam.GetComponent<ShootLaser>();
-                    m_BeamScript.laserColor = m_AvailableColors[m_CurrentColorIndex];
+                    //m_BeamScript.laserColor = m_AvailableColors[m_CurrentColorIndex];
                     m_BeamSpeed = m_MaxBeamSpeed;
 
                     if (m_ChargingEffect != null)

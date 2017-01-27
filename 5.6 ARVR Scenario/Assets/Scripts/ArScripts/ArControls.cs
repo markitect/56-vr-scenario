@@ -1,147 +1,236 @@
 ﻿using UnityEngine;
+#if UNITY_WSA || UNITY_EDITOR
 using UnityEngine.VR.WSA.Input;
 using UnityEngine.Windows.Speech;
+#endif
 using UnityEngine.Networking;
 
 public class ArControls : NetworkBehaviour
 {
-    KeywordRecognizer m_KeywordRecognizer = null;
-    GestureRecognizer m_GestureReconizer = null;
-    public GameObject LaserWallPrefab;
-    public GameObject RedMirrorPrefab;
+#if UNITY_WSA || UNITY_EDITOR
+    KeywordRecognizer keywordRecognizer = null;
+    GestureRecognizer gestureReconizer = null;
+    GameObject laserWallPrefab;
+    GameObject redWindowPrefab;
+    GameObject blueWindowPrefab;
+    GameObject yellowWindowPrefab;
+    GameObject localWall1;
+    GameObject localWall2;
+#endif
 
-    GameObject LocalWall1;
-    GameObject LocalWall2;
-    //GameObject RedMirror;
+    bool redWindowTracking = false;
+    bool blueWindowTracking = false;
+    bool yellowWindowTracking = false;
+    bool laserBlockTracking = true;
 
-    bool RedMirrorMoved = false;
-    bool WallTracking = true;
-    bool WallLimit = false;
+    string[] controlWords;
+    private float currentTrackSpeed = 6.5f;
+    float wallCoolDown1 = 0f;
+    float wallCoolDown2 = 0f;
+    static float coolDown = 10f;
+    int wallCount = 0;
+    int allowedWalls = 2;
 
-    public string[] controlWords;
-    private float m_currentTrackSpeed = 6.5f;
-    float m_WallCoolDown = 0f;
-    public float m_CoolDown = 10f;
-    int m_WallCount = 0;
-    public int m_AllowedWalls = 2;
+	public GameObject arCamera;
+	void Start()
+	{
+		if (!isLocalPlayer)
+			arCamera.SetActive(false);
+#if UNITY_WSA || UNITY_EDITOR
+        controlWords = new string[] { "Wall" , "Red", "Blue", "Yellow" };
 
-    void Start()
-    {
-        controlWords = new string[] { "Wall" };
+        keywordRecognizer = new KeywordRecognizer(controlWords);
+        keywordRecognizer.OnPhraseRecognized += M_KeywordRecognizer_OnPhraseRecognized;
+        keywordRecognizer.Start();
 
-        m_KeywordRecognizer = new KeywordRecognizer(controlWords);
-        m_KeywordRecognizer.OnPhraseRecognized += M_KeywordRecognizer_OnPhraseRecognized;
-        m_KeywordRecognizer.Start();
-
-        m_GestureReconizer = new GestureRecognizer();
-        m_GestureReconizer.SetRecognizableGestures(GestureSettings.Tap
+        gestureReconizer = new GestureRecognizer();
+        gestureReconizer.SetRecognizableGestures(GestureSettings.Tap
             | GestureSettings.NavigationX
             | GestureSettings.NavigationY
             | GestureSettings.NavigationZ);
-        m_GestureReconizer.TappedEvent += M_GestureReconizer_TappedEvent;
-        m_GestureReconizer.NavigationUpdatedEvent += M_GestureReconizer_NavigationUpdatedEvent;
-        m_GestureReconizer.StartCapturingGestures();
+        gestureReconizer.TappedEvent += M_GestureReconizer_TappedEvent;
+        gestureReconizer.NavigationUpdatedEvent += M_GestureReconizer_NavigationUpdatedEvent;
+        gestureReconizer.StartCapturingGestures();
+#endif
 
-        LaserWallPrefab = Resources.Load("ArResources/Prefabs/LaserBlock") as GameObject;
+        laserWallPrefab = Resources.Load("ArResources/Prefabs/LaserBlock") as GameObject;
+        redWindowPrefab = Resources.Load("ArResources/Prefabs/RedWindow") as GameObject;
+        blueWindowPrefab = Resources.Load("ArResources/Prefabs/BlueWindow") as GameObject;
+        yellowWindowPrefab = Resources.Load("ArResources/Prefabs/YellowWindow") as GameObject;
     }
 
-    private void M_GestureReconizer_NavigationUpdatedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headRay)
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(headRay, out hit, 10f))
-        {
-            if (hit.collider.name.Contains("LaserBlock") || hit.collider.name.Contains("Mirror"))
-            {
-                var wall = GameObject.Find(hit.collider.name);
-                wall.transform.Rotate(normalizedOffset);
-            }
-        }
-    }
+		
 
     void Update()
     {
-        //if (m_WallCoolDown < 0)
-        //{
-        //    if (WallTracking)
-        //    {
-                MoveWall();
-        //    }
-        //}
-
-        if (m_WallCoolDown > 0)
-        {
-            m_WallCoolDown -= Time.deltaTime;
-        }
-
-        if (RedMirrorMoved)
-        {
-            RedMirrorPrefab = GameObject.Find("RedMirror");
-            MoveObject(RedMirrorPrefab);
-        }
+        UpdateLoopForWalls();
+        UpdateLoopForWindows();
     }
-    
+
+#if UNITY_WSA || UNITY_EDITOR
     private void M_GestureReconizer_TappedEvent(InteractionSourceKind source, int tapCount, Ray headRay)
     {
-
-        if (!WallTracking)
+        if (laserBlockTracking)
         {
-            WallTracking = true;
-            m_WallCoolDown = m_CoolDown;
-        }
-        else if (WallTracking)
-        {
-            WallTracking = false;
-            m_WallCoolDown = 0;
+            laserBlockTracking = false;
         }
 
-        m_WallCount = tapCount;
+        if(redWindowTracking)
+        {
+            redWindowTracking = false;
+        }
+
+        if (blueWindowTracking)
+        {
+            blueWindowTracking = false;
+        }
+
+        if (yellowWindowTracking)
+        {
+            yellowWindowTracking = false;
+        }
     }
 
     private void M_KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
         if (args.text == "Wall")
         {
-            //if (m_WallCount < m_AllowedWalls)
-            //{
-                WallTracking = true;
-                m_WallCount += 1;
+            if (wallCount < allowedWalls)
+            {
+                laserBlockTracking = true;
+                wallCount += 1;
 
-            if (isLocalPlayer)
-            {   
-                CmdSpawnObject(LaserWallPrefab);
+                if (isLocalPlayer)
+                {
+                    CmdSpawnWallObject();
+                }
+
             }
-
-            //}
-            //if (m_WallCount > m_AllowedWalls)
-            //{
-            //    WallTracking = false;
-            //}
+            else if (wallCount > allowedWalls)
+            {
+                laserBlockTracking = false;
+                Debug.Log("Can't Spawn Any Walls");
+            }
         }
 
         if (args.text == "Red")
         {
-            RedMirrorMoved = true;
+            redWindowTracking = true;
+            if(isLocalPlayer)
+            {
+                CmdSpawnRedWindowObject();
+            }
+        }
+
+        if (args.text == "Blue")
+        {
+            blueWindowTracking = true;
+            if (isLocalPlayer)
+            {
+                CmdSpawnBlueWindowObject();
+            }
+        }
+
+        if (args.text == "Yellow")
+        {
+            yellowWindowTracking = true;
+            if (isLocalPlayer)
+            {
+                CmdSpawnYellowWindowObject();
+            }
         }
     }
 
+    private void M_GestureReconizer_NavigationUpdatedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headRay)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(headRay, out hit, 50f))
+        {
+            if (hit.transform.gameObject.layer == 9)
+            {
+                var hitObject = hit.transform.gameObject;
+                hitObject.transform.Rotate(normalizedOffset);
+            }
+
+            if (hit.transform.gameObject.layer == 10)
+            {
+                var hitObject = hit.transform.gameObject;
+                hitObject.transform.Rotate(normalizedOffset);
+            }
+        }
+    }
+#endif
 
     public void MoveWall()
     {
-        //Wall1 = GameObject.Find("LaserBlock(1)");
-        //Wall2 = GameObject.Find("LaserBlock(2)");
-
-        //if (m_WallCount.Equals(1))
-        //{
-        if (LocalWall1 == null)
+        if (wallCount.Equals(1))
         {
-            return;
+            if (localWall1 == null)
+            {
+                return;
+            }
+            MoveObject(localWall1);
         }
-        MoveObject(LocalWall1);
-        //}
 
-        if (m_WallCount.Equals(2))
+        if (wallCount.Equals(2))
         {
-            MoveObject(LaserWallPrefab);
+            if (localWall1 == null)
+            {
+                return;
+            }
+            MoveObject(localWall2);
+        }
+    }
+
+    public void UpdateLoopForWalls()
+    {
+        if (laserBlockTracking)
+        {
+            MoveWall();
+        }
+
+        if (wallCoolDown1 < 0)
+        {
+            if (localWall1)
+            {
+                Destroy(localWall1);
+                localWall1 = null;
+                wallCount -= 1;
+            }
+        }
+
+        if (wallCoolDown2 < 0)
+        {
+            if (localWall2)
+            {
+                Destroy(localWall2);
+                localWall2 = null;
+                wallCount -= 1;
+            }
+        }
+
+        if (wallCoolDown1 > 0 | wallCoolDown2 > 0)
+        {
+            wallCoolDown1 -= Time.deltaTime;
+            wallCoolDown2 -= Time.deltaTime;
+        }
+    }
+
+    public void UpdateLoopForWindows()
+    {
+        if (redWindowTracking)
+        {
+            MoveObject(redWindowPrefab);
+        }
+
+        if (blueWindowTracking)
+        {
+            MoveObject(blueWindowPrefab);
+        }
+
+        if (yellowWindowTracking)
+        {
+            MoveObject(yellowWindowPrefab);
         }
     }
 
@@ -149,21 +238,49 @@ public class ArControls : NetworkBehaviour
     {
         var cam = transform.GetComponentInChildren<Camera>().transform;
         Vector3 move = cam.forward * 4f + cam.position;
-        obj.transform.position = Vector3.Lerp(obj.transform.position, move, Time.deltaTime * m_currentTrackSpeed);
-        obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, cam.rotation, Time.deltaTime * m_currentTrackSpeed);
+        obj.transform.position = Vector3.Lerp(obj.transform.position, move, Time.deltaTime * currentTrackSpeed);
+        obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, cam.rotation, Time.deltaTime * currentTrackSpeed);
     }
 
     [Command]
-    public void CmdSpawnObject(GameObject obj)
+    public void CmdSpawnWallObject()
     {
-        LocalWall1 = Instantiate(obj);
-        NetworkServer.Spawn(LocalWall1);
+        if (!localWall1)
+        {
+            localWall1 = Instantiate(laserWallPrefab);
+            NetworkServer.Spawn(localWall1);
+            wallCoolDown1 = coolDown;
+        }
+        else if(localWall1)
+        {
+            localWall2 = Instantiate(laserWallPrefab);
+            NetworkServer.Spawn(localWall2);
+            wallCoolDown2 = coolDown;
+        }
     }
 
-    //[Command]
-    //public void CmdSpawnWall()
-    //{
-    //    var spawnedObj = Instantiate(LaserWall);
-    //    NetworkServer.Spawn(spawnedObj);
-    //}
+    [Command]
+    public void CmdSpawnRedWindowObject()
+    {
+        var window = Instantiate(redWindowPrefab);
+        NetworkServer.Spawn(window);
+        wallCoolDown1 = coolDown;
+    }
+
+    [Command]
+    public void CmdSpawnYellowWindowObject()
+    {
+        var window = Instantiate(yellowWindowPrefab);
+        NetworkServer.Spawn(window);
+        wallCoolDown1 = coolDown;
+    }
+
+    [Command]
+    public void CmdSpawnBlueWindowObject()
+    {
+        var window = Instantiate(blueWindowPrefab);
+        NetworkServer.Spawn(window);
+        wallCoolDown1 = coolDown;
+    }
 }
+
