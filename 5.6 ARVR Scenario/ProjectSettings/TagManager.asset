@@ -3,9 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Laser
-  - ScoreTarget
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -16,10 +14,10 @@ TagManager:
   - 
   - 
   - Reflective
+  - Red
+  - Yellow
+  - Blue
   - Wall
-  - ScoreTarget
-  - 
-  - 
   - 
   - 
   - 

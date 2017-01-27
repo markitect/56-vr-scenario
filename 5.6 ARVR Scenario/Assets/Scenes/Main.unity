@@ -213,6 +213,9 @@ MonoBehaviour:
   collisionLayers:
     serializedVersion: 2
     m_Bits: 768
+  laserLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!23 &581399
 MeshRenderer:
   m_ObjectHideFlags: 0
