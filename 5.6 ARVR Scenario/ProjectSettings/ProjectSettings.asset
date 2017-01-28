@@ -525,11 +525,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: 5.6ARVRScenario
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: 
+  metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 8027e461da94d301
   metroApplicationDescription: 5.6 ARVR Scenario
   wsaImages: {}
   metroTileShortName: 
