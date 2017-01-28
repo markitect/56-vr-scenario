@@ -10,6 +10,13 @@ public class NetworkController : NetworkManager
 	public GameObject VRPlayer;
 	public GameObject ARPlayer;
 
+    void Start()
+    {
+        if (VRSettings.loadedDeviceName == "HoloLens")
+        {
+            StartHost();
+        }
+    }
 
 	//Called on client when connect
 	public override void OnClientConnect(NetworkConnection conn)
