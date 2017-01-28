@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.VR;
 #if UNITY_WSA || UNITY_EDITOR
 using UnityEngine.VR.WSA.Input;
 using UnityEngine.Windows.Speech;
@@ -17,11 +18,10 @@ public class ArControls : NetworkBehaviour
     GameObject localWall1;
     GameObject localWall2;
 
-
     bool redWindowTracking = false;
     bool blueWindowTracking = false;
     bool yellowWindowTracking = false;
-    bool laserBlockTracking = true;
+    bool laserBlockTracking = false;
 
     string[] controlWords;
     private float currentTrackSpeed = 6.5f;
@@ -31,17 +31,18 @@ public class ArControls : NetworkBehaviour
     int wallCount = 0;
     int allowedWalls = 2;
 #endif
-	public Camera arCamera;
-	public GameObject crossHair;
-	void Start()
-	{
-		if (!isLocalPlayer)
-		{
-			arCamera.enabled = false;
-			crossHair.SetActive(false);
-		}
+    public Camera arCamera;
+    public GameObject crossHair;
+
+    void Start()
+    {
+        if (!isLocalPlayer)
+        {
+            arCamera.enabled = false;
+            crossHair.SetActive(false);
+        }
 #if UNITY_WSA
-		controlWords = new string[] { "Wall" , "Red", "Blue", "Yellow" };
+        controlWords = new string[] { "Wall", "Red", "Blue", "Yellow" };
 
         keywordRecognizer = new KeywordRecognizer(controlWords);
         keywordRecognizer.OnPhraseRecognized += M_KeywordRecognizer_OnPhraseRecognized;
@@ -62,11 +63,11 @@ public class ArControls : NetworkBehaviour
         blueWindowPrefab = Resources.Load("ArResources/Prefabs/BlueWindow") as GameObject;
         yellowWindowPrefab = Resources.Load("ArResources/Prefabs/YellowWindow") as GameObject;
 #endif
-	}
+    }
 
 #if UNITY_WSA
 
-	void Update()
+    void Update()
     {
         UpdateLoopForWalls();
         UpdateLoopForWindows();
@@ -79,7 +80,7 @@ public class ArControls : NetworkBehaviour
             laserBlockTracking = false;
         }
 
-        if(redWindowTracking)
+        if (redWindowTracking)
         {
             redWindowTracking = false;
         }
@@ -120,7 +121,7 @@ public class ArControls : NetworkBehaviour
         if (args.text == "Red")
         {
             redWindowTracking = true;
-            if(isLocalPlayer)
+            if (isLocalPlayer)
             {
                 CmdSpawnRedWindowObject();
             }
@@ -165,7 +166,7 @@ public class ArControls : NetworkBehaviour
     }
 
 
-	public void MoveWall()
+    public void MoveWall()
     {
         if (wallCount.Equals(1))
         {
@@ -184,7 +185,9 @@ public class ArControls : NetworkBehaviour
             }
             MoveObject(localWall2);
         }
+
     }
+
 
     public void UpdateLoopForWalls()
     {
@@ -222,28 +225,49 @@ public class ArControls : NetworkBehaviour
 
     public void UpdateLoopForWindows()
     {
-        if (redWindowTracking)
+        RaycastHit hit;
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        if (Physics.Raycast(transform.localPosition, fwd, out hit, 100f))
         {
-            MoveObject(redWindowPrefab);
-        }
+            var hitPoint = hit.transform.position;
+            if (redWindowTracking)
+            {
+                MoveObject(redWindowPrefab);
+            }
 
-        if (blueWindowTracking)
-        {
-            MoveObject(blueWindowPrefab);
-        }
+            if (blueWindowTracking)
+            {
+                MoveObject(blueWindowPrefab);
+            }
 
-        if (yellowWindowTracking)
-        {
-            MoveObject(yellowWindowPrefab);
+            if (yellowWindowTracking)
+            {
+                MoveObject(yellowWindowPrefab);
+            }
         }
     }
 
     public void MoveObject(GameObject obj)
     {
-        var cam = transform.GetComponentInChildren<Camera>().transform;
-        Vector3 move = cam.forward * 4f + cam.position;
-        obj.transform.position = Vector3.Lerp(obj.transform.position, move, Time.deltaTime * currentTrackSpeed);
-        obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, cam.rotation, Time.deltaTime * currentTrackSpeed);
+        var headPostion = transform.GetComponentInChildren<Camera>().transform;
+        var headRotation = GameObject.Find("Crosshair");
+
+        RaycastHit hit;
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        if (Physics.Raycast(headPostion.localPosition, headRotation.transform.localPosition, out hit, 20f))
+        {
+            Vector3 move = hit.point;
+            obj.transform.position = Vector3.Lerp(obj.transform.position, move, Time.deltaTime * currentTrackSpeed);
+            obj.transform.rotation = Quaternion.Euler(headPostion.rotation.x, headPostion.rotation.y, 0f);
+        }
+        else
+        {
+            var cam = transform.GetComponentInChildren<Camera>().transform;
+            Vector3 move = cam.forward * 5f + cam.position;
+            obj.transform.position = Vector3.Lerp(obj.transform.position, move, Time.deltaTime * currentTrackSpeed);
+            obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, cam.rotation, Time.deltaTime * currentTrackSpeed);
+        }
+
     }
 
     [Command]
@@ -255,7 +279,7 @@ public class ArControls : NetworkBehaviour
             NetworkServer.Spawn(localWall1);
             wallCoolDown1 = coolDown;
         }
-        else if(localWall1)
+        else if (localWall1)
         {
             localWall2 = Instantiate(laserWallPrefab);
             NetworkServer.Spawn(localWall2);
@@ -268,7 +292,6 @@ public class ArControls : NetworkBehaviour
     {
         var window = Instantiate(redWindowPrefab);
         NetworkServer.Spawn(window);
-        wallCoolDown1 = coolDown;
     }
 
     [Command]
@@ -276,7 +299,6 @@ public class ArControls : NetworkBehaviour
     {
         var window = Instantiate(yellowWindowPrefab);
         NetworkServer.Spawn(window);
-        wallCoolDown1 = coolDown;
     }
 
     [Command]
@@ -284,7 +306,6 @@ public class ArControls : NetworkBehaviour
     {
         var window = Instantiate(blueWindowPrefab);
         NetworkServer.Spawn(window);
-        wallCoolDown1 = coolDown;
     }
 #endif
 }
