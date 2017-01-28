@@ -1,16 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LaserColors {
 
-    private static Color red = Color.red;
-    private static Color blue = Color.blue;
-    private static Color green = Color.green;
-    public static Color Green { get { return green; } }
-    public static Color Red { get { return red; } }
-    public static Color Blue {  get { return blue; } }
+    public static Color[] LaserColor = new Color[] { Color.red, Color.yellow, Color.blue };
 
-    public static Color[] LaserColor = new Color[] { red, green, blue };
+	public static LayerMask[] LaserLayerMasks = new LayerMask[] { LayerMask.NameToLayer("Red") , LayerMask.NameToLayer("Yellow"), LayerMask.NameToLayer("Blue")};
+
+	public static int GetIndexFromColor(Color color)
+	{
+		for (var i = 0; i < LaserColor.Length; ++i)
+		{
+			if (LaserColor[i] == color)
+			{
+				return i;
+			}
+		}
+
+		throw new ArgumentException("Color does not exist in possible laser color array.");
+	}
 
 }
