@@ -69,7 +69,7 @@ public class ShootLaser : NetworkBehaviour
 		this.end = this.start;
 		this.linePoints.Add(end);
 		this.direction = this.transform.forward;
-		this.collisionLayers |= 1 << layerMaskValue;
+		this.laserLayerMask |= 1 << layerMaskValue;
 	}
 
 	// Use this for initialization
@@ -145,7 +145,7 @@ public class ShootLaser : NetworkBehaviour
 		}
 	}
 	
-	public void FireLaser(GameObject owner, float speed, float distance, LayerMask laserLayerMask, Color color)
+	public void FireLaser(GameObject owner, float speed, float distance, LayerMask mlaserLayerMask, Color color)
 	{
 		scorer = owner.GetComponent<ScoreKeeper>();
 		startTime = Time.time;
@@ -157,7 +157,7 @@ public class ShootLaser : NetworkBehaviour
 		this.g = color.g;
 		this.a = color.a;
 		this.isFiring = true;
-		layerMaskValue = laserLayerMask.value;
+		layerMaskValue = mlaserLayerMask.value;
 	}
 
 	private void RecalculatePoints()
