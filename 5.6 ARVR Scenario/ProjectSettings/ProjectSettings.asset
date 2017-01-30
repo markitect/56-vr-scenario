@@ -3,7 +3,7 @@
 --- !u!129 &1
 PlayerSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 10
+  serializedVersion: 11
   productGUID: 2c3b3650932024a27b04a61d742a6797
   AndroidProfiler: 0
   defaultScreenOrientation: 4
@@ -117,7 +117,6 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.Unity3D.HyperBeam
   bundleVersion: 1.0
   preloadedAssets: []
   metroInputSource: 0
@@ -135,6 +134,14 @@ PlayerSettings:
       depthFormat: 1
   protectGraphicsMemory: 0
   useHDRDisplay: 0
+  applicationIdentifier:
+    Android: com.Unity3D.HyperBeam
+    Standalone: unity.Unity3D.HyperBeam
+    Tizen: com.Unity3D.HyperBeam
+    iOS: com.Unity3D.HyperBeam
+    tvOS: com.Unity3D.HyperBeam
+  buildNumber:
+    iOS: 0
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
@@ -143,7 +150,6 @@ PlayerSettings:
   stripEngineCode: 1
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
-  iPhoneBuildNumber: 0
   ForceInternetPermission: 0
   ForceSDCardPermission: 0
   CreateWallpaper: 0
@@ -227,8 +233,8 @@ PlayerSettings:
   - m_BuildTarget: Standalone
     m_Enabled: 1
     m_Devices:
-    - OpenVR
     - split
+    - OpenVR
     - Oculus
   - m_BuildTarget: Android
     m_Enabled: 1

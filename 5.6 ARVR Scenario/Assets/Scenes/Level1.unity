@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3923076, g: 0.54170626, b: 0.7716203, a: 1}
+  m_IndirectSpecularColor: {r: 0.3924741, g: 0.541704, b: 0.77127355, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 6
+    serializedVersion: 7
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -72,6 +72,19 @@ LightmapSettings:
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_StationaryBakeMode: 3
+    m_BakeBackend: 0
+    m_PVRSampling: 1
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVRFiltering: 0
+    m_PVRFilteringMode: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousColorSigma: 1
+    m_PVRFilteringAtrousNormalSigma: 1
+    m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
   m_RuntimeCPUUsage: 25
   m_ShadowMaskMode: 2
@@ -199,6 +212,7 @@ LineRenderer:
     alignment: 0
     textureMode: 0
   m_UseWorldSpace: 1
+  m_Loop: 0
 --- !u!114 &581398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,12 +224,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e8df5a83a154635a4d6b078ea6bfc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  r: 0
+  b: 0
+  g: 0
+  a: 0
   laserColor: {r: 1, g: 1, b: 1, a: 1}
   speed: 2
+  length: 0
   isFiring: 0
+  layerMaskValue: 0
   collisionLayers:
     serializedVersion: 2
     m_Bits: 0
+  laserLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  linePoints: []
 --- !u!23 &581399
 MeshRenderer:
   m_ObjectHideFlags: 0
