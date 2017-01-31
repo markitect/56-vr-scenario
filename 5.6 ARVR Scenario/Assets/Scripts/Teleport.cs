@@ -5,7 +5,9 @@ using UnityEngine;
 public class Teleport : MonoBehaviour {
 
 	public Transform playerTransform;
-    public float delatTimeBeforeTeleport;
+	public GameObject gazeCursor;
+
+    public float deltaTimeBeforeTeleport;
     public int deltaBlink;
     public GUITexture fadeTexture;
     public float fadeInSpeed;
@@ -13,84 +15,85 @@ public class Teleport : MonoBehaviour {
     float timer;
     int count;
     bool teleportBigger = false;
-    Vector3 targetTeleportPosition = new Vector3();
+	GameObject targetTeleportPlatform;
 
-    // Use this for initialization
+	RaycastHit hit;
+	Vector3 raycastStart; 
+	Vector3 raycastDirection;
+	int teleportPlatformLayerMask = 1 << 10;
+	float maxDistance = 20.0f;
 
     // Update is called once per frame
     void Update () {
-		Vector3 start = this.gameObject.transform.position;
-		Vector3 end = (this.transform.forward * 20) + start;
+		raycastStart = this.gameObject.transform.position;
+		raycastDirection = this.gameObject.transform.forward;
 
         // Fade in texture if any
         Color oldColor = fadeTexture.color;
         oldColor.a = Mathf.Lerp(oldColor.a, 0, fadeInSpeed);
         fadeTexture.color = oldColor;
 
-		RaycastHit hit;
-		if (Physics.Raycast(start, end, out hit))
+		gazeCursor.SetActive( false );
+
+		if (Physics.Raycast(raycastStart, raycastDirection, out hit, maxDistance) && hit.collider.gameObject.name == "TeleportPlatform")
 		{
-            if (hit.collider.gameObject.name == "TeleportPlatform")
+            // When hit a teleport platform, update the target teleport
+			targetTeleportPlatform = hit.collider.gameObject;
+			gazeCursor.transform.position = hit.point;
+			gazeCursor.SetActive( true );
+
+            if (timer >= deltaTimeBeforeTeleport)
             {
-                // When hit a teleport platform, update the target teleport
-                targetTeleportPosition = hit.collider.gameObject.transform.position;
+                // Black the screen
+                Color currentColor = fadeTexture.color;
+                currentColor.a = 1;
+                fadeTexture.color = currentColor;
 
-                if (targetTeleportPosition == hit.collider.gameObject.transform.position && timer >= delatTimeBeforeTeleport)
-                {
-                    // Black the screen
-                    Color currentColor = fadeTexture.color;
-                    currentColor.a = 1;
-                    fadeTexture.color = currentColor;
+                // Move player position
+				playerTransform.position = targetTeleportPlatform.transform.position;
+                playerTransform.Translate(Vector3.up * 0.5f);
 
-                    // Move player position
-                    playerTransform.position = hit.collider.gameObject.transform.position;
-                    playerTransform.Translate(Vector3.up * 0.5f);
-
-                    Reset();
-
-                    // Need to make sure to change the teleport's scale back
-                    hit.collider.gameObject.transform.localScale = new Vector3(1.0f, 0.1f, 1.0f);
-                    teleportBigger = false;
-                }
-                else if (targetTeleportPosition == hit.collider.gameObject.transform.position)
-                {
-                    // Player still looking at the same teleport but not long enough before moving
-                    // Increase timer
-                    timer += Time.deltaTime;
-
-                    // Make the target teleport blink by changing its local scale
-                    count++;
-                    if (count % deltaBlink == 0)
-                    {
-                        if (teleportBigger)
-                        {
-                            hit.collider.gameObject.transform.localScale = new Vector3(1.5f, 0.1f, 1.5f);
-                        }
-                        else
-                        {
-                            hit.collider.gameObject.transform.localScale = new Vector3(1.0f, 0.1f, 1.0f);
-                        }
-                        teleportBigger = !teleportBigger;
-                    }
-                }
-                else
-                {
-                    // Player look at some other teleport
-                    Reset();
-                }
+                Reset();
             }
             else
             {
-                // Player look at somewhere else
-                Reset();
+                // Player still looking at the same teleport but not long enough before moving
+                // Increase timer
+                timer += Time.deltaTime;
+
+                // Make the target teleport blink by changing its local scale
+                count++;
+                if (count % deltaBlink == 0)
+                {
+                    if (teleportBigger)
+                    {
+						targetTeleportPlatform.transform.localScale = new Vector3(1.0f, 0.1f, 1.0f);
+                    }
+                    else
+                    {
+						targetTeleportPlatform.transform.localScale = new Vector3(1.5f, 0.1f, 1.5f);
+                    }
+                    teleportBigger = !teleportBigger;
+                }
             }
-		}
+        }
+        else
+        {
+            // Player look at somewhere else
+            Reset();
+        }
 	}
 
     void Reset()
     {
         timer = 0f;
         count = 0;
-        targetTeleportPosition = new Vector3();
+
+		if (teleportBigger)
+		{
+			// Need to make sure to change the teleport's scale back
+			targetTeleportPlatform.transform.localScale = new Vector3(1.0f, 0.1f, 1.0f);
+			teleportBigger = false;
+		}
     }
 }
