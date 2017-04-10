@@ -56,8 +56,7 @@ public class NetworkController : NetworkManager
 			spawnPoint = this.ARSpawnPoint;
 		}
 		//Select the prefab from the spawnable objects list
-
-
+        
 		// Create player object with prefab
 		var player = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity) as GameObject;
 

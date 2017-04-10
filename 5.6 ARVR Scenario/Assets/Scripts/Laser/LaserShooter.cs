@@ -32,8 +32,9 @@ public class LaserShooter : NetworkBehaviour
 		}
 	}
 
-	[SerializeField] private GameObject m_LaserBeamPrefab;
-	[SerializeField] private Transform m_BarrelTipPosition;
+    public Transform m_BarrelTipPosition;
+
+    [SerializeField] private GameObject m_LaserBeamPrefab;
 
 	[SerializeField] private ParticleSystem m_ChargingEffect;
 	[SerializeField] private float m_ColorChangeTimeLimit;
@@ -137,6 +138,19 @@ public class LaserShooter : NetworkBehaviour
 		m_ColorChangeTimer = 0;
 	}
 
+    public void SetColor(LaserType laserType)
+    {
+        this.currentLaserType = laserType;
+
+        if (m_ColorIndicator != null)
+        {
+            m_ColorIndicator.color = LaserData.Lasers[this.currentLaserType].LaserColor;
+        }
+
+        b_CanChangeColor = false;
+        m_ColorChangeTimer = 0;
+    }
+
 	[Command]
 	public void CmdFireLaser()
 	{
@@ -146,7 +160,7 @@ public class LaserShooter : NetworkBehaviour
 		NetworkServer.Spawn(m_Laserbeam);
 
 		m_Laserbeam.GetComponent<Laser>().FireLaser(
-			this.GetComponent<ScoreKeeper>().gameObject,
+			this.GetComponent<ScoreKeeper>(),
 			this.laserSettings.MinLaserSpeed,
 			this.laserSettings.MaxLaserDistance,
 			this.currentLaserType

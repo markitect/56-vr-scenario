@@ -4,51 +4,67 @@ using UnityEngine;
 
 public class LaserSplitter : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject[] faces;
 
-	[SerializeField]
-	private GameObject laserPrefab;
+    private LaserShooter laserShooter;
 
-	private GameObject[] prismFaces = new GameObject[3];
+    private bool _isInUse = false;
+    public bool IsInUse
+    {
+        get
+        {
+            return _isInUse;
+        }
 
-	// Use this for initialization
-	void Start()
+        set
+        {
+            if (value == false)
+            {
+                this.ResetFaceColors();
+            }
+
+            this._isInUse = value;
+        }
+    }
+
+    // Use this for initialization
+    void Start()
 	{
-		prismFaces[0] = this.transform.FindChild("Face1").gameObject;
-		prismFaces[1] = this.transform.FindChild("Face2").gameObject;
-		prismFaces[2] = this.transform.FindChild("Face3").gameObject;
+        this.laserShooter = this.GetComponent<LaserShooter>();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-
 	}
 
 	public void SplitLaser(GameObject faceHit, Laser laser)
 	{
-		this.GetComponent<MeshRenderer>().material.color = LaserData.Lasers[laser.laserType].LaserColor;
+        this.IsInUse = true;
+		faceHit.GetComponentInParent<MeshRenderer>().material.color = LaserData.Lasers[laser.laserType].LaserColor;
 		var newSpeed = laser.speed / 2;
 		var newLength = laser.length / 2;
-		var newLaser = GetNextLaser(laser.laserType);
-		var newColor = LaserData.Lasers[newLaser].LaserColor;
+        var newLaserType = GetNextLaser(laser.laserType);
 
-		foreach (GameObject face in prismFaces)
-		{
-			if (face.name == faceHit.name)
+        foreach (var face in this.faces)
+        {
+            if (face != faceHit)
 			{
-				//do nothing with face that was hit
-			}
-			else
-			{
-				//face.GetComponent<MeshRenderer>().material.color = LaserData.Lasers[newColorIndex];
-				//GameObject laserEmitter = face.transform.FindChild("Emitter").gameObject;
-				//var newLaser = Instantiate(laserPrefab, laserEmitter.transform.position, laserEmitter.transform.rotation).GetComponent<Laser>();
-				//newLaser.FireLaser(laser.scorer.gameObject, newSpeed, newLength, LaserColors.LaserLayerMasks[newColorIndex], LaserColors.LaserColor[newColorIndex]);
-				//newColorIndex = GetNextLaserColorIndex(newColor);
-			}
+                var emitter = face.GetComponentInChildren<Transform>();
+                face.GetComponent<MeshRenderer>().material.color = LaserData.Lasers[newLaserType].LaserColor;
+
+                this.laserShooter.SetColor(newLaserType);
+                if (face.transform.Find("Emitter") != null)
+                {
+                    this.laserShooter.m_BarrelTipPosition = face.transform.Find("Emitter");
+                }
+
+                this.GetComponent<LaserShooter>().CmdFireLaser();
+
+                newLaserType = GetNextLaser(newLaserType);
+            }
 		}
-
-		StartCoroutine(ResetFaceColors());
 	}
 
 	private LaserType GetNextLaser(LaserType laserType)
@@ -66,13 +82,11 @@ public class LaserSplitter : MonoBehaviour
 		}
 	}
 
-	public IEnumerator ResetFaceColors()
+	public void ResetFaceColors()
 	{
-		yield return new WaitForSeconds(3f);
-
-		foreach (var prismFace in prismFaces)
+		foreach (var face in faces)
 		{
-			prismFace.GetComponent<MeshRenderer>().material.color = Color.white;
+            face.GetComponentInParent<MeshRenderer>().material.color = Color.white;
 		}
 	}
 }

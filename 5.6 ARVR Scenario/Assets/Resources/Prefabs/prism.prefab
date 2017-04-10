@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 114078124264488502}
   - component: {fileID: 114245535311919550}
   - component: {fileID: 114675359769085824}
+  - component: {fileID: 114428417543030366}
   m_Layer: 10
   m_Name: prism
   m_TagString: Untagged
@@ -152,8 +153,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1538637390319702}
-  m_LocalRotation: {x: -0, y: -0.76541114, z: -0, w: 0.6435417}
-  m_LocalPosition: {x: 1.8506252, y: -0.66700363, z: -2.3055017}
+  m_LocalRotation: {x: -0, y: -0.5962888, z: -0, w: 0.8027701}
+  m_LocalPosition: {x: -2.5341763, y: 1, z: 0.03225425}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4665317183494814}
@@ -162,7 +163,7 @@ Transform:
   - {fileID: 4936960040697028}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 620.113, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 646.791, z: 0}
 --- !u!4 &4375289517032646
 Transform:
   m_ObjectHideFlags: 1
@@ -482,6 +483,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserPrefab: {fileID: 1853518726223736, guid: 502ce8d1b1cc7dc4dbfc0b46085cb1e1,
     type: 2}
+  faces:
+  - {fileID: 1546846840137556}
+  - {fileID: 1542300375669992}
+  - {fileID: 1645230917238820}
+  IsInUse: 0
 --- !u!114 &114245535311919550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -514,6 +520,23 @@ MonoBehaviour:
     i15: 89
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114428417543030366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1538637390319702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b8f8df869e0a4f40b7e4b0b7690577f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserSettings: {fileID: 11400000, guid: 27b93aae8d27a42479100fe88cfbac06, type: 2}
+  m_LaserBeamPrefab: {fileID: 1853518726223736, guid: 502ce8d1b1cc7dc4dbfc0b46085cb1e1,
+    type: 2}
+  m_BarrelTipPosition: {fileID: 4334117550233992}
+  m_ChargingEffect: {fileID: 0}
+  m_ColorChangeTimeLimit: 2
 --- !u!114 &114675359769085824
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -22,10 +22,9 @@ GameObject:
   - component: {fileID: 33212146967989904}
   - component: {fileID: 65125597507523568}
   - component: {fileID: 23246492867283690}
-  - component: {fileID: 114425172827569092}
   - component: {fileID: 114133639058655044}
   - component: {fileID: 114339158294607318}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: BlueWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,15 +148,3 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &114425172827569092
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1803731608555714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f15567fca09fed4daa5f857aeaf174e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WindowColor: 1

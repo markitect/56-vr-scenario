@@ -22,10 +22,9 @@ GameObject:
   - component: {fileID: 33238166679412344}
   - component: {fileID: 65598377785629632}
   - component: {fileID: 23035014744441318}
-  - component: {fileID: 114902807841727770}
   - component: {fileID: 114647023263201630}
   - component: {fileID: 114701201719977420}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: YellowWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,15 +148,3 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &114902807841727770
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1703613529500898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f15567fca09fed4daa5f857aeaf174e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WindowColor: 2

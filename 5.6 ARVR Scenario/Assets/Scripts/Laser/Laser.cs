@@ -48,6 +48,8 @@ public class Laser : NetworkBehaviour
 	private float distanceTraveled;
 	
 	private float timeToExist = 5f;
+
+    private GameObject prismBeingHit;
 	
 	void Start()
 	{
@@ -128,20 +130,25 @@ public class Laser : NetworkBehaviour
 				{
 					this.isFiring = false;
 					this.linePoints.Clear();
+                    if(this.prismBeingHit != null)
+                    {
+                        this.prismBeingHit.GetComponent<LaserSplitter>().IsInUse = false;
+                    }
 					Destroy(this.gameObject);
 				}
 			}
 		}
 	}
 	
-	public void FireLaser(GameObject owner, float speed, float distance, LaserType laserType)
+	public void FireLaser(ScoreKeeper owner, float speed, float distance, LaserType laserType)
 	{
-		scorer = owner.GetComponent<ScoreKeeper>();
+        scorer = owner;
 		this.speed = speed;
 		this.length = distance;
 		this.isFiring = true;
-		this.laserColor = LaserData.Lasers[laserType].LaserColor;
-		this.laserLayerMask = LaserData.Lasers[laserType].LaserLayer;
+        this.laserType = laserType;
+		this.laserColor = LaserData.Lasers[this.laserType].LaserColor;
+		this.laserLayerMask = LaserData.Lasers[this.laserType].LaserLayer;
 		Invoke("StartDisolve", this.timeToExist);
 	}
 
@@ -200,10 +207,13 @@ public class Laser : NetworkBehaviour
 					case "Prism":
 						{
 							this.direction = Vector3.zero;
-							var parentPrism = hitObject.transform.parent.gameObject;
-							parentPrism.GetComponent<LaserSplitter>().SplitLaser(hitObject, this);
-							return;
-						}
+							this.prismBeingHit = hitObject.transform.parent.gameObject;
+                            if (this.isFiring && !prismBeingHit.GetComponent<LaserSplitter>().IsInUse)
+                            {
+                                prismBeingHit.GetComponent<LaserSplitter>().SplitLaser(hitObject, this);
+                            }
+                            return;
+                        }
 					default:
 						//If we hit anything else end the laser
 						return;
@@ -246,10 +256,12 @@ public class Laser : NetworkBehaviour
 					isScoring = true;
 					return;
 				case "Prism":
-					this.linePoints.Add(hit.point);
 					this.direction = Vector3.zero;
-					var parentPrism = hitObject.transform.parent.gameObject;
-					parentPrism.GetComponent<LaserSplitter>().SplitLaser(hitObject, this);
+					this.prismBeingHit = hitObject.transform.parent.gameObject;
+                    if (this.isFiring && !this.prismBeingHit.GetComponent<LaserSplitter>().IsInUse)
+                    {
+                        this.prismBeingHit.GetComponent<LaserSplitter>().SplitLaser(hitObject, this);
+                    }
 					return;
 				default:
 					this.linePoints.Add(hit.point);
