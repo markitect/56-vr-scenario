@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 33757435899036792}
   - component: {fileID: 136436067042649340}
   - component: {fileID: 23016973149797948}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: VRPlayerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4735439505517396}
   - component: {fileID: 114739169241508870}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: VRTools
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4491131851307822}
   - component: {fileID: 20282625848835418}
   - component: {fileID: 81601437286849812}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: VRPlayer
   m_TagString: Shooter
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 33578766557226434}
   - component: {fileID: 65383840882494448}
   - component: {fileID: 23138416115867904}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HMD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 114116333040334176}
   - component: {fileID: 114893596259187106}
   - component: {fileID: 114331302869117034}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: VRPlayerRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -465,7 +465,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294934527
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -603,13 +603,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserSettings: {fileID: 11400000, guid: 27b93aae8d27a42479100fe88cfbac06, type: 2}
+  m_BarrelTipPosition: {fileID: 4429645025058312}
   m_LaserBeamPrefab: {fileID: 1853518726223736, guid: 502ce8d1b1cc7dc4dbfc0b46085cb1e1,
     type: 2}
-  m_BarrelTipPosition: {fileID: 4429645025058312}
-  m_MaxBeamLength: 10
-  m_MaxChargeTime: 10
-  m_MaxBeamSpeed: 20
-  m_MinBeamSpeed: 5
   m_ChargingEffect: {fileID: 198998456430139934}
   m_ColorChangeTimeLimit: 0
 --- !u!114 &114123233344156658
@@ -726,8 +722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ToolPosition: {fileID: 0}
   m_ChangeTimeLimit: 0
-  LaserPrefab: {fileID: 1000011454856410, guid: 9d7dd9042967d4e90bbc1e277017bca5,
-    type: 2}
+  LaserPrefab: {fileID: 0}
 --- !u!114 &114739169241508870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1695,6 +1690,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
   UVModule:
     enabled: 0
+    mode: 0
     frameOverTime:
       minMaxState: 1
       scalar: 0.9999
@@ -1782,6 +1778,8 @@ ParticleSystem:
     flipU: 0
     flipV: 0
     randomRow: 1
+    sprites:
+    - sprite: {fileID: 0}
   VelocityModule:
     enabled: 0
     x:
@@ -2825,6 +2823,10 @@ ParticleSystem:
     serializedVersion: 3
     type: 0
     collisionMode: 0
+    colliderForce: 0
+    multiplyColliderForceByParticleSize: 0
+    multiplyColliderForceByParticleSpeed: 0
+    multiplyColliderForceByCollisionAngle: 1
     plane0: {fileID: 0}
     plane1: {fileID: 0}
     plane2: {fileID: 0}
@@ -4651,6 +4653,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
   UVModule:
     enabled: 0
+    mode: 0
     frameOverTime:
       minMaxState: 1
       scalar: 0.9999
@@ -4738,6 +4741,8 @@ ParticleSystem:
     flipU: 0
     flipV: 0
     randomRow: 1
+    sprites:
+    - sprite: {fileID: 0}
   VelocityModule:
     enabled: 0
     x:
@@ -5781,6 +5786,10 @@ ParticleSystem:
     serializedVersion: 3
     type: 0
     collisionMode: 0
+    colliderForce: 0
+    multiplyColliderForceByParticleSize: 0
+    multiplyColliderForceByParticleSpeed: 0
+    multiplyColliderForceByCollisionAngle: 1
     plane0: {fileID: 0}
     plane1: {fileID: 0}
     plane2: {fileID: 0}
@@ -7559,6 +7568,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
   UVModule:
     enabled: 0
+    mode: 0
     frameOverTime:
       minMaxState: 1
       scalar: 0.9999
@@ -7646,6 +7656,8 @@ ParticleSystem:
     flipU: 0
     flipV: 0
     randomRow: 1
+    sprites:
+    - sprite: {fileID: 0}
   VelocityModule:
     enabled: 0
     x:
@@ -8689,6 +8701,10 @@ ParticleSystem:
     serializedVersion: 3
     type: 0
     collisionMode: 0
+    colliderForce: 0
+    multiplyColliderForceByParticleSize: 0
+    multiplyColliderForceByParticleSpeed: 0
+    multiplyColliderForceByCollisionAngle: 1
     plane0: {fileID: 0}
     plane1: {fileID: 0}
     plane2: {fileID: 0}
@@ -9640,6 +9656,7 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+  m_MaskInteraction: 0
 --- !u!199 &199755953000058982
 ParticleSystemRenderer:
   serializedVersion: 3
@@ -9691,6 +9708,7 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+  m_MaskInteraction: 0
 --- !u!199 &199967270373264584
 ParticleSystemRenderer:
   serializedVersion: 3
@@ -9742,3 +9760,4 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+  m_MaskInteraction: 0

@@ -59,57 +59,57 @@ public class LaserShooter : NetworkBehaviour
 			CmdFireLaser();
 		}
 
-		//switch (m_FireState)
-		//{
-		//	case FireState.None:
-		//		if (Input.GetButtonDown("Fire1"))
-		//		{
-		//			CmdFireLaser();
-		//		}
-		//		break;
+        //switch (m_FireState)
+        //{
+        //    case FireState.None:
+        //        if (Input.GetButtonDown("Fire1"))
+        //        {
+        //            CmdFireLaser();
+        //        }
+        //        break;
 
-			//case FireState.Charging:
-			//	if (Input.GetButtonDown("Fire1") || m_BeamLength >= m_MaxBeamLength)
-			//	{
-			//		m_BeamScript.length = m_BeamLength;
-			//		m_FireState = FireState.Firing;
+        //        //case FireState.Charging:
+        //        //	if (Input.GetButtonDown("Fire1") || m_BeamLength >= m_MaxBeamLength)
+        //        //	{
+        //        //		m_BeamScript.length = m_BeamLength;
+        //        //		m_FireState = FireState.Firing;
 
-			//		// set beam length back to zero for next beam creation.
-			//		m_BeamLength = 0;
-			//		break;
-			//	}
+        //        //		// set beam length back to zero for next beam creation.
+        //        //		m_BeamLength = 0;
+        //        //		break;
+        //        //	}
 
-			//	m_BeamLength += m_MaxBeamLength * Time.deltaTime / m_MaxChargeTime;
-			//	break;
+        //        //	m_BeamLength += m_MaxBeamLength * Time.deltaTime / m_MaxChargeTime;
+        //        //	break;
 
-			//case FireState.Firing:
-			//	if (Input.GetButtonDown("Fire1") || m_BeamSpeed <= m_MinBeamSpeed)
-			//	{
-			//		if (m_ChargingEffect != null)
-			//			m_ChargingEffect.gameObject.SetActive(false);
+        //        //case FireState.Firing:
+        //        //	if (Input.GetButtonDown("Fire1") || m_BeamSpeed <= m_MinBeamSpeed)
+        //        //	{
+        //        //		if (m_ChargingEffect != null)
+        //        //			m_ChargingEffect.gameObject.SetActive(false);
 
-			//		if (m_Laserbeam != null)
-			//		{
-			//			m_Laserbeam.transform.position = m_BarrelTipPosition.position;
-			//			m_Laserbeam.transform.rotation = m_BarrelTipPosition.rotation;
+        //        //		if (m_Laserbeam != null)
+        //        //		{
+        //        //			m_Laserbeam.transform.position = m_BarrelTipPosition.position;
+        //        //			m_Laserbeam.transform.rotation = m_BarrelTipPosition.rotation;
 
-			//			m_BeamScript.FireLaser(
-			//				this.GetComponentInParent<ScoreKeeper>().gameObject,
-			//				this.m_BeamSpeed,
-			//				this.m_BeamLength,
-			//				this.m_AvailableLaserLayers[this.m_CurrentColorIndex],
-			//				this.m_AvailableColors[this.m_CurrentColorIndex]);
-			//		}
-			//		m_FireState = FireState.None;
-			//		break;
-			//	}
+        //        //			m_BeamScript.FireLaser(
+        //        //				this.GetComponentInParent<ScoreKeeper>().gameObject,
+        //        //				this.m_BeamSpeed,
+        //        //				this.m_BeamLength,
+        //        //				this.m_AvailableLaserLayers[this.m_CurrentColorIndex],
+        //        //				this.m_AvailableColors[this.m_CurrentColorIndex]);
+        //        //		}
+        //        //		m_FireState = FireState.None;
+        //        //		break;
+        //        //	}
 
-			//	// increase or decrease beam speed?
-			//	m_BeamSpeed -= .1f;
-			//	break;
-		//}
+        //        //	// increase or decrease beam speed?
+        //        //	m_BeamSpeed -= .1f;
+        //        //	break;
+        //}
 
-		if (Input.GetAxis("Vertical") > .5 && b_CanChangeColor)
+        if (Input.GetAxis("Vertical") > .5 && b_CanChangeColor)
 		{
 			ChangeColor(1);
 		}

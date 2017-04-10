@@ -5,7 +5,6 @@ using UnityEngine.VR;
 
 public class ToolPositionController : MonoBehaviour
 {
-
 	public Vector3 relativeLocalPositionForMobileDevices;
 	// Use this for initialization
 	void Start () {

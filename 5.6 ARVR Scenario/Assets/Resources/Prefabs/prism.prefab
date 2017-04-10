@@ -481,13 +481,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e44b731ee3fc840b4444b81e9f1b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserPrefab: {fileID: 1853518726223736, guid: 502ce8d1b1cc7dc4dbfc0b46085cb1e1,
-    type: 2}
   faces:
   - {fileID: 1546846840137556}
   - {fileID: 1542300375669992}
   - {fileID: 1645230917238820}
-  IsInUse: 0
 --- !u!114 &114245535311919550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -532,9 +529,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserSettings: {fileID: 11400000, guid: 27b93aae8d27a42479100fe88cfbac06, type: 2}
+  m_BarrelTipPosition: {fileID: 4334117550233992}
   m_LaserBeamPrefab: {fileID: 1853518726223736, guid: 502ce8d1b1cc7dc4dbfc0b46085cb1e1,
     type: 2}
-  m_BarrelTipPosition: {fileID: 4334117550233992}
   m_ChargingEffect: {fileID: 0}
   m_ColorChangeTimeLimit: 2
 --- !u!114 &114675359769085824
