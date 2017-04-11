@@ -27,6 +27,9 @@ public class Laser : NetworkBehaviour
 	[SyncVar]
 	public int layerMaskValue;
 
+    [SyncVar]
+	public bool isDissolving;
+
 	public ScoreKeeper scorer { get; private set; }
 	
 	public LayerMask collisionLayers;
@@ -43,7 +46,6 @@ public class Laser : NetworkBehaviour
 	private bool isScoring;
 	private float scoreTimer;
 
-	private bool isDissolving;
 
 	private float distanceTraveled;
 	

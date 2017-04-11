@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class LaserSplitter : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class LaserSplitter : MonoBehaviour
     private GameObject[] faces;
 
     private LaserShooter laserShooter;
-
+    
     private bool _isInUse = false;
     public bool IsInUse
     {
@@ -38,7 +39,7 @@ public class LaserSplitter : MonoBehaviour
 	void Update()
 	{
 	}
-
+    
 	public void SplitLaser(GameObject faceHit, Laser laser)
 	{
         this.IsInUse = true;
@@ -81,7 +82,7 @@ public class LaserSplitter : MonoBehaviour
 			return (LaserType)0;
 		}
 	}
-
+    
 	public void ResetFaceColors()
 	{
 		foreach (var face in faces)
