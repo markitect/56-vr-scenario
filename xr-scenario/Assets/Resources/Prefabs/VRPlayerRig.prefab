@@ -676,7 +676,7 @@ MonoBehaviour:
     m_Type:
       m_TypeName: UnityEngine.Experimental.Input.TrackedController, Assembly-CSharp,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    m_TagIndex: -1
+    m_TagIndex: 1
     m_SortedCachedUsedControlHashes: 
   m_SerializedBinding:
     typeInfo:
