@@ -1,0 +1,975 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e5bc088c9caeb44bc4283dc321b033, type: 3}
+  m_Name: FirstPersonControls
+  m_EditorClassIdentifier: 
+  m_Actions:
+  - {fileID: 11463784}
+  - {fileID: 11484620}
+  - {fileID: 11411362}
+  - {fileID: 11413948}
+  - {fileID: 11479916}
+  - {fileID: 11415676}
+  - {fileID: 11419910}
+  - {fileID: 11464254}
+  - {fileID: 11455218}
+  - {fileID: 11480086}
+  - {fileID: 11418972}
+  m_ControlSchemes:
+  - m_Name: KeyboardMouse
+    m_DeviceSlots:
+    - m_Key: 1
+      m_Type:
+        m_TypeName: UnityEngine.Experimental.Input.Keyboard, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_TagIndex: -1
+      m_SortedCachedUsedControlHashes: eae93db3efe93db3f8e93db3f9e93db3fce93db30a857ccffbc08e22
+    - m_Key: 2
+      m_Type:
+        m_TypeName: UnityEngine.Experimental.Input.Mouse, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_TagIndex: -1
+      m_SortedCachedUsedControlHashes: 14d29fb315d29fb3c054047d
+    m_ActionMap: {fileID: 11400000}
+    m_SerializableBindings:
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.AxisFromButtonsBinding\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_SerializedNegative\\\": {\\n        \\\"typeInfo\\\": {\\n
+        \           \\\"fullName\\\": \\\"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\\\",\\n
+        \           \\\"assemblyName\\\": \\\"Assembly-CSharp\\\"\\n        },\\n
+        \       \\\"JSONnodeData\\\": \\\"{\\\\n    \\\\\\\"m_ControlHash\\\\\\\":
+        -1287788054,\\\\n    \\\\\\\"m_DeviceKey\\\\\\\": 1\\\\n}\\\"\\n    },\\n
+        \   \\\"m_SerializedPositive\\\": {\\n        \\\"typeInfo\\\": {\\n            \\\"fullName\\\":
+        \\\"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\\\",\\n
+        \           \\\"assemblyName\\\": \\\"Assembly-CSharp\\\"\\n        },\\n
+        \       \\\"JSONnodeData\\\": \\\"{\\\\n    \\\\\\\"m_ControlHash\\\\\\\":
+        -1287788049,\\\\n    \\\\\\\"m_DeviceKey\\\\\\\": 1\\\\n}\\\"\\n    },\\n
+        \   \\\"m_SourceNameFormat\\\": \\\"{0} & {1}\\\"\\n}\"\n        }\n    ],\n
+        \   \"m_SerializableReferenceControl\": {\n        \"typeInfo\": {\n            \"fullName\":
+        \"UnityEngine.Experimental.Input.AxisControl\",\n            \"assemblyName\":
+        \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\": \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.AxisFromButtonsBinding\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_SerializedNegative\\\": {\\n        \\\"typeInfo\\\": {\\n
+        \           \\\"fullName\\\": \\\"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\\\",\\n
+        \           \\\"assemblyName\\\": \\\"Assembly-CSharp\\\"\\n        },\\n
+        \       \\\"JSONnodeData\\\": \\\"{\\\\n    \\\\\\\"m_ControlHash\\\\\\\":
+        -1287788040,\\\\n    \\\\\\\"m_DeviceKey\\\\\\\": 1\\\\n}\\\"\\n    },\\n
+        \   \\\"m_SerializedPositive\\\": {\\n        \\\"typeInfo\\\": {\\n            \\\"fullName\\\":
+        \\\"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\\\",\\n
+        \           \\\"assemblyName\\\": \\\"Assembly-CSharp\\\"\\n        },\\n
+        \       \\\"JSONnodeData\\\": \\\"{\\\\n    \\\\\\\"m_ControlHash\\\\\\\":
+        -1287788036,\\\\n    \\\\\\\"m_DeviceKey\\\\\\\": 1\\\\n}\\\"\\n    },\\n
+        \   \\\"m_SourceNameFormat\\\": \\\"{0} & {1}\\\"\\n}\"\n        }\n    ],\n
+        \   \"m_SerializableReferenceControl\": {\n        \"typeInfo\": {\n            \"fullName\":
+        \"UnityEngine.Experimental.Input.AxisControl\",\n            \"assemblyName\":
+        \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\": \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: 
+        assemblyName: 
+      JSONnodeData: 
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1281371628,\\n    \\\"m_DeviceKey\\\": 2\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1281371627,\\n    \\\"m_DeviceKey\\\": 2\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: 
+        assemblyName: 
+      JSONnodeData: 
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": 2097435840,\\n    \\\"m_DeviceKey\\\": 2\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": 579780859,\\n    \\\"m_DeviceKey\\\": 1\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": 2097435840,\\n    \\\"m_DeviceKey\\\": 2\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -813923062,\\n    \\\"m_DeviceKey\\\": 1\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1287788039,\\n    \\\"m_DeviceKey\\\": 1\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+  - m_Name: Gamepad
+    m_DeviceSlots:
+    - m_Key: 3
+      m_Type:
+        m_TypeName: UnityEngine.Experimental.Input.Gamepad, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_TagIndex: -1
+      m_SortedCachedUsedControlHashes: df76dfb1d85cc3b7d95cc3b7e93dfab74cd91e12ec27571ff327571f
+    m_ActionMap: {fileID: 11400000}
+    m_SerializableBindings:
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": 525805555,\\n    \\\"m_DeviceKey\\\": 3\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": 525805548,\\n    \\\"m_DeviceKey\\\": 3\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: 
+        assemblyName: 
+      JSONnodeData: 
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1211933480,\\n    \\\"m_DeviceKey\\\": 3\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1211933479,\\n    \\\"m_DeviceKey\\\": 3\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: 
+        assemblyName: 
+      JSONnodeData: 
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1310755105,\\n    \\\"m_DeviceKey\\\": 3\\n}\"\n
+        \       },\n        {\n            \"typeInfo\": {\n                \"fullName\":
+        \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": 304011596,\\n    \\\"m_DeviceKey\\\": 3\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1208336919,\\n    \\\"m_DeviceKey\\\": 3\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+  - m_Name: VirtualJoystick
+    m_DeviceSlots:
+    - m_Key: 4
+      m_Type:
+        m_TypeName: UnityEngine.Experimental.Input.VirtualJoystick, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_TagIndex: -1
+      m_SortedCachedUsedControlHashes: d85cc3b7d95cc3b743d91e124cd91e12ec27571ff327571f
+    m_ActionMap: {fileID: 11400000}
+    m_SerializableBindings:
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": 525805555,\\n    \\\"m_DeviceKey\\\": 4\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": 525805548,\\n    \\\"m_DeviceKey\\\": 4\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: 
+        assemblyName: 
+      JSONnodeData: 
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1211933480,\\n    \\\"m_DeviceKey\\\": 4\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1211933479,\\n    \\\"m_DeviceKey\\\": 4\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: 
+        assemblyName: 
+      JSONnodeData: 
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": 304011596,\\n    \\\"m_DeviceKey\\\": 4\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": 304011587,\\n    \\\"m_DeviceKey\\\": 4\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+  - m_Name: VR
+    m_DeviceSlots:
+    - m_Key: 5
+      m_Type:
+        m_TypeName: UnityEngine.Experimental.Input.TrackedController, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_TagIndex: 0
+      m_SortedCachedUsedControlHashes: 33043697
+    - m_Key: 6
+      m_Type:
+        m_TypeName: UnityEngine.Experimental.Input.TrackedController, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_TagIndex: 1
+      m_SortedCachedUsedControlHashes: 33043697
+    m_ActionMap: {fileID: 11400000}
+    m_SerializableBindings:
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: 
+        assemblyName: 
+      JSONnodeData: 
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.AxisControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: 
+        assemblyName: 
+      JSONnodeData: 
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1758067661,\\n    \\\"m_DeviceKey\\\": 5\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1758067661,\\n    \\\"m_DeviceKey\\\": 6\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+    - typeInfo:
+        fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+          Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+          mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+        assemblyName: Assembly-CSharp
+      JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+        {\n                \"fullName\": \"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.ButtonControl,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+        mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\",\n
+        \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+        \"{\\n    \\\"m_ControlHash\\\": -1,\\n    \\\"m_DeviceKey\\\": 0\\n}\"\n
+        \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+        {\n            \"fullName\": \"UnityEngine.Experimental.Input.ButtonControl\",\n
+        \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+        \"{}\"\n    }\n}"
+  m_MapTypeName: FirstPersonControls
+  m_CustomNamespace: 
+--- !u!114 &11411362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba7b4b2e3ea134991ccbff5f47c2c8, type: 3}
+  m_Name: Move
+  m_EditorClassIdentifier: 
+  m_Name: Move
+  m_ActionMap: {fileID: 11400000}
+  m_ActionIndex: 2
+  m_ControlType:
+    m_TypeName: UnityEngine.Experimental.Input.Vector2Control, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_Combined: 1
+  m_SerializableSelfBinding:
+    typeInfo:
+      fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.Vector2Control,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[UnityEngine.Vector2,
+        UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+      assemblyName: Assembly-CSharp
+    JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+      {\n                \"fullName\": \"UnityEngine.Experimental.Input.Vector2FromAxesBinding\",\n
+      \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+      \"{\\n    \\\"m_SerializedX\\\": {\\n        \\\"typeInfo\\\": {\\n            \\\"fullName\\\":
+      \\\"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+      mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\\\",\\n
+      \           \\\"assemblyName\\\": \\\"Assembly-CSharp\\\"\\n        },\\n        \\\"JSONnodeData\\\":
+      \\\"{\\\\n    \\\\\\\"m_ControlHash\\\\\\\": 0,\\\\n    \\\\\\\"m_DeviceKey\\\\\\\":
+      0\\\\n}\\\"\\n    },\\n    \\\"m_SerializedY\\\": {\\n        \\\"typeInfo\\\":
+      {\\n            \\\"fullName\\\": \\\"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+      mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\\\",\\n
+      \           \\\"assemblyName\\\": \\\"Assembly-CSharp\\\"\\n        },\\n        \\\"JSONnodeData\\\":
+      \\\"{\\\\n    \\\\\\\"m_ControlHash\\\\\\\": 1,\\\\n    \\\\\\\"m_DeviceKey\\\\\\\":
+      0\\\\n}\\\"\\n    },\\n    \\\"m_SourceNameFormat\\\": \\\"{0}, {1}\\\"\\n}\"\n
+      \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+      {\n            \"fullName\": \"UnityEngine.Experimental.Input.Vector2Control\",\n
+      \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+      \"{}\"\n    }\n}"
+--- !u!114 &11413948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba7b4b2e3ea134991ccbff5f47c2c8, type: 3}
+  m_Name: LookX
+  m_EditorClassIdentifier: 
+  m_Name: LookX
+  m_ActionMap: {fileID: 11400000}
+  m_ActionIndex: 3
+  m_ControlType:
+    m_TypeName: UnityEngine.Experimental.Input.AxisControl, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_Combined: 0
+  m_SerializableSelfBinding:
+    typeInfo:
+      fullName: 
+      assemblyName: 
+    JSONnodeData: 
+--- !u!114 &11415676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba7b4b2e3ea134991ccbff5f47c2c8, type: 3}
+  m_Name: Look
+  m_EditorClassIdentifier: 
+  m_Name: Look
+  m_ActionMap: {fileID: 11400000}
+  m_ActionIndex: 5
+  m_ControlType:
+    m_TypeName: UnityEngine.Experimental.Input.Vector2Control, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_Combined: 1
+  m_SerializableSelfBinding:
+    typeInfo:
+      fullName: UnityEngine.Experimental.Input.RootBinding`2[[UnityEngine.Experimental.Input.Vector2Control,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[UnityEngine.Vector2,
+        UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+      assemblyName: Assembly-CSharp
+    JSONnodeData: "{\n    \"m_SerializableSources\": [\n        {\n            \"typeInfo\":
+      {\n                \"fullName\": \"UnityEngine.Experimental.Input.Vector2FromAxesBinding\",\n
+      \               \"assemblyName\": \"Assembly-CSharp\"\n            },\n            \"JSONnodeData\":
+      \"{\\n    \\\"m_SerializedX\\\": {\\n        \\\"typeInfo\\\": {\\n            \\\"fullName\\\":
+      \\\"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+      mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\\\",\\n
+      \           \\\"assemblyName\\\": \\\"Assembly-CSharp\\\"\\n        },\\n        \\\"JSONnodeData\\\":
+      \\\"{\\\\n    \\\\\\\"m_ControlHash\\\\\\\": 3,\\\\n    \\\\\\\"m_DeviceKey\\\\\\\":
+      0\\\\n}\\\"\\n    },\\n    \\\"m_SerializedY\\\": {\\n        \\\"typeInfo\\\":
+      {\\n            \\\"fullName\\\": \\\"UnityEngine.Experimental.Input.ControlReferenceBinding`2[[UnityEngine.Experimental.Input.AxisControl,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Single,
+      mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]\\\",\\n
+      \           \\\"assemblyName\\\": \\\"Assembly-CSharp\\\"\\n        },\\n        \\\"JSONnodeData\\\":
+      \\\"{\\\\n    \\\\\\\"m_ControlHash\\\\\\\": 4,\\\\n    \\\\\\\"m_DeviceKey\\\\\\\":
+      0\\\\n}\\\"\\n    },\\n    \\\"m_SourceNameFormat\\\": \\\"{0}, {1}\\\"\\n}\"\n
+      \       }\n    ],\n    \"m_SerializableReferenceControl\": {\n        \"typeInfo\":
+      {\n            \"fullName\": \"UnityEngine.Experimental.Input.Vector2Control\",\n
+      \           \"assemblyName\": \"Assembly-CSharp\"\n        },\n        \"JSONnodeData\":
+      \"{}\"\n    }\n}"
+--- !u!114 &11418972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba7b4b2e3ea134991ccbff5f47c2c8, type: 3}
+  m_Name: Reconfigure
+  m_EditorClassIdentifier: 
+  m_Name: Reconfigure
+  m_ActionMap: {fileID: 11400000}
+  m_ActionIndex: 10
+  m_ControlType:
+    m_TypeName: UnityEngine.Experimental.Input.ButtonControl, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_Combined: 0
+  m_SerializableSelfBinding:
+    typeInfo:
+      fullName: 
+      assemblyName: 
+    JSONnodeData: 
+--- !u!114 &11419910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba7b4b2e3ea134991ccbff5f47c2c8, type: 3}
+  m_Name: FirstPersonControls
+  m_EditorClassIdentifier: 
+  m_Name: Fire
+  m_ActionMap: {fileID: 11400000}
+  m_ActionIndex: 6
+  m_ControlType:
+    m_TypeName: UnityEngine.Experimental.Input.ButtonControl, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_Combined: 0
+  m_SerializableSelfBinding:
+    typeInfo:
+      fullName: 
+      assemblyName: 
+    JSONnodeData: 
+--- !u!114 &11455218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba7b4b2e3ea134991ccbff5f47c2c8, type: 3}
+  m_Name: LockCursor
+  m_EditorClassIdentifier: 
+  m_Name: LockCursor
+  m_ActionMap: {fileID: 11400000}
+  m_ActionIndex: 8
+  m_ControlType:
+    m_TypeName: UnityEngine.Experimental.Input.ButtonControl, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_Combined: 0
+  m_SerializableSelfBinding:
+    typeInfo:
+      fullName: 
+      assemblyName: 
+    JSONnodeData: 
+--- !u!114 &11463784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba7b4b2e3ea134991ccbff5f47c2c8, type: 3}
+  m_Name: MoveX
+  m_EditorClassIdentifier: 
+  m_Name: MoveX
+  m_ActionMap: {fileID: 11400000}
+  m_ActionIndex: 0
+  m_ControlType:
+    m_TypeName: UnityEngine.Experimental.Input.AxisControl, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_Combined: 0
+  m_SerializableSelfBinding:
+    typeInfo:
+      fullName: 
+      assemblyName: 
+    JSONnodeData: 
+--- !u!114 &11464254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba7b4b2e3ea134991ccbff5f47c2c8, type: 3}
+  m_Name: Menu
+  m_EditorClassIdentifier: 
+  m_Name: Menu
+  m_ActionMap: {fileID: 11400000}
+  m_ActionIndex: 7
+  m_ControlType:
+    m_TypeName: UnityEngine.Experimental.Input.ButtonControl, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_Combined: 0
+  m_SerializableSelfBinding:
+    typeInfo:
+      fullName: 
+      assemblyName: 
+    JSONnodeData: 
+--- !u!114 &11479916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba7b4b2e3ea134991ccbff5f47c2c8, type: 3}
+  m_Name: LookY
+  m_EditorClassIdentifier: 
+  m_Name: LookY
+  m_ActionMap: {fileID: 11400000}
+  m_ActionIndex: 4
+  m_ControlType:
+    m_TypeName: UnityEngine.Experimental.Input.AxisControl, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_Combined: 0
+  m_SerializableSelfBinding:
+    typeInfo:
+      fullName: 
+      assemblyName: 
+    JSONnodeData: 
+--- !u!114 &11480086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba7b4b2e3ea134991ccbff5f47c2c8, type: 3}
+  m_Name: UnlockCursor
+  m_EditorClassIdentifier: 
+  m_Name: UnlockCursor
+  m_ActionMap: {fileID: 11400000}
+  m_ActionIndex: 9
+  m_ControlType:
+    m_TypeName: UnityEngine.Experimental.Input.ButtonControl, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_Combined: 0
+  m_SerializableSelfBinding:
+    typeInfo:
+      fullName: 
+      assemblyName: 
+    JSONnodeData: 
+--- !u!114 &11484620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba7b4b2e3ea134991ccbff5f47c2c8, type: 3}
+  m_Name: MoveY
+  m_EditorClassIdentifier: 
+  m_Name: MoveY
+  m_ActionMap: {fileID: 11400000}
+  m_ActionIndex: 1
+  m_ControlType:
+    m_TypeName: UnityEngine.Experimental.Input.AxisControl, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_Combined: 0
+  m_SerializableSelfBinding:
+    typeInfo:
+      fullName: 
+      assemblyName: 
+    JSONnodeData: 
